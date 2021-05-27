@@ -4,20 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace QuanLyKhachSan.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        #region commands
+        public ICommand window_IsLoaded { get; set; }
+        #endregion
         public static bool isLoaded = false;
         public MainViewModel()
         {
-            if (!isLoaded)
+            window_IsLoaded = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
-                isLoaded = true;
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.ShowDialog();
+                if (p != null && !isLoaded)
+                {
+                    isLoaded = true;
+                    LoginWindow loginWindow = new LoginWindow();
+                    App.Current.MainWindow.Hide();
+                    loginWindow.ShowDialog();
+                    App.Current.MainWindow.Show();
+                }
             }
+            );
         }
     }
 }
