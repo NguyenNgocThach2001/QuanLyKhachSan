@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
+        xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -13,62 +14,76 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="LoginWindow" Height="450" Width="800">
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="LoginWindow" Height="550" Width="800">
     <Grid>
-        <materialDesign:Card Height="400" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="757*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+            <Grid Margin="0 0 0 50">
+                <uc:ControlBarUC VerticalAlignment="Top"></uc:ControlBarUC>
+            </Grid>
+
             <Grid>
-                <Grid.Resources>
-                    <Style TargetType="Grid">
-                        <Setter Property="Margin" Value="10 10 10 10">
-                        </Setter>
-                    </Style>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <TextBox x:Name="AccountBox"
+                <materialDesign:Card Height="400" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="Grid">
+                                <Setter Property="Margin" Value="10 10 10 10">
+                                </Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBox x:Name="AccountBox"
                     materialDesign:HintAssist.Hint="Tên Đăng Nhập"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     FontSize ="20" Margin="10"/>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <PasswordBox
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <PasswordBox
                     x:Name="PasswordBox"
                     materialDesign:HintAssist.Hint="Mật Khẩu"
                     FontSize="20" Margin="10"
                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                </Grid>
-                <Grid Grid.Row="3">
-                    <Grid>
-                        <Grid.Resources>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid>
+                                <Grid.Resources>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                <Grid Grid.Column="0">
+                                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                             Background="Blue"
                             Foreground="WhiteSmoke"
                             ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                                Đăng Nhập
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Đăng Nhập
+                                    </Button>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
                             
                             ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                                Hủy
-                            </Button>
+                                        Hủy
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Grid>
+                </materialDesign:Card>
 
-        </materialDesign:Card>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

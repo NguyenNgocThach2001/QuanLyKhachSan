@@ -10,18 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using QuanLyKhachSan.ViewModel;
 using System.Windows.Shapes;
 
-namespace QuanLyKhachSan
+namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for ControlBarUC.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class ControlBarUC : UserControl
     {
-        public LoginWindow()
+        public ControlBarViewModel Viewmodel { get; set; }
+        public ControlBarUC()
         {
             InitializeComponent();
+            Viewmodel = new ControlBarViewModel(); 
+            this.DataContext = Viewmodel;
         }
     }
 }
