@@ -15,6 +15,8 @@ namespace QuanLyKhachSan.ViewModel
         public ICommand CloseWindowCommand { get; set; }
         public ICommand RestoreWindowCommand { get; set; }
         public ICommand MinimizeWindowCommand { get; set; }
+        public ICommand MouseLeftButtonDownWindowCommand { get; set; }
+        
         #endregion
         public ControlBarViewModel()
         {
@@ -44,7 +46,24 @@ namespace QuanLyKhachSan.ViewModel
                         w.WindowState = WindowState.Maximized;
                     else
                         w.WindowState = WindowState.Minimized;
-            }
+                }
+            );
+
+            MinimizeWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) => {
+                FrameworkElement window = GetWindowParent(p);
+                var w = window as Window;
+                if (w != null)
+                    w.WindowState = WindowState.Minimized;
+                }
+            );
+            MouseLeftButtonDownWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) => {
+                FrameworkElement window = GetWindowParent(p);
+                var w = window as Window;
+                if (w != null)
+                {
+                    w.DragMove();
+                }
+                }
             );
         }
         
