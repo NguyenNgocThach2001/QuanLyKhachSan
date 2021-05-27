@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -19,6 +20,13 @@
         Name="mainWindow"
         DataContext="{StaticResource MainVM}"
         Title="Menu Quản Lý Khách Sạn" Height="700" Width="1000">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <uc:ControlBarUC Tag ="{Binding Title, ElementName=mainWindow}"  VerticalAlignment="Top"></uc:ControlBarUC>
     </Grid>
