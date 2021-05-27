@@ -16,7 +16,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="LoginWindow" Height="550" Width="800">
+        Name="login"
+        Title="Trang Đăng Nhập" Height="550" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="37*"/>
@@ -24,7 +25,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
             <Grid Margin="0 0 0 50">
-                <uc:ControlBarUC VerticalAlignment="Top"></uc:ControlBarUC>
+                <uc:ControlBarUC Tag="{Binding Title, ElementName=login}" VerticalAlignment="Top"></uc:ControlBarUC>
             </Grid>
 
             <Grid>
