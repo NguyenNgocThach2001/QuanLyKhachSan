@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              Name="ucControlBar"
              d:DesignHeight="40" d:DesignWidth="800">
-    
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseLeftButtonDown">
             <i:InvokeCommandAction 
@@ -22,18 +22,18 @@
                 CommandParameter="{Binding ElementName=ucControlBar}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid VerticalAlignment="Top">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="287*"/>
-            <ColumnDefinition Width="513*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <materialDesign:ColorZone Mode="Inverted" Height="35" Margin="1,0,-1,-35" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <materialDesign:ColorZone Width="auto" Mode="Inverted" Height="40" Margin="0,0,0,0" Grid.ColumnSpan="2">
             <DockPanel VerticalAlignment="Stretch">
                 <Grid DockPanel.Dock="Right">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
@@ -63,15 +63,14 @@
                         </Button>
                     </Grid>
                 </Grid>
-                <StackPanel Orientation="Horizontal" Height="35" Width="798" Margin="0,0,0,0.2">
-                    <ToggleButton
-                     Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+        <StackPanel HorizontalAlignment="Left" DockPanel.Dock="Left" Orientation="Horizontal" Height="40" Width="800" Margin="0,0,0,0">
+            <ToggleButton 
+                Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
                     <TextBlock Text="{Binding Tag, ElementName=ucControlBar}"
-                     VerticalAlignment="Center"
-                     Margin="16 0 0 0">
-                     
+                VerticalAlignment="Center"
+                Margin="0 0 0 0">
                     </TextBlock>
-                </StackPanel>
+        </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
     </Grid>
