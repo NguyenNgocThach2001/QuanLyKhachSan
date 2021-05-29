@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
-         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -27,7 +27,138 @@
                 CommandParameter="{Binding ElementName=mainWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
     <Grid>
-        <uc:ControlBarUC Tag ="{Binding Title, ElementName=mainWindow}"  VerticalAlignment="Top"></uc:ControlBarUC>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Top">
+            <uc:ControlBarUC Tag ="{Binding Title, ElementName=mainWindow}"  VerticalAlignment="Top"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1">
+            <uc:MenuControlBarUC></uc:MenuControlBarUC>
+        </Grid>
+        <Grid Margin="20 10 20 0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Button
+                            Background="White"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                            ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                        <materialDesign:PackIcon
+                                Kind="DatabaseSearch"
+                                Height="30"
+                                Width="30" />
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1" Margin="20 0 20 0">
+                    <TextBox
+                            FontSize="20"
+                            x:Name="tenPhong_TextBox"
+                            materialDesign:HintAssist.Hint="Tên Phòng" />
+                </Grid>
+                <Grid Grid.Column="2" Margin="0 0 20 0">
+                    <ComboBox
+                        FontSize="20"
+                        materialDesign:HintAssist.Hint="Loại Phòng"
+                        IsEditable="True"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBoxItem>
+                            Phòng Đơn Thường 1
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Phòng Đơn Thường 2
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Phòng Đôi Thường 1
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Phòng Đôi Thường 2
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Phòng Đơn Vip
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Phòng Đôi Vip
+                        </ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">
+                            Tất Cả
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Column="3" Margin="0 0 20 0">
+                    <ComboBox
+                        FontSize="20"
+                        materialDesign:HintAssist.Hint="Tình Trạng"
+                        IsEditable="True"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBoxItem>
+                            Trống
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Đang Thuê
+                        </ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">
+                            Tất Cả
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Column="4" Margin="20 0 20 0">
+                    <ComboBox
+                    FontSize="20"
+                    materialDesign:HintAssist.Hint="Giá Từ"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    IsEditable="True">
+                        <ComboBoxItem IsSelected="True">
+                            250.000 vnđ
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            450.000 vnđ
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            500.000 vnđ
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Không Giới Hạn
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Column="5" Margin="0 0 20 0">
+                    <ComboBox
+                        FontSize="20"
+                        materialDesign:HintAssist.Hint="Đến"
+                        IsEditable="True"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBoxItem IsSelected="True">
+                            500.000 vnđ
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            450.000 vnđ
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            250.000 vnđ
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Không Giới Hạn
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3">
+            
+        </Grid>
     </Grid>
 </Window>

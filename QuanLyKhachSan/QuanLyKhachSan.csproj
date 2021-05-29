@@ -72,13 +72,29 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlFolder\AccountUC.xaml.cs">
+      <DependentUpon>AccountUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlFolder\CheckoutUC.xaml.cs">
+      <DependentUpon>CheckoutUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlFolder\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlFolder\MenuControlBarUC.xaml.cs">
+      <DependentUpon>MenuControlBarUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlFolder\ReportUc.xaml.cs">
+      <DependentUpon>ReportUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CheckoutViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuControlBarViewModel.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,7 +115,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlFolder\AccountUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlFolder\CheckoutUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlFolder\ControlBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlFolder\MenuControlBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlFolder\ReportUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,21 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyKhachSan.ViewModel;
 
-namespace QuanLyKhachSan
+namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for MenuControlBarUC.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class MenuControlBarUC : UserControl
     {
-        public LoginViewModel loginViewModel;
-        public LoginWindow()
+        public ControlBarViewModel viewModel;
+        public MenuControlBarUC()
         {
             InitializeComponent();
-            this.DataContext = loginViewModel = new LoginViewModel();
+            this.DataContext = viewModel = new ControlBarViewModel();
         }
     }
 }

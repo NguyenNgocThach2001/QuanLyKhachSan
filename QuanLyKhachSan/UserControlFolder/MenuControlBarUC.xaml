@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="QuanLyKhachSan.UserControlFolder.MenuControlBarUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyKhachSan.UserControlFolder"
+             mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            Name="ucMenuControlBar"
+            Background="{DynamicResource MaterialDesignPaper}"
+            FontFamily="{DynamicResource MaterialDesignFont}"
+             
+             d:DesignHeight="70" d:DesignWidth="1000">
+    <Grid Background="#18191A" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Width="Auto" Height="Auto">
+                
+                <Grid>
+                    <Button Margin="20 20 20 20"
+                            Background="#d11a2a"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
+                    Tài Khoản
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Button
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Background="#18191A"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
+                    Tạo Thuê Phòng
+                </Button>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Button 
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Background="#18191A"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Danh Sách Phòng">
+                    Danh Sách Phòng
+                </Button>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Button         
+                            Background="#18191A"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Thanh Toán Khi Có Khách Trả Phòng">
+                    Thanh Toán
+                </Button>
+            </Grid>
+            <Grid Grid.Column="4">
+                <Button             
+                            Background="#18191A"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Báo Cáo">
+                    Báo Cáo
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

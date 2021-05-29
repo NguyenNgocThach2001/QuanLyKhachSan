@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Name="login"
+        Name="loginWindow"
         Title="Trang Đăng Nhập" Height="550" Width="800">
     
     <Grid>
@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
             <Grid Margin="0 0 0 50">
-                <uc:ControlBarUC Tag="{Binding Title, ElementName=login}" VerticalAlignment="Top"></uc:ControlBarUC>
+                <uc:ControlBarUC Tag="{Binding Title, ElementName=loginWindow}" VerticalAlignment="Top"></uc:ControlBarUC>
             </Grid>
 
             <Grid>
@@ -69,7 +69,7 @@
                                 <Grid Grid.Column="0">
                                     <Button
                                         Command="{Binding loginDone_btnClick}"
-                                        CommandParameter="{Binding ElementName=login}"
+                                        CommandParameter="{Binding ElementName=loginWindow}"
                                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         Background="Blue"
                                         Foreground="WhiteSmoke"
@@ -80,7 +80,7 @@
                                 <Grid Grid.Column="1">
                                     <Button 
                                         Command="{Binding loginClose_btnClick}"
-                                        CommandParameter="{Binding ElementName=login}"
+                                        CommandParameter="{Binding ElementName=loginWindow}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         ToolTip="Thoát chương trình">
                                         Thoát

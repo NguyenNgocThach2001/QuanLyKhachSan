@@ -17,18 +17,20 @@ namespace QuanLyKhachSan.ViewModel
         public static bool isLoaded = false;
         public MainViewModel()
         {
-            window_IsLoaded = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
+            window_IsLoaded = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
             {
                 if (p != null && !isLoaded)
                 {
                     isLoaded = true;
                     LoginWindow loginWindow = new LoginWindow();
-                    App.Current.MainWindow.Hide();
+                    p.Hide();
                     loginWindow.ShowDialog();
-                    App.Current.MainWindow.Show();
+                    var loginVM = loginWindow.DataContext as LoginViewModel;
+                    p.Show();
                 }
             }
             );
         }
+
     }
 }
