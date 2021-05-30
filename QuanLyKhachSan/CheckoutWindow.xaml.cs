@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QuanLyKhachSan.ViewModel;
 
 namespace QuanLyKhachSan
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CheckoutWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CheckoutWindow : Window
     {
-        public MainViewModel mainViewModel;
-        public MainWindow()
+        public CheckoutWindow()
         {
             InitializeComponent();
-            this.DataContext = mainViewModel = new MainViewModel();
         }
     }
 }

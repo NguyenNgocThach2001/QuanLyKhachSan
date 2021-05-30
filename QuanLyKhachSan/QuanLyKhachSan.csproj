@@ -69,8 +69,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AccountWindow.xaml.cs">
+      <DependentUpon>AccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutWindow.xaml.cs">
+      <DependentUpon>CheckoutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HireWindow.xaml.cs">
+      <DependentUpon>HireWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlFolder\AccountUC.xaml.cs">
       <DependentUpon>AccountUC.xaml</DependentUpon>
@@ -80,6 +92,9 @@
     </Compile>
     <Compile Include="UserControlFolder\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlFolder\HIREUC.xaml.cs">
+      <DependentUpon>HIREUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlFolder\MenuControlBarUC.xaml.cs">
       <DependentUpon>MenuControlBarUC.xaml</DependentUpon>
@@ -95,6 +110,18 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuControlBarViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Page Include="AccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckoutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HireWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +138,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlFolder\ControlBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlFolder\HIREUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

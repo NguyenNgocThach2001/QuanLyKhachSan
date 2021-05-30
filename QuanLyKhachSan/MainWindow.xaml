@@ -39,7 +39,72 @@
             <uc:ControlBarUC Tag ="{Binding Title, ElementName=mainWindow}"  VerticalAlignment="Top"></uc:ControlBarUC>
         </Grid>
         <Grid Grid.Row="1">
-            <uc:MenuControlBarUC></uc:MenuControlBarUC>
+            <Grid Background="#18191A" VerticalAlignment="Top">
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Width="Auto" Height="Auto">
+
+                        <Grid>
+                            <Button 
+                                Command="{Binding AccountCommand}"
+                                CommandParameter="{Binding ElementName=mainWindow}"
+                                Margin="20 20 20 20"
+                                Background="#d11a2a"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
+                                <Bold>Tài Khoản</Bold>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button
+                            Command="{Binding HireCommand}"
+                            CommandParameter="{Binding ElementName=mainWindow}"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Background="#18191A"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
+                            <Bold>Tạo Thuê Phòng</Bold>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button         
+                            Command="{Binding CheckoutCommand}"
+                            CommandParameter="{Binding ElementName=mainWindow}"
+                            Background="#18191A"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Thanh Toán Khi Có Khách Trả Phòng">
+                            <Bold>Thanh Toán</Bold>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <Button          
+                            Command="{Binding ReportCommand}"
+                            CommandParameter="{Binding ElementName=mainWindow}"
+                            Background="#18191A"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Báo Cáo">
+                            <Bold>Báo Cáo</Bold>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Grid>
         <Grid Margin="20 10 20 0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Grid>
