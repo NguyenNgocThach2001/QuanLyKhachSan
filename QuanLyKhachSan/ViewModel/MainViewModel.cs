@@ -26,7 +26,14 @@ namespace QuanLyKhachSan.ViewModel
                     p.Hide();
                     loginWindow.ShowDialog();
                     var loginVM = loginWindow.DataContext as LoginViewModel;
-                    p.Show();
+                    if (loginVM.IsLogin)
+                    {
+                        p.Show();
+                    }
+                    else
+                    {
+                        p.Close();
+                    }
                 }
             }
             );

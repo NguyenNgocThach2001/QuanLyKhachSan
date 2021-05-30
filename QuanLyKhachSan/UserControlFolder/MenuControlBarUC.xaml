@@ -31,7 +31,7 @@
                             Background="#d11a2a"
                             materialDesign:ShadowAssist.ShadowDepth="Depth3"
                             ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
-                    Tài Khoản
+                        <Bold>Tài Khoản</Bold>
                     </Button>
                 </Grid>
             </Grid>
@@ -44,7 +44,7 @@
                             Height="70"
                             FontSize="14"
                             ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
-                    Tạo Thuê Phòng
+                    <Bold>Tạo Thuê Phòng</Bold>
                 </Button>
             </Grid>
             <Grid Grid.Column="2">
@@ -56,7 +56,7 @@
                             Height="70"
                             FontSize="14"
                             ToolTip="Danh Sách Phòng">
-                    Danh Sách Phòng
+                    <Bold>Danh Sách Phòng</Bold>
                 </Button>
             </Grid>
             <Grid Grid.Column="3">
@@ -68,7 +68,7 @@
                             Height="70"
                             FontSize="14"
                             ToolTip="Thanh Toán Khi Có Khách Trả Phòng">
-                    Thanh Toán
+                    <Bold>Thanh Toán</Bold>
                 </Button>
             </Grid>
             <Grid Grid.Column="4">
@@ -80,7 +80,7 @@
                             Height="70"
                             FontSize="14"
                             ToolTip="Báo Cáo">
-                    Báo Cáo
+                    <Bold>Báo Cáo</Bold>
                 </Button>
             </Grid>
         </Grid>
