@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QuanLyKhachSan.ViewModel;
 
-namespace QuanLyKhachSan
+namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HIREUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HIREUC : UserControl
     {
-        public MainViewModel mainViewModel;
-        public MainWindow()
+        public HIREUC()
         {
             InitializeComponent();
-            this.DataContext = mainViewModel = new MainViewModel();
         }
     }
 }

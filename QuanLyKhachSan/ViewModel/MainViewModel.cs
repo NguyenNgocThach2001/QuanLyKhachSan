@@ -15,6 +15,12 @@ namespace QuanLyKhachSan.ViewModel
         public ICommand window_IsLoaded { get; set; }
         #endregion
         public static bool isLoaded = false;
+        #region commands
+        public ICommand AccountCommand { get; set; }
+        public ICommand CheckoutCommand { get; set; }
+        public ICommand ReportCommand { get; set; }
+        public ICommand HireCommand { get; set; }
+        #endregion
         public MainViewModel()
         {
             window_IsLoaded = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
@@ -37,6 +43,26 @@ namespace QuanLyKhachSan.ViewModel
                 }
             }
             );
+            HireCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                HireWindow hireWindow = new HireWindow();
+                hireWindow.ShowDialog();
+            });
+            ReportCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                ReportWindow reportWindow = new ReportWindow();
+                reportWindow.ShowDialog();
+            });
+            AccountCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                AccountWindow accountWindow = new AccountWindow();
+                accountWindow.ShowDialog();
+            });
+            CheckoutCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                CheckoutWindow checkoutWindow = new CheckoutWindow();
+                checkoutWindow.ShowDialog();
+            });
         }
 
     }
