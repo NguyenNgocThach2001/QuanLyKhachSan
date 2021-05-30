@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         xmlns:local="clr-namespace:QuanLyKhachSan"
         mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -10,61 +11,70 @@
             TextElement.FontSize="13"
             TextOptions.TextFormattingMode="Ideal"
             TextOptions.TextRenderingMode="Auto"
-            Name="ucMenuControlBar"
+            Name="checkoutWindow"
             Background="{DynamicResource MaterialDesignPaper}"
             FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        Title="CheckoutWindow" Height="450" Width="800">
+        Title="Thanh Toán" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="20 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="0 0 0 0"  VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Button
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=checkoutWindow}"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="20 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="0 0 0 0"  VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Button
                 Width="50"
                 Height="50"
                 Background="White"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 ToolTip="Thêm Phiếu Thanh Toán">
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                     Kind="DatabaseSearch"
                     Height="50"
                     Width="50" />
-                </Button>
-            </Grid>
-            <Grid Margin="0 10 0 0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <TextBox
+                    </Button>
+                </Grid>
+                <Grid Margin="0 10 0 0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBox
                  FontSize="20"
                  x:Name="CheckoutSearch"
                  materialDesign:HintAssist.Hint="Tìm Phiếu Thanh Toán" />
+                </Grid>
             </Grid>
-        </Grid>
-        <Grid Grid.Row="1" VerticalAlignment="Top">
-            <materialDesign:Card>
+            <Grid Grid.Row="1" VerticalAlignment="Top">
+                <materialDesign:Card>
 
-            </materialDesign:Card>
-        </Grid>
+                </materialDesign:Card>
+            </Grid>
 
-        <Grid Margin="0 0 20 20" Grid.Row="2" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Right">
-            <Button
+            <Grid Margin="0 0 20 20" Grid.Row="2" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Right">
+                <Button
                 Width="50"
                 Height="50"
                 Background="#d11a2a"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 ToolTip="Thêm Phiếu Thanh Toán">
-                <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                     Kind="Plus"
                     Height="50"
                     Width="50" />
-            </Button>
+                </Button>
 
+            </Grid>
         </Grid>
     </Grid>
 </Window>

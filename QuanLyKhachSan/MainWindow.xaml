@@ -222,8 +222,16 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="3">
-            
-        </Grid>
+        <materialDesign:Card Grid.Row="3">
+            <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=Default}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
     </Grid>
 </Window>
