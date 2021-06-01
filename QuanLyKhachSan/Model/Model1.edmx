@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QuanLyKhachSanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QuanLyKhachSanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="UserName" />
@@ -54,6 +54,7 @@
           <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="room_type_id" Type="int" />
           <Property Name="room_status_id" Type="int" />
+          <Property Name="room_name" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="RoomStatus">
           <Key>
@@ -159,8 +160,7 @@
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuanLyKhachSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -221,6 +221,7 @@
           <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__room___403A8C7D" FromRole="Room" ToRole="Reservation" />
           <NavigationProperty Name="RoomStatu" Relationship="Self.FK__Room__room_statu__3A81B327" FromRole="Room" ToRole="RoomStatus" />
           <NavigationProperty Name="RoomType" Relationship="Self.FK__Room__room_type___47DBAE45" FromRole="Room" ToRole="RoomType" />
+          <Property Name="room_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RoomStatu">
           <Key>
@@ -382,6 +383,7 @@
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Room">
               <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
                 <ScalarProperty Name="room_id" ColumnName="room_id" />
                 <ScalarProperty Name="room_type_id" ColumnName="room_type_id" />
                 <ScalarProperty Name="room_status_id" ColumnName="room_status_id" />

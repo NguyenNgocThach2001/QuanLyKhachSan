@@ -58,7 +58,7 @@ namespace QuanLyKhachSan.ViewModel
                 p.Close();
             }
             else
-            {
+            {   
                 var check = DataProvider.Ins.db.Accounts.Where(x => x.UserName == UserName && x.Password == passEncode).Count();
                 if (check > 0)
                 {
