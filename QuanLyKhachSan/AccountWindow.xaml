@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
             TextElement.FontWeight="Regular"
@@ -27,14 +28,14 @@
             <uc:ControlBarUC Tag="{Binding Title, ElementName=accountWindow}"></uc:ControlBarUC>
         </Grid>
     <Grid Grid.Row="1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid  Grid.Column="0" HorizontalAlignment="Left">
-            <StackPanel Width="350">
-                <Grid>
-                    <Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <materialDesign:Card  Grid.Column="0" HorizontalAlignment="Left">
+                <StackPanel Width="350">
+                    <Grid>
+                        <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
@@ -43,43 +44,43 @@
                             <RowDefinition Height="100"></RowDefinition>
                             <RowDefinition Height="30"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="#d11a2a">
+                        <materialDesign:Card Grid.Row="0" Background="#d11a2a">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="WhiteSmoke" FontSize="20">
                                 <Bold>Quản Lý Tài Khoản</Bold>
                             </TextBlock>
-                        </Grid>
-                        <Grid Grid.Row="1">
+                        </materialDesign:Card>
+                        <materialDesign:Card Grid.Row="1">
                             <StackPanel>
                                 <TextBlock Background="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Bold>Dưới Đây Là Các Tài Khoản Hiện Có</Bold>
                                 </TextBlock>
                             </StackPanel>
-                        </Grid>
+                        </materialDesign:Card>
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <materialDesign:Card Grid.Row="1">
 
-                    </Grid>
+                    </materialDesign:Card>
                 </Grid>
             </StackPanel>
-        </Grid>
-        <Grid Grid.Column="1" HorizontalAlignment="Left" Background="LightGray">
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Column="1" HorizontalAlignment="Left" Background="LightGray">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Background="#d11a2a" Width="450" HorizontalAlignment="Left" Grid.Row="0">
+                    <materialDesign:Card Background="#d11a2a" Width="450" HorizontalAlignment="Left" Grid.Row="0">
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="WhiteSmoke">
                             <Bold>Tài Khoản Đang Chọn</Bold>
                         </TextBlock>
-                    </Grid>
-                    <Grid Grid.Row="1">
+                    </materialDesign:Card>
+                    <materialDesign:Card Grid.Row="1">
 
-                    </Grid>
+                    </materialDesign:Card>
                 </Grid>
             </StackPanel>
-        </Grid>
+        </materialDesign:Card>
     </Grid>
     </Grid>
 </Window>
