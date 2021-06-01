@@ -13,12 +13,15 @@ Create Table RoomType(
 )
 
 Create Table Room(
-	room_id int identity(1,1) primary key,
+	room_id int primary key,
 	room_type_id int,
 	room_status_id int,
 	foreign key (room_status_id) references RoomStatus(room_status_id),
 	foreign key (room_type_id) references RoomType(room_type_id),
 )
+
+ALTER TABLE room
+ADD room_name nvarchar(max);
 
 Create Table Guest(
 	guest_id int identity(1,1) primary key,

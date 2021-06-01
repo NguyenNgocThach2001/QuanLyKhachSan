@@ -23,6 +23,7 @@ namespace QuanLyKhachSan.Model
         public int room_id { get; set; }
         public Nullable<int> room_type_id { get; set; }
         public Nullable<int> room_status_id { get; set; }
+        public string room_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }

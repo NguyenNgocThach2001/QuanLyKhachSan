@@ -223,7 +223,7 @@
             </Grid>
         </Grid>
         <materialDesign:Card Grid.Row="3">
-            <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=Default}">
+            <!-- <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=Default}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn>
@@ -232,6 +232,50 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            -->
+            <ScrollViewer>
+                <StackPanel>
+                    <ItemsControl>
+                        <Grid Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                                <ColumnDefinition ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:Card Grid.Column="0" Background="Red">
+                                
+                            </materialDesign:Card>
+                            <Grid Width="250" Height="150" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="65"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="25"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <materialDesign:Card Background="CadetBlue" Grid.Row="0" Height="65">
+                                    <TextBlock Margin="20 0 0 0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                   <Bold>102</Bold>
+                                    </TextBlock>
+                                </materialDesign:Card>
+                                <materialDesign:Card Grid.Row="1">
+                                    <TextBlock Margin ="20 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    Tình Trạng Phòng
+                                    </TextBlock>
+                                </materialDesign:Card>
+                                <materialDesign:Card Grid.Row="2">
+                                    <TextBlock Margin ="20 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    Loại Phòng
+                                    </TextBlock>
+                                </materialDesign:Card>
+                                <materialDesign:Card Grid.Row="3">
+                                    <TextBlock Margin ="20 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    Giá
+                                    </TextBlock>
+                                </materialDesign:Card>
+                            </Grid>
+                        </Grid>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
         </materialDesign:Card>
     </Grid>
 </Window>
