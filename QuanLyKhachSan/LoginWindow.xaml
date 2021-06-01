@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactions"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -16,6 +16,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None"
+        DataContext="{StaticResource LoginVM}"
         WindowStartupLocation="CenterScreen"
         Name="loginWindow"
         Title="Trang Đăng Nhập" Height="550" Width="800">
@@ -45,17 +46,26 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <TextBox x:Name="AccountBox"
+                            <TextBox Text="{Binding UserName}"
                     materialDesign:HintAssist.Hint="Tên Đăng Nhập"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     FontSize ="20" Margin="10"/>
                         </Grid>
                         <Grid Grid.Row="1">
                             <PasswordBox
-                    x:Name="PasswordBox"
-                    materialDesign:HintAssist.Hint="Mật Khẩu"
-                    FontSize="20" Margin="10"
-                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                                x:Name="PasswordBox1"
+                                materialDesign:HintAssist.Hint="Mật Khẩu"
+                                FontSize="20" Margin="10"
+                                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                                <i1:Interaction.Triggers>
+                                    <i1:EventTrigger EventName="PasswordChanged">
+                                        <i1:InvokeCommandAction 
+                                            Command="{Binding PasswordChangeCommand}" 
+                                            CommandParameter="{Binding ElementName=PasswordBox1}"/>
+                                    </i1:EventTrigger>
+                                </i1:Interaction.Triggers>
+                            </PasswordBox>
+                            
                         </Grid>
                         <Grid Grid.Row="3">
                             <Grid>
@@ -68,7 +78,7 @@
 
                                 <Grid Grid.Column="0">
                                     <Button
-                                        Command="{Binding loginDone_btnClick}"
+                                        Command="{Binding LoginCommand}"
                                         CommandParameter="{Binding ElementName=loginWindow}"
                                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         Background="Blue"

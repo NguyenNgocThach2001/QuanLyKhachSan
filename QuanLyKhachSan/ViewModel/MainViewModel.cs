@@ -28,10 +28,12 @@ namespace QuanLyKhachSan.ViewModel
                 if (p != null && !isLoaded)
                 {
                     isLoaded = true;
-                    LoginWindow loginWindow = new LoginWindow();
+                    if (p == null) return;
                     p.Hide();
+                    LoginWindow loginWindow = new LoginWindow();
                     loginWindow.ShowDialog();
                     var loginVM = loginWindow.DataContext as LoginViewModel;
+                    if (loginVM == null) return;
                     if (loginVM.IsLogin)
                     {
                         p.Show();
