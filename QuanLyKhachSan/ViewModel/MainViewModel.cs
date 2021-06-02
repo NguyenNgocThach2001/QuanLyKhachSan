@@ -16,6 +16,13 @@ namespace QuanLyKhachSan.ViewModel
     {
         #region commands
         public ICommand window_IsLoaded { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand SNameChangedCommand { get; set; }
+        public ICommand STypeChangedCommand { get; set; }
+        public ICommand SStatusChangedCommand { get; set; }
+        public ICommand SFromAChangedCommand { get; set; }
+        public ICommand SToBChangedCommand { get; set; }
+
         #endregion
         private ObservableCollection<RoomModel> _RoomList;
         public ObservableCollection<RoomModel> RoomList
@@ -26,7 +33,59 @@ namespace QuanLyKhachSan.ViewModel
                 _RoomList = value; OnPropertyChanged();
             }
         }
+        
         public static bool isLoaded = false;
+        private string _SName;
+        public string SName
+        {
+            get => _SName;
+            set
+            {
+                _SName = value; OnPropertyChanged();
+            }
+        }
+        private string _SType;
+        public string SType
+        {
+            get => _SType;
+            set
+            {
+                _SType = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _SStatus;
+        public string SStatus
+        {
+            get => _SStatus;
+            set
+            {
+                _SStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _SFromA;
+        public string SFromA
+        {
+            get => _SFromA;
+            set
+            {
+                _SFromA = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _SToB;
+        public string SToB
+        {
+            get => _SToB;
+            set
+            {
+                _SToB = value;
+                OnPropertyChanged();
+            }
+        }
         #region commands
         public ICommand AccountCommand { get; set; }
         public ICommand CheckoutCommand { get; set; }
@@ -49,6 +108,11 @@ namespace QuanLyKhachSan.ViewModel
                     if (loginVM.IsLogin)
                     {
                         p.Show();
+                        SName = "";
+                        SType = "Tất Cả";
+                        SStatus = "Tất Cả";
+                        SFromA = "250.000 vnđ";
+                        SToB = "Không Giới Hạn";
                         LoadRoomList();
                     }
                     else
@@ -58,6 +122,15 @@ namespace QuanLyKhachSan.ViewModel
                 }
             }
             );
+            SearchCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                LoadRoomList();
+            });
+            SNameChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { SName = p.Text; });
+            STypeChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => { SType = p.Text; });
+            SStatusChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => { SStatus = p.Text; });
+            SFromAChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => { SFromA = p.Text; });
+            SToBChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => { SToB = p.Text; });
             HireCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
                 HireWindow hireWindow = new HireWindow();
@@ -83,7 +156,7 @@ namespace QuanLyKhachSan.ViewModel
         {
             RoomList = new ObservableCollection<RoomModel>();
             var roomList = DataProvider.Ins.db.Rooms;
-            foreach(var item in roomList)
+            foreach (var item in roomList)
             {
                 var queryRoomType = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == item.room_type_id);
                 RoomModel newRoom = new RoomModel();
@@ -97,8 +170,40 @@ namespace QuanLyKhachSan.ViewModel
                 {
                     newRoom.color = new SolidColorBrush(Colors.Red);
                 }
+                if(SName != "")
+                    if (newRoom.room_name != SName) continue;
+                if(SType != "Tất Cả")
+                    if (newRoom.room_type != SType) continue;
+                if(SStatus != "Tất Cả")
+                    if (newRoom.room_status != SStatus) continue;
+                int price = getVN(newRoom.room_price);
+                int priceA = getVN(SFromA);
+                int priceB = getVN(SToB);
+                if (priceA != -1)
+                    if (price < priceA) continue;
+                if (priceB != -1)
+                    if (price > priceB) continue;
                 RoomList.Add(newRoom);
             }
+        }
+
+        int getVN(string p)
+        {
+            if (p == "Không Giới Hạn") return -1;
+            string res = "";
+            bool check = false;
+            for(int i = p.Length - 1; i >= 0; i--)
+            {
+                if (check && p[i] !='.')
+                {
+                    res = p[i] + res;
+                }
+                if (p[i] == 'v')
+                {
+                    check = true;
+                }
+            }
+            return Convert.ToInt32(res);
         }
 
         string VN(string p)
