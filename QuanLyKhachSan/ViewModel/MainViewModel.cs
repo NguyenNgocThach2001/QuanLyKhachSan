@@ -88,7 +88,7 @@ namespace QuanLyKhachSan.ViewModel
                 var queryRoomType = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == item.room_type_id);
                 RoomModel newRoom = new RoomModel();
                 newRoom.room_name = item.room_name;
-                newRoom.room_price = queryRoomType.price.ToString() + " vnđ";
+                newRoom.room_price = VN(queryRoomType.price.ToString());
                 newRoom.room_type = queryRoomType.room_type_name;
                 newRoom.room_status = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_id == item.room_status_id).room_status_name;
                 if (newRoom.room_status == "Trống")
@@ -99,6 +99,24 @@ namespace QuanLyKhachSan.ViewModel
                 }
                 RoomList.Add(newRoom);
             }
+        }
+
+        string VN(string p)
+        {
+            string res = "";
+            int cnt = 0;
+            for(int i = p.Length - 1; i >= 1; i--)
+            {
+                cnt++;
+                res = p[i] + res;
+                if (cnt == 3)
+                {
+                    res = "." + res;
+                    cnt = 0;
+                }
+            }
+            res = p[0] + res + " vnđ";
+            return res;
         }
     }
 }
