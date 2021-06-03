@@ -1,0 +1,184 @@
+﻿<Window x:Class="QuanLyKhachSan.AddHireWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyKhachSan"
+        mc:Ignorable="d"
+        xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Name="addHireWindow"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        DataContext="{StaticResource AddHireVM}"
+        Title="Tạo Thuê Phòng" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=addHireWindow}"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox VerticalAlignment="Center" Grid.Column="0"
+                    Foreground="Black"
+                    FontSize="25"
+                    HorizontalAlignment="Left"
+                    Text="Tên Phòng         : ">
+                </TextBox>
+
+                <ComboBox 
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Name="RoomComboBox"
+                    Grid.Column="1"
+                    Foreground="Black"
+                    FontSize="25"
+                    Width="auto"
+                    ItemsSource="{Binding RoomComboBox}"
+                    SelectedItem="{Binding Selected}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock FontSize="20" Foreground="Black"  Text="{Binding RoomName}">
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox VerticalAlignment="Center" Grid.Column="0"
+                    Foreground="Black"
+                    FontSize="25"
+                    Width="600"
+                    HorizontalAlignment="Left"
+                    Text="Tên Khách Hàng: ">
+                </TextBox>
+                <TextBox Foreground="Black" FontSize="25" Name="GuestNameTextBox" Height="39" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName ="TextChanged">
+                            <i:InvokeCommandAction 
+                                                Command="{Binding GuestNameChangedCommand}" 
+                                                CommandParameter="{Binding ElementName=GuestNameTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox VerticalAlignment="Center" Grid.Column="0"
+                    Foreground="Black"
+                    FontSize="25"
+                    Width="600"
+                    HorizontalAlignment="Left"
+                    Text="CMND               : ">
+                </TextBox>
+                <TextBox Foreground="black" FontSize="25" Name="CMNDTextBox" Height="39" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName ="TextChanged">
+                            <i:InvokeCommandAction 
+                                                Command="{Binding CMNDChangedCommand}" 
+                                                CommandParameter="{Binding ElementName=CMNDTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox VerticalAlignment="Center" Grid.Column="0"
+                    Foreground="Black"
+                    FontSize="25"
+                    HorizontalAlignment="Left"
+                    Text="Ngày vào          : ">
+                        </TextBox>
+                        <DatePicker Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Height="39"
+                            Width="200"
+                            FontSize="15"
+                            materialDesign:HintAssist.Hint="Pick Date"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox VerticalAlignment="Center" Grid.Column="0"
+                    Foreground="Black"
+                    FontSize="25"
+                    HorizontalAlignment="Left"
+                    Text="Ngày ra             : ">
+                        </TextBox>
+                        <DatePicker Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Height="39"
+                            Width="200"
+                            FontSize="15"
+                            materialDesign:HintAssist.Hint="Pick Date"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button
+                        Margin="0 0 50 20"
+                        HorizontalAlignment="Right"
+                        Name="AddHire"
+                        Command="{Binding AddHireCommand}"
+                        CommandParameter="{Binding ElementName=AddHire}"
+                        Width="70"
+                        Height="70"
+                        Background="#d11a2a"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                        ToolTip="Thêm Thuê Phòng">
+                        <materialDesign:PackIcon
+                        Kind="Plus"
+                        Height="50"
+                        Width="50" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

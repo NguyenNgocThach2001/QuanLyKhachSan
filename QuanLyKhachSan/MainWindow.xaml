@@ -72,7 +72,7 @@
                             Height="70"
                             FontSize="14"
                             ToolTip="Tạo Thuê Phòng Khi Có Người Muốn Thuê Phòng">
-                            <Bold>Tạo Thuê Phòng</Bold>
+                            <Bold>Danh Sách Thuê</Bold>
                         </Button>
                     </Grid>
                     <Grid Grid.Column="2">

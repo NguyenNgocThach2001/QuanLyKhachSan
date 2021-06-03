@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:QuanLyKhachSan"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
@@ -17,7 +17,15 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        DataContext="{StaticResource HireVM}"
         Title="Tạo Thuê Phòng" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding Window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=hireWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -29,7 +37,7 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="20 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250">
@@ -39,34 +47,161 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="0 0 0 0"  VerticalAlignment="Top" HorizontalAlignment="Left">
                     <Button
-                Width="50"
-                Height="50"
-                Background="White"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                ToolTip="Thêm Phiếu Thanh Toán">
+                        Command= "{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=SearchHire}"
+                        Name="SearchHire"
+                        Width="50"
+                        Height="50"
+                        Background="White"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                        ToolTip="Thêm Phiếu Thanh Toán">
                         <materialDesign:PackIcon
-                    Kind="DatabaseSearch"
-                    Height="50"
-                    Width="50" />
+                            Kind="DatabaseSearch"
+                            Height="50"
+                            Width="50" />
                     </Button>
                 </Grid>
                 <Grid Margin="0 10 0 0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <TextBox
-                 FontSize="20"
-                 x:Name="CheckoutSearch"
-                 materialDesign:HintAssist.Hint="Tìm Phòng Đang Thuê" />
+                        FontSize="20"
+                        x:Name="SearchTextBox"
+                        materialDesign:HintAssist.Hint="Tìm Phòng Đang Thuê">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="TextChanged">
+                                <i:InvokeCommandAction 
+                                                Command="{Binding SearchTextBoxChangedCommand}" 
+                                                CommandParameter="{Binding ElementName=SearchTextBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                 </Grid>
             </Grid>
-            <materialDesign:Card Grid.Row="1" Margin="10">
-                <Grid></Grid>
-            </materialDesign:Card>
+            <ScrollViewer Height="135" Grid.Row="1" Margin="20 30 0 0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel HorizontalAlignment="Stretch">
+                    <ItemsControl HorizontalContentAlignment="Stretch" x:Name="ListViewHire" ItemsSource="{Binding HireList}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:Card Width="40" Background="CadetBlue" Grid.Column="0">
+
+                                    </materialDesign:Card>
+                                    <Grid Grid.Column="1" HorizontalAlignment="Left" Width="700" Height="135">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="65"></RowDefinition>
+                                            <RowDefinition Height="35"></RowDefinition>
+                                            <RowDefinition Height="30"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <materialDesign:Card HorizontalAlignment="Left" Grid.Row="0" Width="700">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid HorizontalAlignment="Left" Grid.Column="0" Width="250">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                    </Grid>
+                                                    <materialDesign:Card Grid.Column ="0">
+                                                        <TextBlock  Margin="10 0 0 0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        Phòng:
+                                                        </TextBlock>
+                                                    </materialDesign:Card>
+                                                    <Grid Grid.Column ="1">
+                                                        <TextBlock Text="{Binding room_name}"  Margin="110 0 0 0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                                                        </TextBlock>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Grid.Column="1" HorizontalAlignment="Left" Width="450">
+                                                    <TextBlock Text="{Binding guest_name}" Margin="20 0 0 0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                                                    </TextBlock>
+                                                </Grid>
+                                            </Grid>
+                                        </materialDesign:Card>
+
+                                        <materialDesign:Card Grid.Row="1">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition Width="85"></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <materialDesign:Card Width="100" Grid.Column="0">
+                                                    <TextBlock Margin ="10 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            Ngày vào:
+                                                    </TextBlock>
+                                                </materialDesign:Card>
+                                                <Grid Grid.Column="1">
+                                                    <TextBlock Text="{Binding Checkin_date}" Margin ="5 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                                                    </TextBlock>
+                                                </Grid>
+
+                                                <materialDesign:Card Width="85" Grid.Column="2">
+                                                    <TextBlock Margin ="5 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            Ngày ra:
+                                                    </TextBlock>
+                                                </materialDesign:Card>
+                                                <Grid Grid.Column="3">
+                                                    <TextBlock Text="{Binding Checkout_date}" Margin ="5 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                                                    </TextBlock>
+                                                </Grid>
+                                            </Grid>
+
+                                        </materialDesign:Card>
+                                        <materialDesign:Card Height="30" Grid.Row="2">
+                                            <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
+                                                <Grid Width="130" Margin="10 0 10 0">
+                                                    <materialDesign:Card BorderThickness="0" >
+                                                        <Button Name="DetailButton"
+                                                Command="{Binding DetailCommand}"
+                                                CommandParameter="{Binding ElementName=DetailButton}"
+                                                materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
+                                                            Chi Tiết
+                                                        </Button>
+                                                    </materialDesign:Card>
+                                                </Grid>
+                                                <Grid Width="130" Margin="10 0 10 0">
+                                                    <materialDesign:Card BorderThickness ="0">
+                                                        <Button 
+                                                Name="PaymentButton"
+                                                Command="{Binding PaymentCommand}"
+                                                CommandParameter="{Binding ElementName=PaymentButton}"
+                                                materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
+                                                            Thanh Toán
+                                                        </Button>
+                                                    </materialDesign:Card>
+                                                </Grid>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
             <Grid Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Margin="0 10 20 20">
                 <Button
+                Name="AddHire"
+                Command="{Binding AddHireCommand}"
+                CommandParameter="{Binding ElementName=AddHire}"
                 Width="50"
                 Height="50"
                 Background="#d11a2a"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                ToolTip="Thêm Phiếu Thanh Toán">
+                ToolTip="Thêm Thuê Phòng">
                     <materialDesign:PackIcon
                     Kind="Plus"
                     Height="50"
