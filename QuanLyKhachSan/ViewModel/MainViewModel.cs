@@ -135,6 +135,7 @@ namespace QuanLyKhachSan.ViewModel
             {
                 HireWindow hireWindow = new HireWindow();
                 hireWindow.ShowDialog();
+
             });
             ReportCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {

@@ -4,4 +4,6 @@
                     xmlns:local="clr-namespace:QuanLyKhachSan.ResourceXAML">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    <viewmodel:HireViewModel x:Key="HireVM"></viewmodel:HireViewModel>
+    <viewmodel:AddHireViewModel x:Key="AddHireVM"></viewmodel:AddHireViewModel>
 </ResourceDictionary>
