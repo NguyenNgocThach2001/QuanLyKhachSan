@@ -19,7 +19,7 @@
         WindowStyle="None"
         Name="mainWindow"
         DataContext="{StaticResource MainVM}"
-        Title="Menu Quản Lý Khách Sạn" Height="700" Width="1000">
+        Title="Menu Quản Lý Khách Sạn" Height="750" Width="1050">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction 
