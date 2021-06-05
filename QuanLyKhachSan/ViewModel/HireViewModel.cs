@@ -56,6 +56,22 @@ namespace QuanLyKhachSan.ViewModel
                 LoadHireList();
             });
 
+            DetailCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                AddHireWindow addhireWindow = new AddHireWindow();
+                addhireWindow.ShowDialog();
+                addhireWindow.Close();
+                LoadHireList();
+            }); 
+            
+            PaymentCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                AddHireWindow addhireWindow = new AddHireWindow();
+                addhireWindow.ShowDialog();
+                addhireWindow.Close();
+                LoadHireList();
+            });
+
             SearchCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
             {
                 LoadHireList();

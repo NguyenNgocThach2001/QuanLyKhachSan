@@ -166,9 +166,9 @@
                                                 <Grid Width="130" Margin="10 0 10 0">
                                                     <materialDesign:Card BorderThickness="0" >
                                                         <Button Name="DetailButton"
-                                                Command="{Binding DetailCommand}"
-                                                CommandParameter="{Binding ElementName=DetailButton}"
-                                                materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
+                                                            Command="{Binding DetailCommand}"
+                                                            CommandParameter="{Binding ElementName=DetailButton}"
+                                                            materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
                                                             Chi Tiết
                                                         </Button>
                                                     </materialDesign:Card>
@@ -176,10 +176,10 @@
                                                 <Grid Width="130" Margin="10 0 10 0">
                                                     <materialDesign:Card BorderThickness ="0">
                                                         <Button 
-                                                Name="PaymentButton"
-                                                Command="{Binding PaymentCommand}"
-                                                CommandParameter="{Binding ElementName=PaymentButton}"
-                                                materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
+                                                            Name="PaymentButton"
+                                                            Command="{Binding PaymentCommand}"
+                                                            CommandParameter="{Binding ElementName=PaymentButton}"
+                                                            materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
                                                             Thanh Toán
                                                         </Button>
                                                     </materialDesign:Card>
