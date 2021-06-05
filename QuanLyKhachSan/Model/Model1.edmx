@@ -23,6 +23,7 @@
           <Property Name="phone" Type="nvarchar" MaxLength="20" />
           <Property Name="country" Type="nvarchar" MaxLength="20" />
           <Property Name="note" Type="nvarchar(max)" />
+          <Property Name="CMND" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -183,6 +184,7 @@
           <Property Name="country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__guest__3F466844" FromRole="Guest" ToRole="Reservation" />
+          <Property Name="CMND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -346,6 +348,7 @@
           <EntitySetMapping Name="Guests">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Guest">
               <MappingFragment StoreEntitySet="Guest">
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
                 <ScalarProperty Name="guest_id" ColumnName="guest_id" />
                 <ScalarProperty Name="full_name" ColumnName="full_name" />
                 <ScalarProperty Name="address" ColumnName="address" />

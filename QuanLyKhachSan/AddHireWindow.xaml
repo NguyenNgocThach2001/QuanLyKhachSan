@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuanLyKhachSan"
+        xmlns:local="clr-namespace:QuanLyKhachSan" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -19,6 +20,13 @@
         WindowStyle="None"
         DataContext="{StaticResource AddHireVM}"
         Title="Tạo Thuê Phòng" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding Window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=addHireWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -40,31 +48,41 @@
                     <ColumnDefinition Width="190"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox VerticalAlignment="Center" Grid.Column="0"
+                <TextBlock VerticalAlignment="Center" Grid.Column="0"
                     Foreground="Black"
                     FontSize="25"
                     HorizontalAlignment="Left"
                     Text="Tên Phòng         : ">
-                </TextBox>
+                </TextBlock>
 
                 <ComboBox 
+                    Name ="RoomNameComboBox"
                     Height="39"
                     VerticalAlignment="Center"
-                    Name="RoomComboBox"
                     Grid.Column="1"
                     Foreground="Black"
                     FontSize="25"
                     Width="auto"
-                    ItemsSource="{Binding RoomComboBox}"
-                    SelectedItem="{Binding Selected}">
+                    ItemsSource="{Binding RoomNameList}"
+                    SelectedItem="{Binding SRoom, Mode=Default}"
+                    IsSynchronizedWithCurrentItem="True">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock FontSize="20" Foreground="Black"  Text="{Binding RoomName}">
+                                <TextBlock Width="auto" 
+                                           Text="{Binding room.room_name}" 
+                                           FontSize="30" Foreground="Black">
                                 </TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName ="SelectionChanged">
+                            <i:InvokeCommandAction  
+                                Command="{Binding RoomNameChangedCommand}" 
+                                CommandParameter="{Binding ElementName=RoomNameComboBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ComboBox>
             </Grid>
             <Grid Grid.Row="1">
@@ -72,13 +90,13 @@
                     <ColumnDefinition Width="190"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox VerticalAlignment="Center" Grid.Column="0"
+                <TextBlock VerticalAlignment="Center" Grid.Column="0"
                     Foreground="Black"
                     FontSize="25"
                     Width="600"
                     HorizontalAlignment="Left"
                     Text="Tên Khách Hàng: ">
-                </TextBox>
+                </TextBlock>
                 <TextBox Foreground="Black" FontSize="25" Name="GuestNameTextBox" Height="39" Grid.Column="1">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName ="TextChanged">
@@ -94,13 +112,13 @@
                     <ColumnDefinition Width="190"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox VerticalAlignment="Center" Grid.Column="0"
+                <TextBlock VerticalAlignment="Center" Grid.Column="0"
                     Foreground="Black"
                     FontSize="25"
                     Width="600"
                     HorizontalAlignment="Left"
                     Text="CMND               : ">
-                </TextBox>
+                </TextBlock>
                 <TextBox Foreground="black" FontSize="25" Name="CMNDTextBox" Height="39" Grid.Column="1">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName ="TextChanged">
@@ -126,38 +144,60 @@
                             <ColumnDefinition Width="190"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBox VerticalAlignment="Center" Grid.Column="0"
+                        <TextBlock VerticalAlignment="Center" Grid.Column="0"
                     Foreground="Black"
                     FontSize="25"
                     HorizontalAlignment="Left"
                     Text="Ngày vào          : ">
-                        </TextBox>
-                        <DatePicker Grid.Column="1"
+                        </TextBlock>
+                        <DatePicker 
+                            SelectedDate="{Binding CheckinDate}"
+                            Name ="CheckinDateDateBox"
+                            Grid.Column="1"
                             HorizontalAlignment="Left"
                             Height="39"
                             Width="200"
                             FontSize="15"
                             materialDesign:HintAssist.Hint="Pick Date"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName ="TextInput">
+                                    <i:InvokeCommandAction 
+                                                Command="{Binding CheckinDateNameCommand}" 
+                                                CommandParameter="{Binding ElementName=CheckinDateDateBox}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="190"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBox VerticalAlignment="Center" Grid.Column="0"
+                        <TextBlock VerticalAlignment="Center" Grid.Column="0"
                     Foreground="Black"
                     FontSize="25"
                     HorizontalAlignment="Left"
                     Text="Ngày ra             : ">
-                        </TextBox>
-                        <DatePicker Grid.Column="1"
+                        </TextBlock>
+                        <DatePicker 
+                            SelectedDate="{Binding CheckoutDate}"
+                            Name="CheckoutDateDateBox"
+                            Grid.Column="1"
                             HorizontalAlignment="Left"
                             Height="39"
                             Width="200"
                             FontSize="15"
                             materialDesign:HintAssist.Hint="Pick Date"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName ="TextInput">
+                                    <i:InvokeCommandAction 
+                                                Command="{Binding CheckoutDateNameCommand}" 
+                                                CommandParameter="{Binding ElementName=CheckoutDateDateBox}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">

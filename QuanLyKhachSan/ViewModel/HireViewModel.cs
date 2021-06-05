@@ -50,8 +50,10 @@ namespace QuanLyKhachSan.ViewModel
 
             AddHireCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) => 
             {
-                AddHireWindow addHireWindow = new AddHireWindow();
-                addHireWindow.ShowDialog();
+                AddHireWindow addhireWindow = new AddHireWindow();
+                addhireWindow.ShowDialog();
+                addhireWindow.Close();
+                LoadHireList();
             });
 
             SearchCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
@@ -72,11 +74,13 @@ namespace QuanLyKhachSan.ViewModel
                 HireModel newHire = new HireModel();
                 newHire.guest_name = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).full_name;
                 newHire.room_name = roomList.FirstOrDefault(x => x.room_id == item.room_id).room_name;
-                newHire.CheckinDate = item.check_in_date.ToString();
-                newHire.CheckoutDate = item.check_out_date.ToString();
+                newHire.CheckinDate = (DateTime)item.check_in_date;
+                newHire.CheckoutDate = (DateTime)item.check_out_date;
+                newHire.CheckinDate = DateTime.Parse(((DateTime)item.check_in_date).ToString());
+                newHire.CheckoutDate = DateTime.Parse(((DateTime)item.check_out_date).ToString());
+                //MessageBox.Show(newHire.CheckinDate.ToString());
                 HireList.Add(newHire);
             }
-            System.Windows.MessageBox.Show("Đã load lại hirelist");
         }
         
         

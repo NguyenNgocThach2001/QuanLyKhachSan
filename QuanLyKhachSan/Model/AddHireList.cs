@@ -8,6 +8,6 @@ namespace QuanLyKhachSan.Model
 {
     public class AddHireModel
     {
-        public Reservation reservation { get; set; }
+        public Room room { get; set; }
     }
 }

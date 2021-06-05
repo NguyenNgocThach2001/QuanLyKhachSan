@@ -33,6 +33,9 @@ Create Table Guest(
 	note nvarchar(max),
 )
 
+ALTER TABLE Guest
+ADD CMND nvarchar(max);
+
 Create Table Reservation(
 	Reservation_id int identity(1,1) primary key,
 	guest_id int,
