@@ -11,8 +11,8 @@ namespace QuanLyKhachSan.Model
         public Reservation reservation { get; set; }
         public string room_name { get; set; }
         public string guest_name { get; set; }
-        public string CheckinDate { get; set; }
-        public string CheckoutDate { get; set; }
+        public DateTime CheckinDate { get; set; }
+        public DateTime CheckoutDate { get; set; }
 
     }
 }
