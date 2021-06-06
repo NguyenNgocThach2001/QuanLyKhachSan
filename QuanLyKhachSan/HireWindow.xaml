@@ -9,13 +9,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             TextElement.FontWeight="Regular"
-             TextElement.FontSize="13"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-             Name="hireWindow"
-             Background="{DynamicResource MaterialDesignPaper}"
-             FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Name="hireWindow"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         DataContext="{StaticResource HireVM}"
@@ -163,27 +163,24 @@
                                         </materialDesign:Card>
                                         <materialDesign:Card Height="30" Grid.Row="2">
                                             <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
-                                                <Grid Width="130" Margin="10 0 10 0">
-                                                    <materialDesign:Card BorderThickness="0" >
-                                                        <Button Name="DetailButton"
+                                                <materialDesign:Card Width="130" Margin="10 0 10 0" BorderThickness="0" >
+                                                    <Button Name="DetailButton"
                                                             Command="{Binding DetailCommand}"
-                                                            CommandParameter="{Binding ElementName=DetailButton}"
+                                                            CommandParameter="{Binding ElementName=hireWindow}"
                                                             materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
-                                                            Chi Tiết
-                                                        </Button>
-                                                    </materialDesign:Card>
-                                                </Grid>
-                                                <Grid Width="130" Margin="10 0 10 0">
-                                                    <materialDesign:Card BorderThickness ="0">
-                                                        <Button 
+                                                        Chi Tiết
+                                                    </Button>
+                                                </materialDesign:Card>
+                                                <materialDesign:Card Width="130" Margin="10 0 10 0" BorderThickness ="0">
+                                                    <Button 
                                                             Name="PaymentButton"
-                                                            Command="{Binding PaymentCommand}"
-                                                            CommandParameter="{Binding ElementName=PaymentButton}"
+                                                            Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, 
+                                                            Path = PaymentCommand}"
+                                                            CommandParameter="{Binding ElementName=hireWindow}"
                                                             materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
-                                                            Thanh Toán
-                                                        </Button>
-                                                    </materialDesign:Card>
-                                                </Grid>
+                                                        Thanh Toán
+                                                    </Button>
+                                                </materialDesign:Card>
                                             </StackPanel>
                                         </materialDesign:Card>
                                     </Grid>

@@ -6,4 +6,7 @@
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:HireViewModel x:Key="HireVM"></viewmodel:HireViewModel>
     <viewmodel:AddHireViewModel x:Key="AddHireVM"></viewmodel:AddHireViewModel>
+    <viewmodel:PaymentWindowViewModelPopup x:Key="paymentVMpopup"></viewmodel:PaymentWindowViewModelPopup>
+    <viewmodel:PaymentWindowRealhihiViewModel x:Key="paymentVMReal"></viewmodel:PaymentWindowRealhihiViewModel>
+    <viewmodel:CheckoutViewModel x:Key="checkoutVM"></viewmodel:CheckoutViewModel>
 </ResourceDictionary>

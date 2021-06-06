@@ -137,6 +137,9 @@
     <Compile Include="PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PaymentWindowRealhihi.xaml.cs">
+      <DependentUpon>PaymentWindowRealhihi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,8 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuControlBarViewModel.cs" />
+    <Compile Include="ViewModel\PaymentWindowRealhihiViewModel.cs" />
+    <Compile Include="ViewModel\PaymentWindowViewModelPopup.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Page Include="AccountWindow.xaml">
       <SubType>Designer</SubType>
@@ -201,6 +206,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PaymentWindowRealhihi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

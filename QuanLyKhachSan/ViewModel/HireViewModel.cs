@@ -43,12 +43,12 @@ namespace QuanLyKhachSan.ViewModel
         }
         public HireViewModel()
         {
-            Window_IsLoaded = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
+            Window_IsLoaded = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
                 LoadHireList();
             });
 
-            AddHireCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) => 
+            AddHireCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) => 
             {
                 AddHireWindow addhireWindow = new AddHireWindow();
                 addhireWindow.ShowDialog();
@@ -56,7 +56,7 @@ namespace QuanLyKhachSan.ViewModel
                 LoadHireList();
             });
 
-            DetailCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
+            DetailCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) =>
             {
                 AddHireWindow addhireWindow = new AddHireWindow();
                 addhireWindow.ShowDialog();
@@ -64,15 +64,14 @@ namespace QuanLyKhachSan.ViewModel
                 LoadHireList();
             }); 
             
-            PaymentCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
+            PaymentCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
-                AddHireWindow addhireWindow = new AddHireWindow();
-                addhireWindow.ShowDialog();
-                addhireWindow.Close();
+                PaymentWindow paymentWindow = new PaymentWindow();
+                paymentWindow.ShowDialog();
                 LoadHireList();
             });
 
-            SearchCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
+            SearchCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) =>
             {
                 LoadHireList();
             });

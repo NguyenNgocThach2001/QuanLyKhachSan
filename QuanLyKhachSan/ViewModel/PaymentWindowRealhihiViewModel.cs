@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyKhachSan.ViewModel
 {
-    public class CheckoutViewModel:BaseViewModel
+    class PaymentWindowRealhihiViewModel :BaseViewModel
     {
     }
 }
