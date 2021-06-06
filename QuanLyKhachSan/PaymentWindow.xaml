@@ -1,0 +1,215 @@
+﻿<Window x:Class="QuanLyKhachSan.PaymentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyKhachSan"
+        mc:Ignorable="d"
+        xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Name="paymentPopupWindow"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        DataContext="{StaticResource paymentVMpopup}"
+        Title="PaymentWindow" Height="750" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC></uc:ControlBarUC>
+        </Grid>
+        <materialDesign:Card Grid.Row="1">
+            <TextBlock FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Bold>Phiếu Thanh Toán</Bold>
+            </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2">
+            <TextBlock Text="{Binding RoomName}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">
+            </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" ></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <TextBlock FontSize="20">
+                        <Bold>Tên Khách Hàng: </Bold>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0">
+                    <TextBlock Text="{Binding GuestName}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" ></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <TextBlock FontSize="20">
+                        <Bold>CMND: </Bold>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0">
+                    <TextBlock Text="{Binding GuestName}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" ></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <TextBlock FontSize="20">
+                        <Bold>Ngày Vào: </Bold>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0">
+                    <TextBlock Text="{Binding GuestName}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" ></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <TextBlock FontSize="20">
+                        <Bold>Ngày Ra: </Bold>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0">
+                    <TextBlock Text="{Binding GuestName}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" ></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <TextBlock FontSize="20">
+                        <Bold>Dịch vụ thêm: </Bold>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0">
+                    <ComboBox 
+                    Name ="ServiceComboBox"
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="25"
+                    Width="auto"
+                    ItemsSource="{Binding ServiceList}"
+                    SelectedItem="{Binding SService, Mode=Default}"
+                    IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Width="auto" 
+                                           Text="{Binding Service.service_name}" 
+                                           FontSize="30" Foreground="Black">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="SelectionChanged">
+                                <i:InvokeCommandAction  
+                                Command="{Binding ServiceNameChangedCommand}" 
+                                CommandParameter="{Binding ElementName=ServiceComboBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="8">
+            <ScrollViewer>
+                <ListView ItemsSource="{Binding ServicePaymentList}" Margin="5" Name="lsService">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                            <GridViewColumn Header="Tên Dịch Vụ" DisplayMemberBinding="{Binding ServiceName}"></GridViewColumn>
+                            <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
+                            <GridViewColumn Header="Đơn Giá" DisplayMemberBinding="{Binding UnitPrice}"></GridViewColumn>
+                            <GridViewColumn Header="Thành Tiền" DisplayMemberBinding="{Binding Amount}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="9">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Foreground="Red" FontSize="25">
+                        <Bold>Tổng: </Bold>
+                    </TextBlock>         
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBlock Text="{Binding CostSum}" Foreground="Red" FontSize="25">
+                      
+                    </TextBlock>
+                </Grid>
+                <Grid Margin="10 0 0 0" Grid.Column="2">
+                    <TextBlock Text="vnđ" Foreground="Red" FontSize="25">
+
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="10">
+            <Button 
+                Name="ButtonPay"
+                Command="{Binding PayCommand}"
+                CommandParameter="{Binding ElementName=ButtonPay}"
+                Width="150" Height="30">
+                <TextBlock FontSize="20">
+                    <Bold>Thanh Toán</Bold>
+                </TextBlock>
+            </Button>
+        </materialDesign:Card>
+    </Grid>
+</Window>

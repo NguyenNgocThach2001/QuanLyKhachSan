@@ -11,3 +11,4 @@ namespace QuanLyKhachSan.Model
         public Room room { get; set; }
     }
 }
+    
