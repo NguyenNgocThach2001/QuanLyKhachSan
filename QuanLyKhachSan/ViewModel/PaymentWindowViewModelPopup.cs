@@ -14,9 +14,21 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class PaymentWindowViewModelPopup:BaseViewModel
     {
+
+        #region commands
+        public ICommand Window_IsLoaded { get; set; }
+        #endregion
+        public int SelectedItem { get; set; }
         public PaymentWindowViewModelPopup()
         {
+            Window_IsLoaded = new RelayCommand<Window>((p) => { return p != null; }, (p) => {
+                LoadData();
+            });
+        }
 
+        public void LoadData()
+        {
+            MessageBox.Show(SelectedItem.ToString());
         }
     }
 }

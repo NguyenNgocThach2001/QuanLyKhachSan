@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:QuanLyKhachSan.ViewModel"
-                    xmlns:local="clr-namespace:QuanLyKhachSan.ResourceXAML">
+                    xmlns:viewmodel="clr-namespace:QuanLyKhachSan.ViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:HireViewModel x:Key="HireVM"></viewmodel:HireViewModel>
@@ -9,4 +8,11 @@
     <viewmodel:PaymentWindowViewModelPopup x:Key="paymentVMpopup"></viewmodel:PaymentWindowViewModelPopup>
     <viewmodel:PaymentWindowRealhihiViewModel x:Key="paymentVMReal"></viewmodel:PaymentWindowRealhihiViewModel>
     <viewmodel:CheckoutViewModel x:Key="checkoutVM"></viewmodel:CheckoutViewModel>
-</ResourceDictionary>
+    <viewmodel:RoomManagementUCViewModel x:Key="roomMgUCVM"></viewmodel:RoomManagementUCViewModel>
+    <viewmodel:RoomStatusManagementUCViewmodel x:Key="roomStatusMgUCVM"></viewmodel:RoomStatusManagementUCViewmodel>
+    <viewmodel:RoomTypeManagementUCViewmodel x:Key="roomTypeMgUCVM"></viewmodel:RoomTypeManagementUCViewmodel>
+    <viewmodel:StaffManagementUCViewmodel x:Key="staffMgUCVM"></viewmodel:StaffManagementUCViewmodel>
+    <viewmodel:ServiceManagementUCViewmodel x:Key="serviceMgUCVM"></viewmodel:ServiceManagementUCViewmodel>
+    <viewmodel:PositionManagementUCViewmodel x:Key="positionMgUCVM"></viewmodel:PositionManagementUCViewmodel>
+    <viewmodel:PayRangeManagementUCViewmodel x:Key="payrangeMgUCVM"></viewmodel:PayRangeManagementUCViewmodel>
+</ResourceDictionary>   

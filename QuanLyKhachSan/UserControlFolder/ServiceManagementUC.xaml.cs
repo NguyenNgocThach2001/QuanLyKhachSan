@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for CheckoutUC.xaml
+    /// Interaction logic for ServiceManagementUC.xaml
     /// </summary>
-    public partial class CheckoutUC : UserControl
+    public partial class ServiceManagementUC : UserControl
     {
-        public CheckoutUC()
+        public ServiceManagementUC()
         {
             InitializeComponent();
         }

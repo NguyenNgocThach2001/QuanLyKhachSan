@@ -10,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QuanLyKhachSan.ViewModel;
 
-namespace QuanLyKhachSan
+namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for HireWindow.xaml
+    /// Interaction logic for StaffManagementUC.xaml
     /// </summary>
-    public partial class HireWindow : Window
+    public partial class StaffManagementUC : UserControl
     {
-        public HireViewModel hireViewModel { get; set; }
-        public HireWindow()
+        public StaffManagementUC()
         {
             InitializeComponent();
-            this.DataContext = hireViewModel = new HireViewModel();
         }
     }
 }

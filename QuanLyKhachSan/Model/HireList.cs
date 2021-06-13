@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace QuanLyKhachSan.Model
 {
@@ -13,6 +14,5 @@ namespace QuanLyKhachSan.Model
         public string guest_name { get; set; }
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
-
     }
 }

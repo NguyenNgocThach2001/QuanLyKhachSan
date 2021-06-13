@@ -14,9 +14,8 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class HireViewModel:BaseViewModel
     {
-
-        private ObservableCollection<HireModel> _HireList;
-        public ObservableCollection<HireModel> HireList
+        private List<HireModel> _HireList;
+        public List<HireModel> HireList
         {
             get => _HireList;
             set
@@ -58,16 +57,19 @@ namespace QuanLyKhachSan.ViewModel
 
             DetailCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) =>
             {
-                AddHireWindow addhireWindow = new AddHireWindow();
-                addhireWindow.ShowDialog();
-                addhireWindow.Close();
-                LoadHireList();
+                
             }); 
             
-            PaymentCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            PaymentCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) =>
             {
+                ListBox lb = FindParent<ListBox>(p);
+                int Reservation_id = new int();
+                if ((lb.SelectedItem as HireModel)!=null)
+                    if((lb.SelectedItem as HireModel).reservation != null)
+                        Reservation_id = (lb.SelectedItem as HireModel).reservation.Reservation_id;
                 PaymentWindow paymentWindow = new PaymentWindow();
                 paymentWindow.ShowDialog();
+                ((PaymentWindowViewModelPopup)paymentWindow.DataContext).SelectedItem = Reservation_id;
                 LoadHireList();
             });
 
@@ -78,9 +80,17 @@ namespace QuanLyKhachSan.ViewModel
             SearchTextBoxChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { SearchText = p.Text; });
         }
 
+        private static T FindParent<T>(DependencyObject dependencyObject) where T : DependencyObject
+        {
+            var parent = VisualTreeHelper.GetParent(dependencyObject);
+            if (parent == null) return null;
+            var parentT = parent as T;
+            return parentT ?? FindParent<T>(parent);
+        }
+
         void LoadHireList()
         {
-            HireList = new ObservableCollection<HireModel>();
+            HireList = new List<HireModel>();
             var hireList = DataProvider.Ins.db.Reservations.ToList();
             var guestList = DataProvider.Ins.db.Guests.ToList();
             var roomList = DataProvider.Ins.db.Rooms.ToList();
@@ -97,7 +107,5 @@ namespace QuanLyKhachSan.ViewModel
                 HireList.Add(newHire);
             }
         }
-        
-        
     }
 }
