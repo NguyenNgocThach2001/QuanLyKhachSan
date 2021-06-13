@@ -63,6 +63,8 @@ Create Table Account(
 	Password nvarchar(max),
 )
 
+ALTER TABLE Account
+ADD FullName nvarchar(max);
 
 Delete From Account
 Where Account.UserName = N'Thach';
@@ -70,3 +72,14 @@ Where Account.UserName = N'Thach';
 Insert into Account
 Values (N'Thach',N'e99d28b464722f0282f1c1d099b236f6');
 
+Create Table Service(
+	Service_ID int identity(1,1) primary key,
+	Service_Name nvarchar(max),
+)
+
+Create Table PaymentService(
+	PaymentService_ID int identity(1,1) primary key,
+	payment_id int ,
+	guest_id int,
+	foreign key(payment_id,guest_id) references Payment(payment_id,guest_id),
+)

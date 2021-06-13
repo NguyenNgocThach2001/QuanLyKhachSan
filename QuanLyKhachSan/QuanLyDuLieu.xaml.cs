@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using QuanLyKhachSan.ViewModel;
 
 namespace QuanLyKhachSan
 {
     /// <summary>
-    /// Interaction logic for HireWindow.xaml
+    /// Interaction logic for QuanLyDuLieu.xaml
     /// </summary>
-    public partial class HireWindow : Window
+    public partial class QuanLyDuLieu : Window
     {
-        public HireViewModel hireViewModel { get; set; }
-        public HireWindow()
+        public QuanLyDuLieu()
         {
             InitializeComponent();
-            this.DataContext = hireViewModel = new HireViewModel();
         }
     }
 }

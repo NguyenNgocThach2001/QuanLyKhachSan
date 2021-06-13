@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for HIREUC.xaml
+    /// Interaction logic for PositionManagementUC.xaml
     /// </summary>
-    public partial class HIREUC : UserControl
+    public partial class PositionManagementUC : UserControl
     {
-        public HIREUC()
+        public PositionManagementUC()
         {
             InitializeComponent();
         }

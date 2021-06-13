@@ -7,7 +7,7 @@
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -79,8 +79,8 @@
             </Grid>
             <ScrollViewer Grid.Row="1" Margin="20 30 0 0">
                 <StackPanel HorizontalAlignment="Stretch">
-                    <ItemsControl HorizontalContentAlignment="Stretch" x:Name="ListViewHire" ItemsSource="{Binding HireList}">
-                        <ItemsControl.ItemTemplate>
+                    <ListBox HorizontalContentAlignment="Stretch" x:Name="ListViewHire" ItemsSource="{Binding HireList}">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0 20 0 0">
                                     <Grid.ColumnDefinitions>
@@ -116,7 +116,7 @@
                                                         </TextBlock>
                                                     </materialDesign:Card>
                                                     <Grid Grid.Column ="1">
-                                                        <TextBlock Text="{Binding room_name}"  Margin="110 0 0 0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                        <TextBlock Name="RoomName_TxtBox" Text="{Binding room_name}"  Margin="110 0 0 0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center">
 
                                                         </TextBlock>
                                                     </Grid>
@@ -165,8 +165,8 @@
                                             <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
                                                 <materialDesign:Card Width="130" Margin="10 0 10 0" BorderThickness="0" >
                                                     <Button Name="DetailButton"
-                                                            Command="{Binding DetailCommand}"
-                                                            CommandParameter="{Binding ElementName=hireWindow}"
+                                                            Command="{Binding Path = DataContext.DetailCommand, RelativeSource = {RelativeSource AncestorType={x:Type Window}}}"
+                                                            CommandParameter="{Binding ElementName=PaymentButton}"
                                                             materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
                                                         Chi Tiết
                                                     </Button>
@@ -174,11 +174,17 @@
                                                 <materialDesign:Card Width="130" Margin="10 0 10 0" BorderThickness ="0">
                                                     <Button 
                                                             Name="PaymentButton"
-                                                            Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, 
-                                                            Path = PaymentCommand}"
-                                                            CommandParameter="{Binding ElementName=hireWindow}"
-                                                            materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
+                                                            materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0"
+                                                            Command="{Binding Path = DataContext.PaymentCommand, RelativeSource = {RelativeSource AncestorType={x:Type Window}}}"
+                                                            CommandParameter="{Binding ElementName=PaymentButton}">
                                                         Thanh Toán
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName ="TextChanged">
+                                                                <i:InvokeCommandAction 
+                                                                    Command="{Binding SearchTextBoxChangedCommand}" 
+                                                                    CommandParameter="{Binding ElementName=SearchTextBox}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
                                                     </Button>
                                                 </materialDesign:Card>
                                             </StackPanel>
@@ -186,8 +192,8 @@
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
             </ScrollViewer>
             <Grid Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Margin="0 10 20 20">

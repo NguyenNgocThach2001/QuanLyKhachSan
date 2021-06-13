@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyKhachSan.UserControlFolder
 {
     /// <summary>
-    /// Interaction logic for ReportUc.xaml
+    /// Interaction logic for RoomTypeManagementUC.xaml
     /// </summary>
-    public partial class ReportUc : UserControl
+    public partial class RoomTypeManagementUC : UserControl
     {
-        public ReportUc()
+        public RoomTypeManagementUC()
         {
             InitializeComponent();
         }
