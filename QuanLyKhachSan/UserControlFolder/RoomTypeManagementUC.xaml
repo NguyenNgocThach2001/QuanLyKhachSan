@@ -11,11 +11,18 @@
             TextElement.FontSize="13"
             TextOptions.TextFormattingMode="Ideal"
             TextOptions.TextRenderingMode="Auto"
-            Name="staffManagementUC"
+            Name="roomTypeManagementUC"
             Background="{DynamicResource MaterialDesignPaper}"
             FontFamily="{DynamicResource MaterialDesignFont}"
-            DataContext="{StaticResource RoomTypeManagementUCViewmodel}"
+            DataContext="{StaticResource roomTypeMgUCVM}"
             d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=roomStatusManagementWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"></RowDefinition>
@@ -32,8 +39,8 @@
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" />
-                    <TextBox FontSize="20">
-
+                    <TextBox FontSize="20"
+                             Text="{Binding RoomTypeNameIP,Mode=TwoWay}">
                     </TextBox>
                 </Grid>
             </DockPanel>
@@ -47,31 +54,45 @@
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" />
-                    <TextBox FontSize="20">
-
+                    <TextBox FontSize="20"
+                             Text="{Binding RoomPriceIP, Mode=TwoWay}">
                     </TextBox>
                 </Grid>
             </DockPanel>
         </Grid>
         <Grid Grid.Row="2" Margin="0 10 0 0">
             <DockPanel HorizontalAlignment="Left" Margin="30 0 0 0">
-                <Button Width="100" Margin="10 0 0 0">
+                <Button Width="100" Margin="10 0 0 0"
+                        Command="{Binding AddCommand}"
+                        CommandParameter="{Binding ElementName=roomTypeManagementUC}">
                     <TextBlock>Thêm</TextBlock>
                 </Button>
-                <Button Width="100" Margin="10 0 0 0">
+                <Button Width="100" Margin="10 0 0 0"
+                        Name ="deleteBtn"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding ElementName=deleteBtn}">
                     <TextBlock>Xóa</TextBlock>
                 </Button>
-                <Button Width="100" Margin="10 0 0 0">
+                <Button Width="100" Margin="10 0 0 0"
+                        Name ="updateBtn"
+                        Command="{Binding UpdateCommand}"
+                        CommandParameter="{Binding ElementName=updateBtn}">
                     <TextBlock>Sửa</TextBlock>
                 </Button>
             </DockPanel>
         </Grid>
         <Grid Grid.Row="3">
-            <DataGrid Margin="0 10 0 0">
+            <DataGrid Margin="0 10 0 0"
+                      Name ="dataGrid"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding RoomTypeList,Mode=TwoWay,
+                      NotifyOnSourceUpdated=True,
+                      NotifyOnTargetUpdated=True}"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã Loại Phòng"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Tên Loại Phòng"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Giá Phòng"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding RoomTypeId}" Header="Mã Loại Phòng"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="Tên Loại Phòng"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Price}" Header="Giá Phòng"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
