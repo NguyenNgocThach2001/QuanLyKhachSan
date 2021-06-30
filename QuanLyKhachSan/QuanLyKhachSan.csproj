@@ -131,12 +131,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\RoomList.cs" />
+    <Compile Include="Model\RoomMgModel.cs" />
     <Compile Include="Model\RoomStatu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RoomStatusModel.cs" />
     <Compile Include="Model\RoomType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RoomTypeModel.cs" />
     <Compile Include="Model\SelectedReservationData.cs" />
     <Compile Include="PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
@@ -185,7 +188,9 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CheckoutViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\DepartmentManagementUCViewModel.cs" />
     <Compile Include="ViewModel\HireViewModel.cs" />
+    <Compile Include="ViewModel\Lib.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuControlBarViewModel.cs" />
@@ -193,6 +198,7 @@
     <Compile Include="ViewModel\PaymentWindowViewModelPopup.cs" />
     <Compile Include="ViewModel\PayRangeManagementUCViewmodel.cs" />
     <Compile Include="ViewModel\PositionManagementUCViewmodel.cs" />
+    <Compile Include="ViewModel\QuanLyDuLieuViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\RoomManagementUCViewModel.cs" />
     <Compile Include="ViewModel\RoomStatusManagementUCViewmodel.cs" />

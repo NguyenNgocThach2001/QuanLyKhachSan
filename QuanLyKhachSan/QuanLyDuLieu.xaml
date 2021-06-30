@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
         mc:Ignorable="d"
+        xmlns:vm="clr-namespace:QuanLyKhachSan.ViewModel"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -13,13 +14,20 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Name="paymentPopupWindow"
+        Name="quanlydulieuWindow"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        DataContext="{StaticResource dataManagementVM}"
+        DataContext="{StaticResource QuanLyDuLieuVM}"
         Title="QuanLyDuLieu" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=quanlydulieuWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -31,22 +39,57 @@
         </Grid>
         <Grid Grid.Row="1" Background="#18191A">
             <DockPanel HorizontalAlignment="Right">
-                <Button Command="{Binding RoomCommand}" Height="50" Width="110" HorizontalAlignment="Right">
+                <Button Name ="Room_Btn"
+                        Command="{Binding RoomCommand}" 
+                        CommandParameter="{Binding ElementName=Room_Btn}" 
+                        Height="50" Width="110" HorizontalAlignment="Right" Click="Button_Click">
                     <TextBlock>
                         <Bold>Phòng</Bold>
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ServiceCommand}" Height="50" Width="110"  HorizontalAlignment="Right">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Name ="RoomStatus_Btn" Grid.Row="0"
+                        Command="{Binding RoomStatusCommand}" 
+                        CommandParameter="{Binding ElementName=Room_Btn}" 
+                        Height="25" Width="110" HorizontalAlignment="Right" Click="Button_Click">
+                        <TextBlock>
+                        <Bold>Trạng thái</Bold>
+                        </TextBlock>
+                    </Button>
+
+                    <Button Name ="RoomType_Btn" Grid.Row="1"
+                        Command="{Binding RoomTypeCommand}" 
+                        CommandParameter="{Binding ElementName=Room_Btn}" 
+                        Height="25" Width="110" HorizontalAlignment="Right" Click="Button_Click">
+                        <TextBlock>
+                        <Bold>Loại Phòng</Bold>
+                        </TextBlock>
+                    </Button>
+                </Grid>
+                <Button Name ="Service_Btn"
+                        Command="{Binding ServiceCommand}"
+                        CommandParameter="{Binding ElementName=Service_Btn}" 
+                        Height="50" Width="110"  HorizontalAlignment="Right" Click="Button_Click">
                     <TextBlock>
                         <Bold>Dịch Vụ</Bold>
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding StaffCommand}" Height="50" Width="110"  HorizontalAlignment="Right">
+                <Button Name ="Staff_Btn"
+                        Command="{Binding StaffCommand}"
+                        CommandParameter="{Binding ElementName=Staff_Btn}"
+                        Height="50" Width="110"  HorizontalAlignment="Right">
                     <TextBlock>
                         <Bold>Nhân Viên</Bold>
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding DepartmentCommand}" Height="50" Width="110"  HorizontalAlignment="Right">
+                <Button Name ="Department_Btn"
+                        Command="{Binding DepartmentCommand}" 
+                        CommandParameter="{Binding ElementName=Department_Btn}"
+                        Height="50" Width="110"  HorizontalAlignment="Right">
                     <TextBlock>
                         <Bold>Phòng Ban</Bold>
                     </TextBlock>
@@ -55,6 +98,36 @@
         </Grid>
         <Grid Grid.Row="2">
             <Canvas>
+                <Grid Panel.ZIndex="{Binding DepartmentIndex}" Width="800" Height="350">
+                    <uc:DepartmentManagementUC >
+
+                    </uc:DepartmentManagementUC>
+                </Grid>
+                <Grid Panel.ZIndex="{Binding StaffIndex}" Width="800" Height="350">
+                    <uc:StaffManagementUC >
+
+                    </uc:StaffManagementUC>
+                </Grid>
+                <Grid Panel.ZIndex="{Binding RoomIndex}" Width="800" Height="350">
+                    <uc:RoomManagement>
+
+                    </uc:RoomManagement>
+                </Grid>
+                <Grid Panel.ZIndex="{Binding ServiceIndex}" Width="800" Height="350">
+                    <uc:ServiceManagementUC>
+
+                    </uc:ServiceManagementUC>
+                </Grid>
+                <Grid Panel.ZIndex="{Binding RoomStatusIndex}" Width="800" Height="350">
+                    <uc:RoomStatusManagementUC>
+
+                    </uc:RoomStatusManagementUC>
+                </Grid>
+                <Grid Panel.ZIndex="{Binding RoomTypeIndex}" Width="800" Height="350">
+                    <uc:RoomTypeManagementUC>
+
+                    </uc:RoomTypeManagementUC>
+                </Grid>
                 
             </Canvas>
         </Grid>

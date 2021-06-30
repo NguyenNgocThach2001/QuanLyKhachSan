@@ -22,6 +22,7 @@ namespace QuanLyKhachSan.ViewModel
         public ICommand SStatusChangedCommand { get; set; }
         public ICommand SFromAChangedCommand { get; set; }
         public ICommand SToBChangedCommand { get; set; }
+        public ICommand ManagementCommand { get; set; }
 
         #endregion
         private ObservableCollection<RoomModel> _RoomList;
@@ -125,6 +126,11 @@ namespace QuanLyKhachSan.ViewModel
             SearchCommand = new RelayCommand<Button>((p) => { return p == null ? false : true; }, (p) =>
             {
                 LoadRoomList();
+            });
+            ManagementCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                QuanLyDuLieu quanlydulieu = new QuanLyDuLieu();
+                quanlydulieu.ShowDialog();
             });
             SNameChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { SName = p.Text; });
             STypeChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => { SType = p.Text; });
