@@ -45,10 +45,10 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Width="Auto" Height="Auto">
-
                         <Grid>
                             <Button 
                                 Command="{Binding AccountCommand}"
@@ -101,6 +101,20 @@
                             FontSize="14"
                             ToolTip="Báo Cáo">
                             <Bold>Báo Cáo</Bold>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="4">
+                        <Button          
+                            Command="{Binding ManagementCommand}"
+                            CommandParameter="{Binding ElementName=mainWindow}"
+                            Background="#18191A"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Width="150"
+                            Height="70"
+                            FontSize="14"
+                            ToolTip="Quản lý">
+                            <Bold>Quản lý</Bold>
                         </Button>
                     </Grid>
                 </Grid>

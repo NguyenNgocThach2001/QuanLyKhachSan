@@ -15,7 +15,7 @@
             Name="roomManagementUC"
             Background="{DynamicResource MaterialDesignPaper}"
             FontFamily="{DynamicResource MaterialDesignFont}"
-            DataContext="{StaticResource RoomManagementUCViewmodel}"
+            DataContext="{StaticResource roomMgUCVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -54,7 +54,7 @@
                         StrokeThickness="2"
                         Fill="Transparent" />
 
-                    <ComboBox FontSize="25"></ComboBox>
+                    <ComboBox></ComboBox>
                 </Grid>
             </DockPanel>
         </Grid>
@@ -67,7 +67,7 @@
                         StrokeThickness="2"
                         Fill="Transparent" />
 
-                    <ComboBox FontSize="25"></ComboBox>
+                    <ComboBox></ComboBox>
                 </Grid>
             </DockPanel>
         </Grid>
