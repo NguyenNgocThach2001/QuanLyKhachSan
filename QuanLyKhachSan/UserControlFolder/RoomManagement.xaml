@@ -60,7 +60,8 @@
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" />
-                    <ComboBox></ComboBox>
+
+                    <ComboBox FontSize="25"></ComboBox>
                 </Grid>
             </DockPanel>
         </Grid>
