@@ -12,10 +12,11 @@ namespace QuanLyKhachSan.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class Service
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
+        public int Service_ID { get; set; }
+        public string Service_Name { get; set; }
+        public Nullable<int> unitPrice { get; set; }
+        public string unit { get; set; }
     }
 }

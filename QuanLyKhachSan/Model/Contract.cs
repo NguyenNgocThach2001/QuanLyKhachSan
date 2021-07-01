@@ -12,10 +12,12 @@ namespace QuanLyKhachSan.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class Contract
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
+        public int Contract_ID { get; set; }
+        public Nullable<int> Staff_ID { get; set; }
+        public string Context { get; set; }
+    
+        public virtual Staff Staff { get; set; }
     }
 }

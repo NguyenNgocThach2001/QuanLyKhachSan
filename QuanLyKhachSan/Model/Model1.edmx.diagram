@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a7df6d9140ff4fd0b77a78b39df88d87" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="a7df6d9140ff4fd0b77a78b39df88d87" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="QuanLyKhachSanModel.Account" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhachSanModel.Guest" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhachSanModel.Payment" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
@@ -17,6 +17,25 @@
         <AssociationConnector Association="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyKhachSanModel.FK__Room__room_statu__3A81B327" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyKhachSanModel.FK__Room__room_type___47DBAE45" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.PaymentService" Width="1.5" PointX="10.125" PointY="1.75" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Service" Width="1.5" PointX="7.5" PointY="5.75" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__PaymentService__5CD6CB2B" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Coefficient" Width="1.5" PointX="0.75" PointY="13.625" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Contract" Width="1.5" PointX="5.25" PointY="12.375" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Department" Width="1.5" PointX="5.25" PointY="9.125" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Payrange" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Position" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="QuanLyKhachSanModel.Staff" Width="1.5" PointX="3" PointY="9.25" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Coe__236943A5" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Contract__Staff___2645B050" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Departmen__Depar__151B244E" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__160F4887" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__17F790F9" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__1DB06A4F" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__22751F6C" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Pay__19DFD96B" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Pay__245D67DE" />
+        <AssociationConnector Association="QuanLyKhachSanModel.FK__Staff__Staff_Pos__25518C17" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -165,32 +165,36 @@ namespace QuanLyKhachSan.ViewModel
             var roomList = DataProvider.Ins.db.Rooms;
             foreach (var item in roomList)
             {
-                var queryRoomType = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == item.room_type_id);
-                RoomModel newRoom = new RoomModel();
-                newRoom.room_name = item.room_name;
-                newRoom.room_price = VN(queryRoomType.price.ToString());
-                newRoom.room_type = queryRoomType.room_type_name;
-                newRoom.room_status = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_id == item.room_status_id).room_status_name;
-                if (newRoom.room_status == "Trống")
-                    newRoom.color = new SolidColorBrush(Colors.Green);
-                else
+                try
                 {
-                    newRoom.color = new SolidColorBrush(Colors.Red);
+                    var queryRoomType = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == item.room_type_id);
+                    RoomModel newRoom = new RoomModel();
+                    newRoom.room_name = item.room_name;
+                    newRoom.room_price = VN(queryRoomType.price.ToString());
+                    newRoom.room_type = queryRoomType.room_type_name;
+                    newRoom.room_status = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_id == item.room_status_id).room_status_name;
+                    if (newRoom.room_status == "Trống")
+                        newRoom.color = new SolidColorBrush(Colors.Green);
+                    else
+                    {
+                        newRoom.color = new SolidColorBrush(Colors.Red);
+                    }
+                    if (SName != "")
+                        if (newRoom.room_name != SName) continue;
+                    if (SType != "Tất Cả")
+                        if (newRoom.room_type != SType) continue;
+                    if (SStatus != "Tất Cả")
+                        if (newRoom.room_status != SStatus) continue;
+                    int price = getVN(newRoom.room_price);
+                    int priceA = getVN(SFromA);
+                    int priceB = getVN(SToB);
+                    if (priceA != -1)
+                        if (price < priceA) continue;
+                    if (priceB != -1)
+                        if (price > priceB) continue;
+                    RoomList.Add(newRoom);
                 }
-                if(SName != "")
-                    if (newRoom.room_name != SName) continue;
-                if(SType != "Tất Cả")
-                    if (newRoom.room_type != SType) continue;
-                if(SStatus != "Tất Cả")
-                    if (newRoom.room_status != SStatus) continue;
-                int price = getVN(newRoom.room_price);
-                int priceA = getVN(SFromA);
-                int priceB = getVN(SToB);
-                if (priceA != -1)
-                    if (price < priceA) continue;
-                if (priceB != -1)
-                    if (price > priceB) continue;
-                RoomList.Add(newRoom);
+                catch { }
             }
         }
 

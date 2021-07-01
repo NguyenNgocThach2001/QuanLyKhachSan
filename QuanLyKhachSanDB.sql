@@ -77,9 +77,71 @@ Create Table Service(
 	Service_Name nvarchar(max),
 )
 
+ALTER TABLE Service
+ADD unitPrice int;
+
+ALTER TABLE Service
+ADD unit nvarchar(max);
+
 Create Table PaymentService(
 	PaymentService_ID int identity(1,1) primary key,
-	payment_id int ,
+	payment_id int,
 	guest_id int,
 	foreign key(payment_id,guest_id) references Payment(payment_id,guest_id),
 )
+
+Create Table Department(
+	Department_ID nvarchar(10) primary key,
+	Department_Name nvarchar(max),
+	Department_Head_id int,
+)
+
+
+Create Table Staff(
+	Staff_ID int identity(1,1) primary key,
+	Staff_Name nvarchar(max),
+	Staff_Sex nvarchar(10),
+	Staff_Phone nvarchar(20),
+	Staff_Position_ID nvarchar(10),
+	Staff_Payrange_ID nvarchar(10),
+	Staff_Coefficients_ID nvarchar(10),
+	Staff_Department_ID nvarchar(10),
+	Staff_Contract_Date DateTime,
+	Expiry_Date DateTime,
+)
+
+Create Table Contract(
+	Contract_ID int identity(1,1) primary key,
+	Staff_ID int,
+	Context nvarchar(max),
+	foreign key(Staff_ID) references Staff(Staff_ID),
+)
+
+
+Create Table Position(
+	Position_ID nvarchar(10) primary key,
+	Position_Name nvarchar(max),
+)
+
+Create Table Coefficients(
+	Coefficients_ID nvarchar(10) primary key,
+	Coefficients_Num float,
+)
+
+Create Table Payrange(
+	Payrange_ID nvarchar(10) primary key,
+	Payrange_Num float,
+)
+
+ALTER TABLE Staff
+ADD FOREIGN KEY (Staff_Department_ID) REFERENCES Department(Department_ID);
+ALTER TABLE Staff
+ADD FOREIGN KEY (Staff_Coefficients_ID) references Coefficients(Coefficients_ID);
+ALTER TABLE Staff
+ADD FOREIGN KEY (Staff_Payrange_ID) references Payrange(Payrange_ID);
+ALTER TABLE Staff
+ADD FOREIGN KEY (Staff_Position_ID) references Position(Position_ID);
+ALTER TABLE Contract
+ADD FOREIGN  key(Staff_ID) references Staff(Staff_ID);
+ALTER TABLE Department
+ADD FOREIGN KEY (Department_Head_id) REFERENCES Staff(Staff_ID);

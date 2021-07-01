@@ -13,20 +13,14 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class RoomManagementUCViewModel:BaseViewModel
     {
-        private string _RoomNameIP { get; set; }
-        public string RoomNameIP
-        {
-            get => _RoomNameIP;
-            set
-            {
-                _RoomNameIP = value;
-                OnPropertyChanged();
-            }
-        }
+        
         public ICommand window_IsLoaded { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
+
+        public ICommand RoomTypeChangedCommand { get; set; }
+        public ICommand RoomStatusChangedCommand { get; set; }
         private ObservableCollection<RoomMgModel> _RoomList = new ObservableCollection<RoomMgModel>();
         public ObservableCollection<RoomMgModel> RoomList
         {
@@ -37,6 +31,72 @@ namespace QuanLyKhachSan.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<RoomStatusModel> _RoomStatusList = new ObservableCollection<RoomStatusModel>();
+        public ObservableCollection<RoomStatusModel> RoomStatusList
+        {
+            get => _RoomStatusList;
+            set
+            {
+                _RoomStatusList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<RoomTypeModel> _RoomTypeList = new ObservableCollection<RoomTypeModel>();
+        public ObservableCollection<RoomTypeModel> RoomTypeList
+        {
+            get => _RoomTypeList;
+            set
+            {
+                _RoomTypeList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _RoomNameIP { get; set; }
+        public string RoomNameIP
+        {
+            get => _RoomNameIP;
+            set
+            {
+                _RoomNameIP = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _SRoomStatusName = "";
+        public string SRoomStatusName
+        {
+            get => _SRoomStatusName;
+            set
+            {
+                _SRoomStatusName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private RoomStatusModel _SRoomStatus { get; set; }
+        public RoomStatusModel SRoomStatus
+        {
+            get => _SRoomStatus;
+            set
+            {
+                _SRoomStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private RoomTypeModel _SRoomType { get; set; }
+        public RoomTypeModel SRoomType
+        {
+            get => _SRoomType;
+            set
+            {
+                _SRoomType = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public RoomManagementUCViewModel()
         {
@@ -52,6 +112,21 @@ namespace QuanLyKhachSan.ViewModel
             AddCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) => {
                 AddData(p);
             });
+            RoomTypeChangedCommand = new RelayCommand<ComboBox>((p) => { return p != null; },
+                                     (p) => { 
+                                         try 
+                                         { 
+                                             SRoomType = ((RoomTypeModel)p.SelectedItem); 
+                                         } 
+                                         catch { }; 
+                                     });
+            RoomStatusChangedCommand = new RelayCommand<ComboBox>((p) => { return p != null; },
+                                     (p) => { 
+                                         try { 
+                                             SRoomStatus = ((RoomStatusModel)p.SelectedItem); 
+                                         } 
+                                         catch { }; 
+                                     });
         }
 
 
@@ -72,16 +147,42 @@ namespace QuanLyKhachSan.ViewModel
                 }
                 catch { }
             }
+            AddRoomStatusListToComboBox();
+            AddRoomTypeListToComboBox();
+        }
+        void AddRoomStatusListToComboBox()
+        {
+            RoomStatusList.Clear();
+            var roomList = DataProvider.Ins.db.RoomStatus.ToList();
+            foreach (var item in roomList)
+            {
+                RoomStatusModel newRoom = new RoomStatusModel();
+                newRoom.RoomStatusId = item.room_status_id;
+                newRoom.RoomStatusName = item.room_status_name;
+                RoomStatusList.Add(newRoom);
+            }
         }
 
+        void AddRoomTypeListToComboBox()
+        {
+            RoomTypeList.Clear();
+            var roomTypeList = DataProvider.Ins.db.RoomTypes.ToList();
+            foreach (var item in roomTypeList)
+            {
+                RoomTypeModel newRoom = new RoomTypeModel();
+                newRoom.RoomTypeId = item.room_type_id;
+                newRoom.RoomTypeName = item.room_type_name;
+                RoomTypeList.Add(newRoom);
+            }
+        }
         void AddData(UserControl p)
         {
             if (RoomNameIP == "") return;
             var db = DataProvider.Ins.db;
             Room add = new Room();
             add.room_name = RoomNameIP;
-            //add.room_type_id = RoomTypeIDIP;
-            //add.room_status_id = RoomStatusIDIP;
+            add.room_type_id = SRoomType.RoomTypeId;
+            add.room_status_id = SRoomStatus.RoomStatusId;
             db.Rooms.Add(add);
             db.SaveChanges();
             LoadData();
