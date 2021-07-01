@@ -8,5 +8,6 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class DepartmentManagementUCViewModel:BaseViewModel
     {
+
     }
 }

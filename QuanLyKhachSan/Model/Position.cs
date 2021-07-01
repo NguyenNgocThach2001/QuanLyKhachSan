@@ -12,21 +12,18 @@ namespace QuanLyKhachSan.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Payment
+    public partial class Position
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payment()
+        public Position()
         {
-            this.PaymentServices = new HashSet<PaymentService>();
+            this.Staffs = new HashSet<Staff>();
         }
     
-        public int payment_id { get; set; }
-        public int guest_id { get; set; }
-        public Nullable<int> reservation_id { get; set; }
-        public string fullname { get; set; }
+        public string Position_ID { get; set; }
+        public string Position_Name { get; set; }
     
-        public virtual Reservation Reservation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PaymentService> PaymentServices { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

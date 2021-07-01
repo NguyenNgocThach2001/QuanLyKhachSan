@@ -61,7 +61,34 @@
                         StrokeThickness="2"
                         Fill="Transparent" />
 
-                    <ComboBox FontSize="25"></ComboBox>
+                    <ComboBox 
+                    Name ="RoomStatusComboBox"
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="25"
+                    Width="auto"
+                    ItemsSource="{Binding RoomStatusList}"
+                    SelectedItem="{Binding SRoomStatus, Mode=Default}"
+                    IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Width="auto" 
+                                           Text="{Binding RoomStatusName}" 
+                                           FontSize="30" Foreground="Black">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="SelectionChanged">
+                                <i:InvokeCommandAction  
+                                Command="{Binding RoomStatusChangedCommand}" 
+                                CommandParameter="{Binding ElementName=RoomStatusComboBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </Grid>
             </DockPanel>
         </Grid>
@@ -75,20 +102,20 @@
                         Fill="Transparent" />
 
                     <ComboBox 
-                    Name ="RoomNameComboBox"
+                    Name ="RoomTypeComboBox"
                     Height="39"
                     VerticalAlignment="Center"
                     Foreground="Black"
                     FontSize="25"
                     Width="auto"
-                    ItemsSource="{Binding RoomStatusList}"
-                    SelectedItem="{Binding SRoom, Mode=Default}"
+                    ItemsSource="{Binding RoomTypeList}"
+                    SelectedItem="{Binding SRoomType, Mode=Default}"
                     IsSynchronizedWithCurrentItem="True">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock Width="auto" 
-                                           Text="{Binding room.room_status_name}" 
+                                           Text="{Binding RoomTypeName}" 
                                            FontSize="30" Foreground="Black">
                                     </TextBlock>
                                 </StackPanel>
@@ -97,8 +124,8 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName ="SelectionChanged">
                                 <i:InvokeCommandAction  
-                                Command="{Binding RoomNameChangedCommand}" 
-                                CommandParameter="{Binding ElementName=RoomNameComboBox}"/>
+                                Command="{Binding RoomTypeChangedCommand}" 
+                                CommandParameter="{Binding ElementName=RoomTypeComboBox}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ComboBox>

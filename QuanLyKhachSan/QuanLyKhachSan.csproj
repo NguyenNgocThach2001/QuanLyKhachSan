@@ -101,7 +101,16 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\AddHireList.cs" />
+    <Compile Include="Model\Coefficient.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Contract.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\Department.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Guest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -124,6 +133,15 @@
     <Compile Include="Model\Payment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PaymentService.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Payrange.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Position.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Reservation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -141,6 +159,13 @@
     </Compile>
     <Compile Include="Model\RoomTypeModel.cs" />
     <Compile Include="Model\SelectedReservationData.cs" />
+    <Compile Include="Model\Service.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServiceModel.cs" />
+    <Compile Include="Model\Staff.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
