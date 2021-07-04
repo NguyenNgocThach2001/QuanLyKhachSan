@@ -13,7 +13,6 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class RoomManagementUCViewModel:BaseViewModel
     {
-        
         public ICommand window_IsLoaded { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }

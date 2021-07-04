@@ -133,6 +133,11 @@ Create Table Payrange(
 	Payrange_Num float,
 )
 
+
+ALTER TABLE Staff
+ADD Birthday datetime;
+ALTER TABLE Staff
+ADD Note nvarchar(max);
 ALTER TABLE Staff
 ADD FOREIGN KEY (Staff_Department_ID) REFERENCES Department(Department_ID);
 ALTER TABLE Staff
@@ -145,3 +150,13 @@ ALTER TABLE Contract
 ADD FOREIGN  key(Staff_ID) references Staff(Staff_ID);
 ALTER TABLE Department
 ADD FOREIGN KEY (Department_Head_id) REFERENCES Staff(Staff_ID);
+ALTER TABLE Department
+ADD Deputy nvarchar(max);
+ALTER TABLE Reservation 
+ADD Staff_ID int;
+ALTER TABLE Reservation 
+ADD FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID);
+ALTER TABLE Account
+ADD Staff_ID int;
+ALTER TABLE Account 
+ADD FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID);	

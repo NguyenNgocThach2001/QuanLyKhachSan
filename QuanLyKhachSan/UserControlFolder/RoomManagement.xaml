@@ -21,7 +21,7 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction 
                 Command="{Binding window_IsLoaded}" 
-                CommandParameter="{Binding ElementName=roomStatusManagementWindow}"/>
+                CommandParameter="{Binding ElementName=roomManagementWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
