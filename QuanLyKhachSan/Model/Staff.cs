@@ -17,6 +17,7 @@ namespace QuanLyKhachSan.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Staff()
         {
+            this.Accounts = new HashSet<Account>();
             this.Contracts = new HashSet<Contract>();
             this.Departments = new HashSet<Department>();
         }
@@ -27,12 +28,15 @@ namespace QuanLyKhachSan.Model
         public string Staff_Phone { get; set; }
         public string Staff_Position_ID { get; set; }
         public string Staff_Payrange_ID { get; set; }
-        public string Staff_Coefficients_ID { get; set; }
         public string Staff_Department_ID { get; set; }
         public Nullable<System.DateTime> Staff_Contract_Date { get; set; }
         public Nullable<System.DateTime> Expiry_Date { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<int> Staff_Coefficients_ID { get; set; }
+        public string Note { get; set; }
     
-        public virtual Coefficient Coefficient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

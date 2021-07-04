@@ -28,7 +28,7 @@
         <Grid Grid.Row="0">
             <DockPanel>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           FontSize="25" Margin="10 0 0 0" Width="170">Tên phòng ban</TextBlock>
+                           FontSize="25" Margin="10 0 0 0" Width="170">Tên Phòng Ban</TextBlock>
                 <Grid Margin="10 0 0 0">
                     <Rectangle   
                         Stroke="Black"
@@ -47,7 +47,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.ColumnSpan="2">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="25" Margin="10 0 0 0" Width="170"></TextBlock>
+                           FontSize="25" Margin="10 0 0 0" Width="170">Trưởng Phòng</TextBlock>
                 <Grid Margin="10 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -66,7 +66,7 @@
         <Grid Grid.Row="2">
             <DockPanel>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           FontSize="25" Margin="10 0 0 0" Width="170">Đơn vị tính</TextBlock>
+                           FontSize="25" Margin="10 0 0 0" Width="170">Phó Phòng</TextBlock>
                 <Grid Margin="10 0 0 0">
                     <Rectangle   
                         Stroke="Black"
@@ -107,8 +107,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã Phòng Ban"></DataGridTextColumn>
                     <DataGridTextColumn Header="Tên Phòng Ban"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Ban"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Đơn Giá"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Trưởng Phòng"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Phó Phòng"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

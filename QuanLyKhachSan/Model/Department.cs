@@ -26,6 +26,7 @@ namespace QuanLyKhachSan.Model
         public string Department_ID { get; set; }
         public string Department_Name { get; set; }
         public Nullable<int> Department_Head_id { get; set; }
+        public string Deputy { get; set; }
     
         public virtual Staff Staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

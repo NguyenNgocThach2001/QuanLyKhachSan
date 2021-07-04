@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+            xmlns:System="clr-namespace:System;assembly=mscorlib"
             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
             TextElement.FontWeight="Regular"
             TextElement.FontSize="13"
@@ -17,7 +18,14 @@
             FontFamily="{DynamicResource MaterialDesignFont}"
             DataContext="{StaticResource staffMgUCVM}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=staffManagementUC}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Margin="0 5 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
@@ -30,28 +38,55 @@
         <Grid Grid.Row="0">
             <DockPanel>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           FontSize="20" Margin="10 0 0 0">Tên nhân viên</TextBlock>
-                <Grid Margin="20 0 0 0" Width="200">
+                           FontSize="20" Margin="10 0 0 0" Width="150">Tên nhân viên</TextBlock>
+                <Grid Width="200" >
                     <Rectangle   
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" />
-                    <TextBox FontSize="20">
-                        
+                    <TextBox Foreground="Black"
+                             FontSize="20"
+                             Margin="5 0 0 0"
+                             Text="{Binding StaffNameIP,Mode=TwoWay}">
+
                     </TextBox>
                 </Grid>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="20" Margin="30 0 0 0">
+                           FontSize="20" Margin="30 0 0 0" Width="179">
                     Phòng ban
                 </TextBlock>
-                <Grid Margin="80 0 0 0" Width="200">
+                <Grid Width="200">
                     <Rectangle Stroke="Black"
                                StrokeThickness="2"
                                Fill="Transparent">
-                        
                     </Rectangle>
-                    <ComboBox>
-                        
+                    <ComboBox 
+                    Name ="DepartmentComboBox"
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="20"
+                    Width="auto"
+                    ItemsSource="{Binding DepartmentCBList}"
+                    SelectedItem="{Binding DepartmentIP, Mode=Default}"
+                    IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Width="auto" 
+                                           Text="{Binding Name}" 
+                                           FontSize="30" Foreground="Black">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="SelectionChanged">
+                                <i:InvokeCommandAction  
+                                Command="{Binding DepartmentChangedCommand}" 
+                                CommandParameter="{Binding ElementName=DepartmentComboBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </Grid>
             </DockPanel>
@@ -59,28 +94,42 @@
         <Grid Grid.Row="1">
             <DockPanel >
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="20" Margin="10 0 0 0">Ngày Sinh</TextBlock>
-                <Grid Margin="50 0 0 0" Width="200">
+                           FontSize="20" Margin="10 0 0 0" Width="150">Ngày Sinh</TextBlock>
+                <Grid Width="200">
                     <Rectangle   
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" Grid.ColumnSpan="2" Margin="0,0,-0.2,0.2" />
-                    <DatePicker>
-                        
+                    <DatePicker Margin="5 0 0 0"
+                                Foreground="Black"
+                                FontSize="20"
+                                SelectedDate="{Binding
+                                Path=BirthdayIP,
+                                Mode=TwoWay,
+                                StringFormat ='0:dd MMMM yyyy, HH:mm',
+                                TargetNullValue={x:Static System:DateTime.Now}}">
+
                     </DatePicker>
                 </Grid>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="20" Margin="30 0 0 0">
+                           FontSize="20" Margin="30 0 0 0" Width="179">
                     Ngày ký hợp đồng
                 </TextBlock>
-                <Grid Margin="15 0 0 0" Width="200">
+                <Grid Width="200">
                     <Rectangle Stroke="Black"
                                StrokeThickness="2"
                                Fill="Transparent">
-                        
+
                     </Rectangle>
-                    <DatePicker>
-                        
+                    <DatePicker Margin="5 0 0 0"
+                                Foreground="Black"
+                                FontSize="20"
+                                SelectedDate="{Binding
+                                Path=ContractDateIP,
+                                Mode=TwoWay,
+                                StringFormat ='0:dd MMMM yyyy, HH:mm',
+                                TargetNullValue={x:Static System:DateTime.Now}}">
+
                     </DatePicker>
                 </Grid>
             </DockPanel>
@@ -88,26 +137,78 @@
         <Grid Grid.Row="2">
             <DockPanel>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           FontSize="20" Margin="10 0 0 0">Giới tính</TextBlock>
-                <Grid Margin="66 0 0 0" Width="200">
+                           FontSize="20" Margin="10 0 0 0" Width="150">Giới tính</TextBlock>
+                <Grid Width="200">
                     <Rectangle   
                         Stroke="Black"
                         StrokeThickness="2"
-                        Fill="Transparent" />
-                    <ComboBox></ComboBox>
+                        Fill="Transparent" Grid.ColumnSpan="2" Margin="0,0,0,0.2" />
+                    <ComboBox Margin="5 0 0 0"
+                    Name ="SexComboBox"
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="20"
+                    Width="auto"
+                    ItemsSource="{Binding SexCBList}"
+                    SelectedItem="{Binding SSex, Mode=TwoWay}"
+                    IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Width="auto" 
+                                           Text="{Binding Sex}" 
+                                           FontSize="20" Foreground="Black">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="SelectionChanged">
+                                <i:InvokeCommandAction  
+                                Command="{Binding SexChangedCommand}" 
+                                CommandParameter="{Binding ElementName=SexComboBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </Grid>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="20" Margin="30 0 0 0">
-                    Hệ số lương
+                           FontSize="20" Margin="30 0 0 0" Width="179">
+                    Bậc lương
                 </TextBlock>
-                <Grid Margin="71 0 0 0" Width="200">
+                <Grid Width="200">
                     <Rectangle Stroke="Black"
                                StrokeThickness="2"
                                Fill="Transparent">
 
                     </Rectangle>
-                    <ComboBox>
-
+                    <ComboBox 
+                    Name ="PayrangeComboBox"
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="20"
+                    Width="auto"
+                    ItemsSource="{Binding PayrangeCBList}"
+                    SelectedItem="{Binding PayrangeIP, Mode=Default}"
+                    IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Width="auto" 
+                                           Text="{Binding Num}" 
+                                           FontSize="30" Foreground="Black">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="SelectionChanged">
+                                <i:InvokeCommandAction  
+                                Command="{Binding PayrangeChangedCommand}" 
+                                CommandParameter="{Binding ElementName=PayrangeComboBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </Grid>
             </DockPanel>
@@ -115,28 +216,56 @@
         <Grid Grid.Row="3">
             <DockPanel>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           FontSize="20" Margin="10 0 0 0">Điện thoại</TextBlock>
-                <Grid Margin="50 0 0 0" Width="200">
+                           FontSize="20" Margin="10 0 0 0" Width="150">Điện thoại</TextBlock>
+                <Grid Width="200">
                     <Rectangle   
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" />
-                    <TextBox FontSize="20">
-
+                    <TextBox Foreground="Black"
+                             FontSize="20"
+                             Margin="5 0 0 0"
+                             Text="{Binding PhoneIP,Mode=TwoWay}">
+    
                     </TextBox>
                 </Grid>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="20" Margin="30 0 0 0">
+                           FontSize="20" Margin="30 0 0 0" Width="179">
                     Chức vụ
                 </TextBlock>
-                <Grid Margin="106 0 0 0" Width="200">
+                <Grid Width="200">
                     <Rectangle Stroke="Black"
                                StrokeThickness="2"
                                Fill="Transparent">
 
                     </Rectangle>
-                    <ComboBox>
-
+                    <ComboBox 
+                    Name ="PositionComboBox"
+                    Height="39"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="20"
+                    Width="auto"
+                    ItemsSource="{Binding PositionCBList}"
+                    SelectedItem="{Binding PositionIP, Mode=Default}"
+                    IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" Margin="0,-2,0,-1.8">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Width="auto" 
+                                           Text="{Binding Name}" 
+                                           FontSize="30" Foreground="Black">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName ="SelectionChanged">
+                                <i:InvokeCommandAction  
+                                Command="{Binding PositionChangedCommand}" 
+                                CommandParameter="{Binding ElementName=PositionComboBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </Grid>
             </DockPanel>
@@ -144,45 +273,60 @@
         <Grid Grid.Row="4">
             <DockPanel>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
-                           FontSize="20" Margin="10 0 0 0">Ghi chú</TextBlock>
-                <Grid Margin="23 0 0 0">
+                           FontSize="20" Margin="10 0 0 0"  Width="150">Ghi chú</TextBlock>
+                <Grid Width="625" HorizontalAlignment="Left">
                     <Rectangle   
                         Stroke="Black"
                         StrokeThickness="2"
                         Fill="Transparent" />
-
-                    <TextBox></TextBox>
+                    <TextBox 
+                        Margin="5 0 0 0"
+                        Text="{Binding Note, Mode=TwoWay}"></TextBox>
                 </Grid>
             </DockPanel>
         </Grid>
-      
+
         <Grid Grid.Row="5" Margin="0 10 0 0">
             <DockPanel HorizontalAlignment="Left" Margin="30 0 0 0">
-                <Button Width="100" Margin="10 0 0 0">
+                <Button Width="100" Margin="10 0 0 0"
+                        Command="{Binding AddCommand}"
+                        CommandParameter="{Binding ElementName=roomTypeManagementUC}">
                     <TextBlock>Thêm</TextBlock>
                 </Button>
-                <Button Width="100" Margin="10 0 0 0">
+                <Button Width="100" Margin="10 0 0 0"
+                        Name ="deleteBtn"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding ElementName=deleteBtn}">
                     <TextBlock>Xóa</TextBlock>
                 </Button>
-                <Button Width="100" Margin="10 0 0 0">
+                <Button Width="100" Margin="10 0 0 0"
+                        Name ="updateBtn"
+                        Command="{Binding UpdateCommand}"
+                        CommandParameter="{Binding ElementName=updateBtn}">
                     <TextBlock>Sửa</TextBlock>
                 </Button>
             </DockPanel>
         </Grid>
         <Grid Grid.Row="6">
             <ScrollViewer>
-                <DataGrid>
+                <DataGrid Name="dataGrid"
+                IsReadOnly="True"
+                ItemsSource="{Binding Path = StaffList, Mode=TwoWay,
+                NotifyOnSourceUpdated=True,
+                NotifyOnTargetUpdated=True}"
+                AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã Nhân Viên"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Họ Tên"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Chức vụ"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Phòng Ban"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ngày Ký Hợp Đồng"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Số Điện Thoại"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Hệ Số Lương"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Giới Tính"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ngày Sinh"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ghi Chú"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding STT}" Header="STT"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="Mã Nhân Viên"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Họ Tên"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Position_Name}" Header="Chức vụ"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Department_Name}" Header="Phòng Ban"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Contract_Date}" Header="Ngày Ký Hợp Đồng"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Phone}" Header="Số Điện Thoại"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Payrange}" Header="Bậc Lương"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Sex}" Header="Giới Tính"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Birthday}" Header="Ngày Sinh"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Note}" Header="Ghi Chú"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </ScrollViewer>
