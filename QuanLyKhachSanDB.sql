@@ -58,6 +58,25 @@ Create Table Payment(
 	foreign key (reservation_id) references Reservation(reservation_id),
 )
 
+Create Table PaymentService(
+	PaymentService_ID int identity(1,1) primary key,
+)
+
+ALTER Table PaymentService
+ADD Useage int;
+
+ALTER Table PaymentService
+ADD Reservation_id int;
+
+ALTER Table PaymentService
+ADD foreign Key (Reservation_id) REFERENCES Reservation(Reservation_id);
+
+ALTER Table PaymentService
+ADD Service_ID int;
+
+ALTER Table PaymentService
+ADD foreign Key (Service_ID) REFERENCES Service(Service_ID);
+
 Create Table Account(
 	UserName nvarchar(50) primary key,
 	Password nvarchar(max),
@@ -82,13 +101,6 @@ ADD unitPrice int;
 
 ALTER TABLE Service
 ADD unit nvarchar(max);
-
-Create Table PaymentService(
-	PaymentService_ID int identity(1,1) primary key,
-	payment_id int,
-	guest_id int,
-	foreign key(payment_id,guest_id) references Payment(payment_id,guest_id),
-)
 
 Create Table Department(
 	Department_ID nvarchar(10) primary key,
@@ -152,8 +164,6 @@ ALTER TABLE Department
 ADD FOREIGN KEY (Department_Head_id) REFERENCES Staff(Staff_ID);
 ALTER TABLE Department
 ADD Deputy nvarchar(max);
-ALTER TABLE Reservation 
-ADD Staff_ID int;
 ALTER TABLE Reservation 
 ADD FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID);
 ALTER TABLE Account

@@ -18,6 +18,7 @@ namespace QuanLyKhachSan.Model
         public Reservation()
         {
             this.Payments = new HashSet<Payment>();
+            this.PaymentServices = new HashSet<PaymentService>();
         }
     
         public int Reservation_id { get; set; }
@@ -28,11 +29,12 @@ namespace QuanLyKhachSan.Model
         public Nullable<System.DateTime> check_out_date { get; set; }
         public Nullable<int> adult { get; set; }
         public Nullable<int> children { get; set; }
-        public Nullable<int> Staff_ID { get; set; }
     
         public virtual Guest Guest { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PaymentService> PaymentServices { get; set; }
         public virtual Room Room { get; set; }
     }
 }
