@@ -14,9 +14,18 @@ namespace QuanLyKhachSan.Model
     
     public partial class Service
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Service()
+        {
+            this.PaymentServices = new HashSet<PaymentService>();
+        }
+    
         public int Service_ID { get; set; }
         public string Service_Name { get; set; }
         public Nullable<int> unitPrice { get; set; }
         public string unit { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PaymentService> PaymentServices { get; set; }
     }
 }

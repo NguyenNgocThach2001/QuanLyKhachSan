@@ -15,7 +15,7 @@ namespace QuanLyKhachSan.ViewModel
     {
         public ICommand window_IsLoaded { get; set; }
         public ICommand AddCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; } 
         public ICommand UpdateCommand { get; set; }
 
         public ICommand SexChangedCommand { get; set; }

@@ -16,8 +16,11 @@ namespace QuanLyKhachSan.Model
     {
         public int PaymentService_ID { get; set; }
         public Nullable<int> payment_id { get; set; }
-        public Nullable<int> guest_id { get; set; }
+        public Nullable<int> Useage { get; set; }
+        public Nullable<int> Reservation_id { get; set; }
+        public Nullable<int> Service_ID { get; set; }
     
-        public virtual Payment Payment { get; set; }
+        public virtual Service Service { get; set; }
+        public virtual Reservation Reservation { get; set; }
     }
 }

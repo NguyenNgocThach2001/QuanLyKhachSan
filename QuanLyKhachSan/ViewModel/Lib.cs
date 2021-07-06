@@ -11,6 +11,14 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class Lib
     {
+
+        public T FindParent<T>(DependencyObject dependencyObject) where T : DependencyObject
+        {
+            var parent = VisualTreeHelper.GetParent(dependencyObject);
+            if (parent == null) return null;
+            var parentT = parent as T;
+            return parentT ?? FindParent<T>(parent);
+        }
         public FrameworkElement GetWindowParent(Button p)
         {
             FrameworkElement parent = p;
@@ -47,6 +55,24 @@ namespace QuanLyKhachSan.ViewModel
                 }
             }
             return null;
+        }
+
+        public string VN(string p)
+        {
+            string res = "";
+            int cnt = 0;
+            for (int i = p.Length - 1; i >= 1; i--)
+            {
+                cnt++;
+                res = p[i] + res;
+                if (cnt == 3)
+                {
+                    res = "." + res;
+                    cnt = 0;
+                }
+            }
+            res = p[0] + res + " vnđ";
+            return res;
         }
     }
 }

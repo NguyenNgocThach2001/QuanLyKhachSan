@@ -14,6 +14,7 @@ namespace QuanLyKhachSan.ViewModel
 {
     public class HireViewModel:BaseViewModel
     {
+        public ICommand SelectedItemChangedCommand { get; set; }
         private List<HireModel> _HireList;
         public List<HireModel> HireList
         {
@@ -21,6 +22,17 @@ namespace QuanLyKhachSan.ViewModel
             set
             {
                 _HireList = value; OnPropertyChanged();
+            }
+        }
+
+        private object _SelectedItemIP { get; set; }
+        public object SelectedItemIP
+        {
+            get => _SelectedItemIP;
+            set
+            {
+                _SelectedItemIP = value;
+                OnPropertyChanged();
             }
         }
         #region commands
@@ -47,6 +59,10 @@ namespace QuanLyKhachSan.ViewModel
                 LoadHireList();
             });
 
+            SelectedItemChangedCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) =>
+            {
+            });
+
             AddHireCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) => 
             {
                 AddHireWindow addhireWindow = new AddHireWindow();
@@ -67,10 +83,13 @@ namespace QuanLyKhachSan.ViewModel
                 if ((lb.SelectedItem as HireModel)!=null)
                     if((lb.SelectedItem as HireModel).reservation != null)
                         Reservation_id = (lb.SelectedItem as HireModel).reservation.Reservation_id;
-                PaymentWindow paymentWindow = new PaymentWindow();
-                paymentWindow.ShowDialog();
-                ((PaymentWindowViewModelPopup)paymentWindow.DataContext).SelectedItem = Reservation_id;
-                LoadHireList();
+                if (Reservation_id != 0)
+                {
+                    PaymentWindow paymentWindow = new PaymentWindow();
+                    ((PaymentWindowViewModelPopup)(paymentWindow.DataContext)).Reservation_id = Reservation_id;
+                    paymentWindow.ShowDialog();
+                    LoadHireList();
+                }
             });
 
             SearchCommand = new RelayCommand<Button>((p) => { return p != null; }, (p) =>
@@ -96,15 +115,21 @@ namespace QuanLyKhachSan.ViewModel
             var roomList = DataProvider.Ins.db.Rooms.ToList();
             foreach(var item in hireList)
             {
-                HireModel newHire = new HireModel();
-                newHire.guest_name = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).full_name;
-                newHire.room_name = roomList.FirstOrDefault(x => x.room_id == item.room_id).room_name;
-                newHire.CheckinDate = (DateTime)item.check_in_date;
-                newHire.CheckoutDate = (DateTime)item.check_out_date;
-                newHire.CheckinDate = DateTime.Parse(((DateTime)item.check_in_date).ToString());
-                newHire.CheckoutDate = DateTime.Parse(((DateTime)item.check_out_date).ToString());
-                //MessageBox.Show(newHire.CheckinDate.ToString());
-                HireList.Add(newHire);
+                try
+                {
+                    int tmpguest_id = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).guest_id;
+                    HireModel newHire = new HireModel();
+                    newHire.guest_name = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).full_name;
+                    newHire.room_name = roomList.FirstOrDefault(x => x.room_id == item.room_id).room_name;
+                    newHire.CheckinDate = (DateTime)item.check_in_date;
+                    newHire.CheckoutDate = (DateTime)item.check_out_date;
+                    newHire.CheckinDate = DateTime.Parse(((DateTime)item.check_in_date).ToString());
+                    newHire.CheckoutDate = DateTime.Parse(((DateTime)item.check_out_date).ToString());
+                    newHire.reservation = hireList.FirstOrDefault(x => x.guest_id == tmpguest_id);
+                    //MessageBox.Show(newHire.CheckinDate.ToString());
+                    HireList.Add(newHire);
+                }
+                catch { }
             }
         }
     }

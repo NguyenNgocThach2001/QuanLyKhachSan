@@ -67,7 +67,9 @@
           </Key>
           <Property Name="PaymentService_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="payment_id" Type="int" />
-          <Property Name="guest_id" Type="int" />
+          <Property Name="Useage" Type="int" />
+          <Property Name="Reservation_id" Type="int" />
+          <Property Name="Service_ID" Type="int" />
         </EntityType>
         <EntityType Name="Payrange">
           <Key>
@@ -95,7 +97,6 @@
           <Property Name="check_out_date" Type="date" />
           <Property Name="adult" Type="int" />
           <Property Name="children" Type="int" />
-          <Property Name="Staff_ID" Type="int" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -195,17 +196,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PaymentService__5CD6CB2B">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+        <Association Name="FK__PaymentSe__Reser__3A4CA8FD">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
           <End Role="PaymentService" Type="Self.PaymentService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Payment">
-              <PropertyRef Name="payment_id" />
-              <PropertyRef Name="guest_id" />
+            <Principal Role="Reservation">
+              <PropertyRef Name="Reservation_id" />
             </Principal>
             <Dependent Role="PaymentService">
-              <PropertyRef Name="payment_id" />
-              <PropertyRef Name="guest_id" />
+              <PropertyRef Name="Reservation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PaymentSe__Servi__3B40CD36">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="PaymentService" Type="Self.PaymentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Service_ID" />
+            </Principal>
+            <Dependent Role="PaymentService">
+              <PropertyRef Name="Service_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -373,8 +384,12 @@
             <End Role="Reservation" EntitySet="Reservation" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
-          <AssociationSet Name="FK__PaymentService__5CD6CB2B" Association="Self.FK__PaymentService__5CD6CB2B">
-            <End Role="Payment" EntitySet="Payment" />
+          <AssociationSet Name="FK__PaymentSe__Reser__3A4CA8FD" Association="Self.FK__PaymentSe__Reser__3A4CA8FD">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="PaymentService" EntitySet="PaymentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PaymentSe__Servi__3B40CD36" Association="Self.FK__PaymentSe__Servi__3B40CD36">
+            <End Role="Service" EntitySet="Service" />
             <End Role="PaymentService" EntitySet="PaymentService" />
           </AssociationSet>
           <AssociationSet Name="FK__Reservati__guest__3F466844" Association="Self.FK__Reservati__guest__3F466844">
@@ -447,8 +462,8 @@
           <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__guest__3F466844" FromRole="Guest" ToRole="Reservation" />
           <Property Name="CMND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__guest__3F466844" FromRole="Guest" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -459,25 +474,7 @@
           <Property Name="guest_id" Type="Int32" Nullable="false" />
           <Property Name="reservation_id" Type="Int32" />
           <Property Name="fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Reservation" Relationship="Self.FK__Payment__reserva__4316F928" FromRole="Payment" ToRole="Reservation" />
-          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentService__5CD6CB2B" FromRole="Payment" ToRole="PaymentService" />
-        </EntityType>
-        <EntityType Name="Reservation">
-          <Key>
-            <PropertyRef Name="Reservation_id" />
-          </Key>
-          <Property Name="Reservation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="guest_id" Type="Int32" />
-          <Property Name="room_id" Type="Int32" />
-          <Property Name="reservation_date" Type="DateTime" Precision="0" />
-          <Property Name="check_in_date" Type="DateTime" Precision="0" />
-          <Property Name="check_out_date" Type="DateTime" Precision="0" />
-          <Property Name="adult" Type="Int32" />
-          <Property Name="children" Type="Int32" />
-          <NavigationProperty Name="Guest" Relationship="Self.FK__Reservati__guest__3F466844" FromRole="Reservation" ToRole="Guest" />
-          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__reserva__4316F928" FromRole="Reservation" ToRole="Payment" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__Reservati__room___403A8C7D" FromRole="Reservation" ToRole="Room" />
-          <Property Name="Staff_ID" Type="Int32" />
+          <NavigationProperty Name="Reservation" Relationship="QuanLyKhachSanModel.FK__Payment__reserva__4316F928" FromRole="Payment" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -486,10 +483,10 @@
           <Property Name="room_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="room_type_id" Type="Int32" />
           <Property Name="room_status_id" Type="Int32" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__room___403A8C7D" FromRole="Room" ToRole="Reservation" />
           <NavigationProperty Name="RoomStatu" Relationship="Self.FK__Room__room_statu__3A81B327" FromRole="Room" ToRole="RoomStatus" />
           <NavigationProperty Name="RoomType" Relationship="Self.FK__Room__room_type___47DBAE45" FromRole="Room" ToRole="RoomType" />
           <Property Name="room_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D" FromRole="Room" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="RoomStatu">
           <Key>
@@ -508,42 +505,6 @@
           <Property Name="price" Type="Int32" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK__Room__room_type___47DBAE45" FromRole="RoomType" ToRole="Room" />
         </EntityType>
-        <Association Name="FK__Reservati__guest__3F466844">
-          <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Guest">
-              <PropertyRef Name="guest_id" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="guest_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Payment__reserva__4316F928">
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reservation">
-              <PropertyRef Name="Reservation_id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="reservation_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservati__room___403A8C7D">
-          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="room_id" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="room_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Room__room_statu__3A81B327">
           <End Role="RoomStatus" Type="Self.RoomStatu" Multiplicity="0..1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
@@ -572,22 +533,9 @@
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Guests" EntityType="Self.Guest" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
-          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="RoomStatus" EntityType="Self.RoomStatu" />
           <EntitySet Name="RoomTypes" EntityType="Self.RoomType" />
-          <AssociationSet Name="FK__Reservati__guest__3F466844" Association="Self.FK__Reservati__guest__3F466844">
-            <End Role="Guest" EntitySet="Guests" />
-            <End Role="Reservation" EntitySet="Reservations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Payment__reserva__4316F928" Association="Self.FK__Payment__reserva__4316F928">
-            <End Role="Reservation" EntitySet="Reservations" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservati__room___403A8C7D" Association="Self.FK__Reservati__room___403A8C7D">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="Reservation" EntitySet="Reservations" />
-          </AssociationSet>
           <AssociationSet Name="FK__Room__room_statu__3A81B327" Association="Self.FK__Room__room_statu__3A81B327">
             <End Role="RoomStatus" EntitySet="RoomStatus" />
             <End Role="Room" EntitySet="Rooms" />
@@ -596,12 +544,7 @@
             <End Role="RoomType" EntitySet="RoomTypes" />
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
-          <EntitySet Name="PaymentServices" EntityType="QuanLyKhachSanModel.PaymentService" />
           <EntitySet Name="Services" EntityType="QuanLyKhachSanModel.Service" />
-          <AssociationSet Name="FK__PaymentService__5CD6CB2B" Association="QuanLyKhachSanModel.FK__PaymentService__5CD6CB2B">
-            <End Role="Payment" EntitySet="Payments" />
-            <End Role="PaymentService" EntitySet="PaymentServices" />
-          </AssociationSet>
           <EntitySet Name="Coefficients" EntityType="QuanLyKhachSanModel.Coefficient" />
           <EntitySet Name="Contracts" EntityType="QuanLyKhachSanModel.Contract" />
           <EntitySet Name="Departments" EntityType="QuanLyKhachSanModel.Department" />
@@ -648,16 +591,29 @@
             <End Role="Position" EntitySet="Positions" />
             <End Role="Staff" EntitySet="Staffs" />
           </AssociationSet>
+          <EntitySet Name="PaymentServices" EntityType="QuanLyKhachSanModel.PaymentService" />
+          <AssociationSet Name="FK__PaymentSe__Servi__3B40CD36" Association="QuanLyKhachSanModel.FK__PaymentSe__Servi__3B40CD36">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="PaymentService" EntitySet="PaymentServices" />
+          </AssociationSet>
+          <EntitySet Name="Reservations" EntityType="QuanLyKhachSanModel.Reservation" />
+          <AssociationSet Name="FK__Reservati__guest__3F466844" Association="QuanLyKhachSanModel.FK__Reservati__guest__3F466844">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__reserva__4316F928" Association="QuanLyKhachSanModel.FK__Payment__reserva__4316F928">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PaymentSe__Reser__3A4CA8FD" Association="QuanLyKhachSanModel.FK__PaymentSe__Reser__3A4CA8FD">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="PaymentService" EntitySet="PaymentServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__room___403A8C7D" Association="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="PaymentService">
-          <Key>
-            <PropertyRef Name="PaymentService_ID" />
-          </Key>
-          <Property Name="PaymentService_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="payment_id" Type="Int32" />
-          <Property Name="guest_id" Type="Int32" />
-          <NavigationProperty Name="Payment" Relationship="QuanLyKhachSanModel.FK__PaymentService__5CD6CB2B" FromRole="PaymentService" ToRole="Payment" />
-        </EntityType>
         <EntityType Name="Service">
           <Key>
             <PropertyRef Name="Service_ID" />
@@ -666,21 +622,8 @@
           <Property Name="Service_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="unitPrice" Type="Int32" />
           <Property Name="unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Servi__3B40CD36" FromRole="Service" ToRole="PaymentService" />
         </EntityType>
-        <Association Name="FK__PaymentService__5CD6CB2B">
-          <End Type="QuanLyKhachSanModel.Payment" Role="Payment" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.PaymentService" Role="PaymentService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payment">
-              <PropertyRef Name="payment_id" />
-              <PropertyRef Name="guest_id" />
-            </Principal>
-            <Dependent Role="PaymentService">
-              <PropertyRef Name="payment_id" />
-              <PropertyRef Name="guest_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Coefficient">
           <Key>
             <PropertyRef Name="Coefficients_ID" />
@@ -875,6 +818,95 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PaymentService">
+          <Key>
+            <PropertyRef Name="PaymentService_ID" />
+          </Key>
+          <Property Name="PaymentService_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payment_id" Type="Int32" />
+          <Property Name="Useage" Type="Int32" />
+          <Property Name="Reservation_id" Type="Int32" />
+          <Property Name="Service_ID" Type="Int32" />
+          <NavigationProperty Name="Service" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Servi__3B40CD36" FromRole="PaymentService" ToRole="Service" />
+          <NavigationProperty Name="Reservation" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Reser__3A4CA8FD" FromRole="PaymentService" ToRole="Reservation" />
+        </EntityType>
+        <Association Name="FK__PaymentSe__Servi__3B40CD36">
+          <End Type="QuanLyKhachSanModel.Service" Role="Service" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.PaymentService" Role="PaymentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Service_ID" />
+            </Principal>
+            <Dependent Role="PaymentService">
+              <PropertyRef Name="Service_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Reservation_id" />
+          </Key>
+          <Property Name="Reservation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="guest_id" Type="Int32" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="reservation_date" Type="DateTime" Precision="0" />
+          <Property Name="check_in_date" Type="DateTime" Precision="0" />
+          <Property Name="check_out_date" Type="DateTime" Precision="0" />
+          <Property Name="adult" Type="Int32" />
+          <Property Name="children" Type="Int32" />
+          <NavigationProperty Name="Guest" Relationship="QuanLyKhachSanModel.FK__Reservati__guest__3F466844" FromRole="Reservation" ToRole="Guest" />
+          <NavigationProperty Name="Payments" Relationship="QuanLyKhachSanModel.FK__Payment__reserva__4316F928" FromRole="Reservation" ToRole="Payment" />
+          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Reser__3A4CA8FD" FromRole="Reservation" ToRole="PaymentService" />
+          <NavigationProperty Name="Room" Relationship="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D" FromRole="Reservation" ToRole="Room" />
+        </EntityType>
+        <Association Name="FK__Reservati__guest__3F466844">
+          <End Type="QuanLyKhachSanModel.Guest" Role="Guest" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="guest_id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="guest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__reserva__4316F928">
+          <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Reservation_id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="reservation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PaymentSe__Reser__3A4CA8FD">
+          <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.PaymentService" Role="PaymentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Reservation_id" />
+            </Principal>
+            <Dependent Role="PaymentService">
+              <PropertyRef Name="Reservation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__room___403A8C7D">
+          <End Type="QuanLyKhachSanModel.Room" Role="Room" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -915,21 +947,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reservations">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Reservation">
-              <MappingFragment StoreEntitySet="Reservation">
-                <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
-                <ScalarProperty Name="Reservation_id" ColumnName="Reservation_id" />
-                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
-                <ScalarProperty Name="room_id" ColumnName="room_id" />
-                <ScalarProperty Name="reservation_date" ColumnName="reservation_date" />
-                <ScalarProperty Name="check_in_date" ColumnName="check_in_date" />
-                <ScalarProperty Name="check_out_date" ColumnName="check_out_date" />
-                <ScalarProperty Name="adult" ColumnName="adult" />
-                <ScalarProperty Name="children" ColumnName="children" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Room">
               <MappingFragment StoreEntitySet="Room">
@@ -954,15 +971,6 @@
                 <ScalarProperty Name="room_type_id" ColumnName="room_type_id" />
                 <ScalarProperty Name="room_type_name" ColumnName="room_type_name" />
                 <ScalarProperty Name="price" ColumnName="price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PaymentServices">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.PaymentService">
-              <MappingFragment StoreEntitySet="PaymentService">
-                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
-                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
-                <ScalarProperty Name="PaymentService_ID" ColumnName="PaymentService_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1034,6 +1042,31 @@
                 <ScalarProperty Name="Staff_Sex" ColumnName="Staff_Sex" />
                 <ScalarProperty Name="Staff_Name" ColumnName="Staff_Name" />
                 <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentServices">
+            <EntityTypeMapping TypeName="QuanLyKhachSanModel.PaymentService">
+              <MappingFragment StoreEntitySet="PaymentService">
+                <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
+                <ScalarProperty Name="Reservation_id" ColumnName="Reservation_id" />
+                <ScalarProperty Name="Useage" ColumnName="Useage" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="PaymentService_ID" ColumnName="PaymentService_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="children" ColumnName="children" />
+                <ScalarProperty Name="adult" ColumnName="adult" />
+                <ScalarProperty Name="check_out_date" ColumnName="check_out_date" />
+                <ScalarProperty Name="check_in_date" ColumnName="check_in_date" />
+                <ScalarProperty Name="reservation_date" ColumnName="reservation_date" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
+                <ScalarProperty Name="Reservation_id" ColumnName="Reservation_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
