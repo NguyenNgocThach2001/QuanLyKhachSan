@@ -206,9 +206,24 @@ namespace QuanLyKhachSan.ViewModel
                     reservation.room_id = item.room.room_id;
                 }
             }
+
+            Room room = DataProvider.Ins.db.Rooms.FirstOrDefault(x => x.room_id == reservation.room_id);
+            RoomType roomtype = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == room.room_type_id);
+            RoomService roomservice = new RoomService();
+            roomservice.Room_Name = roomtype.room_type_name;
+            roomservice.Unit = "Ngày";
+            roomservice.Unit_Price = roomtype.price;
+            roomservice.Useage = (reservation.check_out_date.Value - reservation.check_in_date.Value).Days;
+            roomservice.Room_Service = Guid.NewGuid();
+            reservation.Room_Service = roomservice.Room_Service;
+            reservation.paid = 0;
+            reservation.reservation_date = DateTime.Today;
+            DataProvider.Ins.db.RoomServices.Add(roomservice);
             DataProvider.Ins.db.Reservations.Add(reservation);
             DataProvider.Ins.db.Rooms.First(x => x.room_status_id == 2 && x.room_id == reservation.room_id).room_status_id = 1;
             DataProvider.Ins.db.SaveChanges();
+
+
             MessageBox.Show("Thêm Thành Công");
             FrameworkElement window = GetWindowParent(p);
             var w = window as Window;

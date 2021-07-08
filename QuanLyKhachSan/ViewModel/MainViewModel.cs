@@ -141,22 +141,26 @@ namespace QuanLyKhachSan.ViewModel
             {
                 HireWindow hireWindow = new HireWindow();
                 hireWindow.ShowDialog();
+                LoadRoomList();
 
             });
             ReportCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
                 ReportWindow reportWindow = new ReportWindow();
                 reportWindow.ShowDialog();
+                LoadRoomList();
             });
             AccountCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
                 AccountWindow accountWindow = new AccountWindow();
                 accountWindow.ShowDialog();
+                LoadRoomList();
             });
             CheckoutCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
                 CheckoutWindow checkoutWindow = new CheckoutWindow();
                 checkoutWindow.ShowDialog();
+                LoadRoomList();
             });
         }
         void LoadRoomList()
@@ -170,6 +174,7 @@ namespace QuanLyKhachSan.ViewModel
                     var queryRoomType = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == item.room_type_id);
                     RoomModel newRoom = new RoomModel();
                     newRoom.room_name = item.room_name;
+                    if (queryRoomType == null) return;
                     newRoom.room_price = VN(queryRoomType.price.ToString());
                     newRoom.room_type = queryRoomType.room_type_name;
                     newRoom.room_status = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_id == item.room_status_id).room_status_name;

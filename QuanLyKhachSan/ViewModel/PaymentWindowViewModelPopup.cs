@@ -19,6 +19,7 @@ namespace QuanLyKhachSan.ViewModel
         public ICommand AddServiceCommand { get; set; }
         public ICommand DeleteServiceCommand { get; set; }
         public ICommand ServiceNameChangedCommand { get; set; }
+        public ICommand PayCommand { get; set; }
         #endregion
         private string _GuestName { get; set; }
         public string GuestName
@@ -184,6 +185,7 @@ namespace QuanLyKhachSan.ViewModel
         {
             Window_IsLoaded = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+                LoadData();
             });
             AddServiceCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
             {
@@ -198,6 +200,7 @@ namespace QuanLyKhachSan.ViewModel
             {
                 try
                 {
+                    if (SService == null) return;
                     UnitPriceTxtBlock = SService.unitPrice.ToString();
                     UnitTxtBlock = SService.unit;
                     Lib trash = new Lib();
@@ -210,12 +213,36 @@ namespace QuanLyKhachSan.ViewModel
                     AmountTxtBlock = "";
                 }
             });
-            
+
+            PayCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
+            {
+                Pay(p);
+            });
+        }
+
+        void Pay(Button p)
+        {
+            var db = DataProvider.Ins.db;
+            Reservation reservation = db.Reservations.FirstOrDefault(x => x.Reservation_id == Reservation_id);
+            Room room = db.Rooms.FirstOrDefault(x => x.room_id == reservation.room_id);
+            room.room_status_id = 2;
+            reservation.paid = 1;
+            db.SaveChanges();
+            MessageBox.Show("Thanh toán thành công");
+            Lib trash = new Lib();
+            FrameworkElement window = trash.GetWindowParent(p);
+            var w = window as Window;
+            if (w != null)
+            {
+                w.Close();
+            }
         }
 
         void AddData() 
         {
-            if (SService.serviceName == "" && SService == null) return;
+            if (SService == null) return;
+            if (SService.serviceName == null) return;
+            if (SService.serviceName == "") return;
             try
             {
                 PaymentService paymentservice = new PaymentService();
@@ -239,6 +266,7 @@ namespace QuanLyKhachSan.ViewModel
             DataGrid w = FindParent<DataGrid>(p);
             if (w != null && (ServicePaymentModel)w.SelectedItem != null)
             {
+                if (((ServicePaymentModel)w.SelectedItem).ID == 0) return;
                 var db = DataProvider.Ins.db;
                 PaymentService del = new PaymentService();
                 del = db.PaymentServices.Where
@@ -300,13 +328,23 @@ namespace QuanLyKhachSan.ViewModel
                         --cnt;
                     }
                 }
-
-                AddDataToCBBox();
+                ServicePaymentModel tmp1 = new ServicePaymentModel();
+                RoomService roomService = DataProvider.Ins.db.RoomServices.FirstOrDefault(x => x.Room_Service == reservation.Room_Service);
+                tmp1.ID = 0;
+                tmp1.STT = ++cnt;
+                tmp1.Unit = roomService.Unit;
+                tmp1.UnitPrice = roomService.Unit_Price.Value;
+                tmp1.ServiceName = roomService.Room_Name;
+                tmp1.Useage = roomService.Useage.Value;
+                tmp1.Sum = tmp1.Useage * tmp1.UnitPrice;
+                ServicePaymentList.Add(tmp1);
+                Sum += tmp1.Sum;
             }
             catch
             {
                 
             }
+            AddDataToCBBox();
         }
 
         void AddDataToCBBox()
@@ -333,6 +371,7 @@ namespace QuanLyKhachSan.ViewModel
             try
             {
                 Lib trash = new Lib();
+                if (SService == null) return;
                 AmountTxtBlock = trash.VN((UseageTxtBox * SService.unitPrice).ToString());
             }
             catch { }

@@ -26,19 +26,19 @@ namespace QuanLyKhachSan.Model
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Guest> Guests { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
-        public virtual DbSet<Room> Rooms { get; set; }
-        public virtual DbSet<RoomStatu> RoomStatus { get; set; }
-        public virtual DbSet<RoomType> RoomTypes { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Coefficient> Coefficients { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Payrange> Payranges { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<PaymentService> PaymentServices { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomService> RoomServices { get; set; }
+        public virtual DbSet<RoomStatu> RoomStatus { get; set; }
+        public virtual DbSet<RoomType> RoomTypes { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
     }
 }

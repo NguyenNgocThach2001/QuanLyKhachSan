@@ -12,22 +12,21 @@ namespace QuanLyKhachSan.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Room
+    public partial class RoomService
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Room()
+        public RoomService()
         {
             this.Reservations = new HashSet<Reservation>();
         }
     
-        public int room_id { get; set; }
-        public Nullable<int> room_type_id { get; set; }
-        public Nullable<int> room_status_id { get; set; }
-        public string room_name { get; set; }
+        public System.Guid Room_Service { get; set; }
+        public string Room_Name { get; set; }
+        public string Unit { get; set; }
+        public Nullable<int> Unit_Price { get; set; }
+        public Nullable<int> Useage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }
-        public virtual RoomStatu RoomStatu { get; set; }
-        public virtual RoomType RoomType { get; set; }
     }
 }
