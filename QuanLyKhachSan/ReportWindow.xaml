@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhachSan"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,6 +15,7 @@
         TextOptions.TextRenderingMode="Auto"
         Name="reportWindow"
         WindowStartupLocation="CenterScreen" 
+        DataContext="{StaticResource reportVM}"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None"
@@ -125,8 +127,11 @@
                     <Separator Grid.Row="3">
                         
                     </Separator>
-                    <materialDesign:Card Grid.Row="4"> 
-                        
+                    <materialDesign:Card Grid.Row="4">
+                        <oxy:PlotView Model="{Binding MyModel}"
+                                      Width="100" Height="100">
+                            
+                        </oxy:PlotView>
                     </materialDesign:Card>
                 </Grid>
             </materialDesign:Card>
