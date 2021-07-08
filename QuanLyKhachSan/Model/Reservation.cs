@@ -30,6 +30,7 @@ namespace QuanLyKhachSan.Model
         public Nullable<int> children { get; set; }
         public Nullable<System.Guid> Room_Service { get; set; }
         public Nullable<int> paid { get; set; }
+        public Nullable<double> amount { get; set; }
     
         public virtual Guest Guest { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

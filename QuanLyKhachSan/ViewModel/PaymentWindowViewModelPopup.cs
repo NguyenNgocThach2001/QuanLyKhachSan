@@ -21,16 +21,6 @@ namespace QuanLyKhachSan.ViewModel
         public ICommand ServiceNameChangedCommand { get; set; }
         public ICommand PayCommand { get; set; }
         #endregion
-        private string _GuestName { get; set; }
-        public string GuestName
-        {
-            get => _GuestName;
-            set
-            {
-                _GuestName = value;
-                OnPropertyChanged();
-            }
-        }
         private double _Sum { get; set; }
         public double Sum
         {
@@ -87,6 +77,16 @@ namespace QuanLyKhachSan.ViewModel
             }
         }
 
+        private string _GuestName { get; set; }
+        public string GuestName
+        {
+            get => _GuestName;
+            set
+            {
+                _GuestName = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string _RoomName { get; set; }
         public string RoomName
@@ -98,6 +98,7 @@ namespace QuanLyKhachSan.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private string _CMND { get; set; }
         public string CMND
         {
@@ -227,6 +228,7 @@ namespace QuanLyKhachSan.ViewModel
             Room room = db.Rooms.FirstOrDefault(x => x.room_id == reservation.room_id);
             room.room_status_id = 2;
             reservation.paid = 1;
+            reservation.amount = Sum;
             db.SaveChanges();
             MessageBox.Show("Thanh toán thành công");
             Lib trash = new Lib();

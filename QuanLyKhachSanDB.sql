@@ -45,6 +45,7 @@ Create Table Reservation(
 	check_out_date date,
 	adult int,
 	children int,
+	amount float,
 	foreign key (guest_id) references Guest(guest_id),
 	foreign key (room_id) references Room(room_id), 
 )

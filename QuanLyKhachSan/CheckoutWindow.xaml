@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:QuanLyKhachSan.UserControlFolder"
         xmlns:local="clr-namespace:QuanLyKhachSan"
-        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -18,6 +18,13 @@
         WindowStyle="None"
         DataContext="{StaticResource checkoutVM}"
         Title="Thanh Toán" Height="750" Width="1050">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction 
+                Command="{Binding Window_IsLoaded}" 
+                CommandParameter="{Binding ElementName=checkoutWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <materialDesign:Card>
             <Grid>
@@ -45,7 +52,7 @@
                                 Height="50"
                                 Background="White"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                ToolTip="Thêm Phiếu Thanh Toán">
+                                ToolTip="Tìm Phiếu Thanh Toán">
                                 <materialDesign:PackIcon
                                     Kind="DatabaseSearch"
                                     Height="50"
@@ -66,8 +73,12 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <ScrollViewer>
-                            <ItemsControl>
-                                <ItemsControl.ItemTemplate>
+                            <ListBox
+                                HorizontalContentAlignment="Stretch" 
+                                x:Name="ReservationListView" 
+                                ItemsSource="{Binding ReservationList}"
+                                SelectedItem ="{Binding SelectedItemIP}">
+                                <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="20" VerticalAlignment="Center" >
                                             <Grid.ColumnDefinitions>
@@ -88,7 +99,7 @@
                                                 <materialDesign:Card Background="CadetBlue" Grid.Row="0">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width=""></ColumnDefinition>
+                                                            <ColumnDefinition></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
                                                         <TextBlock Grid.Column="0"
@@ -117,7 +128,7 @@
                                                         </TextBlock>
                                                         <TextBlock Grid.Column="1"
                                                        FontSize="25" Margin="5 0 0 0"
-                                                       Text="{Binding GuestName}"
+                                                       Text="{Binding GuestName,Mode=TwoWay}"
                                                        VerticalAlignment="Center">
                                                         </TextBlock>
                                                     </Grid>
@@ -134,28 +145,50 @@
                                                 <Bold>Ngày Thanh Toán</Bold>
                                                         </TextBlock>
                                                         <TextBlock Grid.Column="1"
-                                                       FontSize="25" Margin="5 0 0 0"
-                                                       Text="{Binding PaymentDate}"
-                                                       VerticalAlignment="Center">
+                                                            FontSize="25" Margin="5 0 0 0"
+                                                            Text="{Binding reservation.check_out_date,Mode=TwoWay}"
+                                                            VerticalAlignment="Center">
                                                         </TextBlock>
                                                     </Grid>
                                                 </materialDesign:Card>
                                                 <materialDesign:Card Grid.Row="3">
-                                                    <Grid HorizontalAlignment="Right">
-                                                        <Button Margin="0 0 20 0"
-                                                    Command="{Binding DetailCommand}"
-                                                    CommandParameter="{Binding ElementName=checkoutWindow}">
-                                                            <TextBlock FontSize="25" VerticalAlignment="Center">
-                                                    <Bold>Chi Tiết</Bold>
-                                                            </TextBlock>
-                                                        </Button>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition></ColumnDefinition>
+                                                            <ColumnDefinition></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid HorizontalAlignment="Left" Grid.Column="0">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock 
+                                                                FontSize="25" Margin="5 0 0 0"
+                                                                Foreground="Red"
+                                                                Text="{Binding Amount,Mode=TwoWay}"
+                                                                VerticalAlignment="Center">
+                                                                </TextBlock>
+                                                                <TextBlock 
+                                                                FontSize="25" Margin="5 0 0 0"
+                                                                Text="VND"
+                                                                    Foreground="Red"
+                                                                VerticalAlignment="Center">
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                        <Grid HorizontalAlignment="Right" Grid.Column="1">
+                                                            <Button Margin="0 0 20 0"
+                                                            Command="{Binding DetailCommand}"
+                                                            CommandParameter="{Binding ElementName=checkoutWindow}">
+                                                                <TextBlock FontSize="25" VerticalAlignment="Center">
+                                                                <Bold>Chi Tiết</Bold>
+                                                                </TextBlock>
+                                                            </Button>
+                                                        </Grid>
                                                     </Grid>
                                                 </materialDesign:Card>
                                             </Grid>
                                         </Grid>
                                     </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </ScrollViewer>
                     </Grid>
                     <Grid Margin="0 0 20 20" Grid.Row="2" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Right"/>
