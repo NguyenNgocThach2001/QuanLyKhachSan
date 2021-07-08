@@ -77,6 +77,24 @@ ADD Service_ID int;
 ALTER Table PaymentService
 ADD foreign Key (Service_ID) REFERENCES Service(Service_ID);
 
+Create Table RoomService(
+	Room_Service UNIQUEIDENTIFIER primary key default NEWID(),
+	Room_Name nvarchar(max),
+	Unit nvarchar(max),	
+	Unit_Price int,
+	Useage int,
+)
+
+ALTER Table Reservation
+ADD Room_Service UNIQUEIDENTIFIER;
+
+ALTER Table Reservation
+ADD paid int;
+
+ALTER Table Reservation
+Add foreign key (Room_Service) REFERENCES RoomService(Room_Service);
+
+
 Create Table Account(
 	UserName nvarchar(50) primary key,
 	Password nvarchar(max),

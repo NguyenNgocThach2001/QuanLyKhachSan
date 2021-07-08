@@ -132,9 +132,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Payment.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\PaymentService.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -154,6 +151,9 @@
     </Compile>
     <Compile Include="Model\RoomList.cs" />
     <Compile Include="Model\RoomMgModel.cs" />
+    <Compile Include="Model\RoomService.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\RoomStatu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

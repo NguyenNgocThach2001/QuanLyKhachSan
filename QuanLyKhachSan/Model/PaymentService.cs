@@ -20,7 +20,7 @@ namespace QuanLyKhachSan.Model
         public Nullable<int> Reservation_id { get; set; }
         public Nullable<int> Service_ID { get; set; }
     
-        public virtual Service Service { get; set; }
         public virtual Reservation Reservation { get; set; }
+        public virtual Service Service { get; set; }
     }
 }
