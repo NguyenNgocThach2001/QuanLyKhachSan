@@ -89,6 +89,7 @@
           <Property Name="children" Type="int" />
           <Property Name="Room_Service" Type="uniqueidentifier" />
           <Property Name="paid" Type="int" />
+          <Property Name="amount" Type="float" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -776,6 +777,7 @@
           <NavigationProperty Name="Room" Relationship="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D" FromRole="Reservation" ToRole="Room" />
           <NavigationProperty Name="RoomService" Relationship="QuanLyKhachSanModel.FK__Reservati__Room___540C7B00" FromRole="Reservation" ToRole="RoomService" />
           <Property Name="paid" Type="Int32" />
+          <Property Name="amount" Type="Double" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -1016,6 +1018,7 @@
           <EntitySetMapping Name="Reservations">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Reservation">
               <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="paid" ColumnName="paid" />
                 <ScalarProperty Name="Room_Service" ColumnName="Room_Service" />
                 <ScalarProperty Name="children" ColumnName="children" />

@@ -12,14 +12,11 @@ using System.Windows;
 
 namespace QuanLyKhachSan.ViewModel
 {
-    public class PaymentWindowViewModelPopup:BaseViewModel
+    public class PaymenHistoryDetailViewModel : BaseViewModel
     {
         #region commands
         public ICommand Window_IsLoaded { get; set; }
-        public ICommand AddServiceCommand { get; set; }
-        public ICommand DeleteServiceCommand { get; set; }
-        public ICommand ServiceNameChangedCommand { get; set; }
-        public ICommand PayCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
         #endregion
         private double _Sum { get; set; }
         public double Sum
@@ -31,48 +28,15 @@ namespace QuanLyKhachSan.ViewModel
                 OnPropertyChanged();
             }
         }
-        private int _UseageTxtBox { get; set; }
-        public int UseageTxtBox
-        {
-            get => _UseageTxtBox;
-            set
-            {
-                _UseageTxtBox = value;
-                OnPropertyChanged();
-                AmountUpdate();
-            }
-        }
+
         
-
-        private string _AmountTxtBlock { get; set; }
-        public string AmountTxtBlock
+        private int _Reservation_id { get; set; }
+        public int Reservation_id
         {
-            get => _AmountTxtBlock;
+            get => _Reservation_id;
             set
             {
-                _AmountTxtBlock = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _UnitTxtBlock { get; set; }
-        public string UnitTxtBlock
-        {
-            get => _UnitTxtBlock;
-            set
-            {
-                _UnitTxtBlock = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _UnitPriceTxtBlock { get; set; }
-        public string UnitPriceTxtBlock
-        {
-            get => _UnitPriceTxtBlock;
-            set
-            {
-                _UnitPriceTxtBlock = value;
+                _Reservation_id = value;
                 OnPropertyChanged();
             }
         }
@@ -141,17 +105,6 @@ namespace QuanLyKhachSan.ViewModel
             }
         }
 
-        private DataGridRowDetailsVisibilityMode _rowDetailsVisible;
-        public DataGridRowDetailsVisibilityMode RowDetailsVisible
-        {
-            get { return _rowDetailsVisible; }
-            set
-            {
-                _rowDetailsVisible = value;
-                OnPropertyChanged();
-            }
-        }
-
         private ObservableCollection<ServicePaymentModel> _ServicePaymentList = new ObservableCollection<ServicePaymentModel>();
         public ObservableCollection<ServicePaymentModel> ServicePaymentList
         {
@@ -172,65 +125,21 @@ namespace QuanLyKhachSan.ViewModel
                 OnPropertyChanged();
             }
         }
-        private int _Reservation_id { get; set; }
-        public int Reservation_id
-        {
-            get => _Reservation_id;
-            set
-            {
-                _Reservation_id = value;
-                LoadData();
-            }
-        }
-        public PaymentWindowViewModelPopup()
+        public PaymenHistoryDetailViewModel()
         {
             Window_IsLoaded = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 LoadData();
             });
-            AddServiceCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
-            {
-                AddData();
-            });
-            DeleteServiceCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
-            {
-                DeleteData(p);
-            });
 
-            ServiceNameChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
+            CloseCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
             {
-                try
-                {
-                    if (SService == null) return;
-                    UnitPriceTxtBlock = SService.unitPrice.ToString();
-                    UnitTxtBlock = SService.unit;
-                    Lib trash = new Lib();
-                    AmountTxtBlock = trash.VN((UseageTxtBox * SService.unitPrice).ToString());
-                }
-                catch
-                {
-                    UnitPriceTxtBlock = "";
-                    UnitTxtBlock = "";
-                    AmountTxtBlock = "";
-                }
-            });
-
-            PayCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
-            {
-                Pay(p);
+                Close(p);
             });
         }
 
-        void Pay(Button p)
+        void Close(Button p)
         {
-            var db = DataProvider.Ins.db;
-            Reservation reservation = db.Reservations.FirstOrDefault(x => x.Reservation_id == Reservation_id);
-            Room room = db.Rooms.FirstOrDefault(x => x.room_id == reservation.room_id);
-            room.room_status_id = 2;
-            reservation.paid = 1;
-            reservation.amount = Sum;
-            db.SaveChanges();
-            MessageBox.Show("Thanh toán thành công");
             Lib trash = new Lib();
             FrameworkElement window = trash.GetWindowParent(p);
             var w = window as Window;
@@ -240,45 +149,6 @@ namespace QuanLyKhachSan.ViewModel
             }
         }
 
-        void AddData() 
-        {
-            if (SService == null) return;
-            if (SService.serviceName == null) return;
-            if (SService.serviceName == "") return;
-            try
-            {
-                PaymentService paymentservice = new PaymentService();
-                paymentservice.Service_ID = SService.serviceID;
-                paymentservice.Reservation_id = Reservation_id;
-                paymentservice.Useage = UseageTxtBox;
-                var db = DataProvider.Ins.db; 
-                db.PaymentServices.Add(paymentservice);
-                db.SaveChanges();
-                LoadData();
-            }
-            catch
-            {
-                MessageBox.Show("Lỗi!Hãy kiểm tra lại thông tin!");
-            }
-        }
-        void DeleteData(Button p)
-        {
-            if (p == null)
-                return;
-            DataGrid w = FindParent<DataGrid>(p);
-            if (w != null && (ServicePaymentModel)w.SelectedItem != null)
-            {
-                if (((ServicePaymentModel)w.SelectedItem).ID == 0) return;
-                var db = DataProvider.Ins.db;
-                PaymentService del = new PaymentService();
-                del = db.PaymentServices.Where
-                            (x => x.PaymentService_ID ==
-                            ((ServicePaymentModel)w.SelectedItem).ID).First();
-                db.PaymentServices.Remove(del);
-                db.SaveChanges();
-                LoadData();
-            }
-        }
 
         private static T FindParent<T>(DependencyObject dependencyObject) where T : DependencyObject
         {
@@ -291,7 +161,6 @@ namespace QuanLyKhachSan.ViewModel
         {
             int cnt = 0;
             Sum = 0;
-            UseageTxtBox = 1;
             try
             {
                 Reservation reservation = DataProvider.Ins.db.Reservations.FirstOrDefault(x => x.Reservation_id == Reservation_id);
@@ -309,7 +178,7 @@ namespace QuanLyKhachSan.ViewModel
                 ServicePaymentList = new ObservableCollection<ServicePaymentModel>();
                 var servicepaymentList = DataProvider.Ins.db.PaymentServices.Where
                                         (x => x.Reservation_id == reservation.Reservation_id).ToList();
-                foreach(PaymentService item in servicepaymentList)
+                foreach (PaymentService item in servicepaymentList)
                 {
                     try
                     {
@@ -344,7 +213,7 @@ namespace QuanLyKhachSan.ViewModel
             }
             catch
             {
-                
+
             }
             AddDataToCBBox();
         }
@@ -367,16 +236,6 @@ namespace QuanLyKhachSan.ViewModel
                 }
                 catch { }
             }
-        }
-        void AmountUpdate()
-        {
-            try
-            {
-                Lib trash = new Lib();
-                if (SService == null) return;
-                AmountTxtBlock = trash.VN((UseageTxtBox * SService.unitPrice).ToString());
-            }
-            catch { }
         }
     }
 }
