@@ -17,4 +17,5 @@
     <viewmodel:PayRangeManagementUCViewmodel x:Key="payrangeMgUCVM"></viewmodel:PayRangeManagementUCViewmodel>
     <viewmodel:QuanLyDuLieuViewModel x:Key="QuanLyDuLieuVM"></viewmodel:QuanLyDuLieuViewModel>
     <viewmodel:DepartmentManagementUCViewModel x:Key="departmentMgUCVM"></viewmodel:DepartmentManagementUCViewModel>
+    <viewmodel:PaymenHistoryDetailViewModel x:Key="paymentHistoryDetailVMpopup"></viewmodel:PaymenHistoryDetailViewModel>
 </ResourceDictionary>   

@@ -173,14 +173,6 @@
                                         </materialDesign:Card>
                                         <materialDesign:Card Height="30" Grid.Row="2">
                                             <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
-                                                <materialDesign:Card Width="130" Margin="10 0 10 0" BorderThickness="0" >
-                                                    <Button Name="DetailButton"
-                                                            Command="{Binding Path = DataContext.DetailCommand, RelativeSource = {RelativeSource AncestorType={x:Type Window}}}"
-                                                            CommandParameter="{Binding ElementName=PaymentButton}"
-                                                            materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0">
-                                                        Chi Tiết
-                                                    </Button>
-                                                </materialDesign:Card>
                                                 <materialDesign:Card Width="130" Margin="10 0 10 0" BorderThickness ="0">
                                                     <Button 
                                                             Name="PaymentButton"
@@ -188,13 +180,6 @@
                                                             Command="{Binding Path = DataContext.PaymentCommand, RelativeSource = {RelativeSource AncestorType={x:Type Window}}}"
                                                             CommandParameter="{Binding ElementName=PaymentButton}">
                                                         Thanh Toán
-                                                        <i:Interaction.Triggers>
-                                                            <i:EventTrigger EventName ="SelectionChanged">
-                                                                <i:InvokeCommandAction  
-                                                                    Command="{Binding SelectedItemChangedCommand}" 
-                                                                    CommandParameter="{Binding ElementName=PaymentButton}"/>
-                                                            </i:EventTrigger>
-                                                        </i:Interaction.Triggers>
                                                     </Button>
                                                 </materialDesign:Card>
                                             </StackPanel>

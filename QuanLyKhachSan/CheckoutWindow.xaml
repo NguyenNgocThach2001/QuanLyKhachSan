@@ -174,11 +174,12 @@
                                                             </StackPanel>
                                                         </Grid>
                                                         <Grid HorizontalAlignment="Right" Grid.Column="1">
-                                                            <Button Margin="0 0 20 0"
-                                                            Command="{Binding DetailCommand}"
-                                                            CommandParameter="{Binding ElementName=checkoutWindow}">
+                                                            <Button Margin="0 0 20 0" Name ="DetailBtn"
+                                                                Command="{Binding Path = DataContext.DetailCommand, 
+                                                                RelativeSource = {RelativeSource AncestorType={x:Type Window}}}"
+                                                                CommandParameter="{Binding ElementName=DetailBtn}">
                                                                 <TextBlock FontSize="25" VerticalAlignment="Center">
-                                                                <Bold>Chi Tiết</Bold>
+                                                                    <Bold>Chi Tiết</Bold>
                                                                 </TextBlock>
                                                             </Button>
                                                         </Grid>

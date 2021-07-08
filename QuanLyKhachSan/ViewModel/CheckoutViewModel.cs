@@ -59,7 +59,17 @@ namespace QuanLyKhachSan.ViewModel
             });
             DetailCommand = new RelayCommand<Button>((p) => { return true; }, (p) =>
             {
-                
+                ListBox lb = FindParent<ListBox>(p);
+                int Reservation_id = new int();
+                if ((lb.SelectedItem as PaymentHistoryModel) != null)
+                    if ((lb.SelectedItem as PaymentHistoryModel).reservation != null)
+                        Reservation_id = (lb.SelectedItem as PaymentHistoryModel).reservation.Reservation_id;
+                if (Reservation_id != 0)
+                {
+                    PaymentHistoryDetail paymentWindow = new PaymentHistoryDetail();
+                    ((PaymenHistoryDetailViewModel)(paymentWindow.DataContext)).Reservation_id = Reservation_id;
+                    paymentWindow.ShowDialog();
+                }
             });
 
             SearchCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
