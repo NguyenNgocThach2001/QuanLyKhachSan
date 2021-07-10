@@ -102,6 +102,11 @@ Create Table Account(
 )
 
 ALTER TABLE Account
+ADD StaffName nvarchar(max);
+ALTER TABLE Account
+ADD Role nvarchar(20);
+
+ALTER TABLE Account
 ADD FullName nvarchar(max);
 
 Delete From Account

@@ -13,6 +13,8 @@
           <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="FullName" Type="nvarchar(max)" />
           <Property Name="Staff_ID" Type="int" />
+          <Property Name="StaffName" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Coefficients">
           <Key>
@@ -453,6 +455,8 @@
           <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Staff_ID" Type="Int32" />
           <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Account__Staff_I__282DF8C2" FromRole="Account" ToRole="Staff" />
+          <Property Name="StaffName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="QuanLyKhachSanEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
@@ -922,6 +926,8 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
                 <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

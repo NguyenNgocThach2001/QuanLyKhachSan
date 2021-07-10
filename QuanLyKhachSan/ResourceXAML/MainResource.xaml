@@ -19,5 +19,7 @@
     <viewmodel:DepartmentManagementUCViewModel x:Key="departmentMgUCVM"></viewmodel:DepartmentManagementUCViewModel>
     <viewmodel:OxyPlotReportViewModel x:Key="oxyPlotReportVM"></viewmodel:OxyPlotReportViewModel>
     <viewmodel:ReportViewModel x:Key="reportVM"></viewmodel:ReportViewModel>
+    <viewmodel:AccountViewModel x:Key="accountVM"></viewmodel:AccountViewModel>
+    <viewmodel:ChangePasswordViewModel x:Key="changePasswordVM"></viewmodel:ChangePasswordViewModel>
     <viewmodel:PaymenHistoryDetailViewModel x:Key="paymentHistoryDetailVMpopup"></viewmodel:PaymenHistoryDetailViewModel>
 </ResourceDictionary>   

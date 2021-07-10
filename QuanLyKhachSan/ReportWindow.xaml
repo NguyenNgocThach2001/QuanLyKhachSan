@@ -128,8 +128,7 @@
                         
                     </Separator>
                     <materialDesign:Card Grid.Row="4">
-                        <oxy:PlotView Model="{Binding MyModel}"
-                                      Width="100" Height="100">
+                        <oxy:PlotView Model="{Binding MyModel}" >
                             
                         </oxy:PlotView>
                     </materialDesign:Card>
