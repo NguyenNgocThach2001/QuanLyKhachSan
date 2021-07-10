@@ -117,9 +117,7 @@ namespace QuanLyKhachSan.ViewModel
             {
                 try
                 {
-                    int tmpguest_id = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).guest_id;
-                    Reservation reservation = hireList.FirstOrDefault(x => x.guest_id == tmpguest_id);
-                    if (reservation.paid == 1) continue;
+                    if (item.paid == 1) continue;
                     HireModel newHire = new HireModel();
                     newHire.guest_name = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).full_name;
                     newHire.room_name = roomList.FirstOrDefault(x => x.room_id == item.room_id).room_name;
@@ -127,7 +125,7 @@ namespace QuanLyKhachSan.ViewModel
                     newHire.CheckoutDate = (DateTime)item.check_out_date;
                     newHire.CheckinDate = DateTime.Parse(((DateTime)item.check_in_date).ToString());
                     newHire.CheckoutDate = DateTime.Parse(((DateTime)item.check_out_date).ToString());
-                    newHire.reservation = reservation;
+                    newHire.reservation = item;
                     //MessageBox.Show(newHire.CheckinDate.ToString());
                     HireList.Add(newHire);
                 }
