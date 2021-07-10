@@ -148,6 +148,7 @@ namespace QuanLyKhachSan.ViewModel
             {
                 ReportWindow reportWindow = new ReportWindow();
                 reportWindow.ShowDialog();
+                reportWindow.Close();
                 LoadRoomList();
             });
             AccountCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>

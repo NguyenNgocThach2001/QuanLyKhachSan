@@ -11,19 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using QuanLyKhachSan.ViewModel;
 
 namespace QuanLyKhachSan
 {
     /// <summary>
-    /// Interaction logic for ReportWindow.xaml
+    /// Interaction logic for ChangePasswordWindow.xaml
     /// </summary>
-    public partial class ReportWindow : Window
+    public partial class ChangePasswordWindow : Window
     {
-        public ReportWindow()
+        public ChangePasswordWindow()
         {
-            ReportViewModel ViewModel = new ReportViewModel();
-            this.DataContext = ViewModel;
             InitializeComponent();
         }
     }
