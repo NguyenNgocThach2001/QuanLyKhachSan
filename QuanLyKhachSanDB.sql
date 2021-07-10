@@ -50,15 +50,6 @@ Create Table Reservation(
 	foreign key (room_id) references Room(room_id), 
 )
 
-Create Table Payment(
-	payment_id int identity(1,1),
-	guest_id int, 
-	reservation_id int,
-	fullname nvarchar(max),
-	Primary Key(payment_id, guest_id),
-	foreign key (reservation_id) references Reservation(reservation_id),
-)
-
 Create Table PaymentService(
 	PaymentService_ID int identity(1,1) primary key,
 )
