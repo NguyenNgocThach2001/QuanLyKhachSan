@@ -131,6 +131,7 @@ namespace QuanLyKhachSan.ViewModel
             {
                 QuanLyDuLieu quanlydulieu = new QuanLyDuLieu();
                 quanlydulieu.ShowDialog();
+                LoadRoomList();
             });
             SNameChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { SName = p.Text; });
             STypeChangedCommand = new RelayCommand<ComboBox>((p) => { return true; }, (p) => { SType = p.Text; });
@@ -200,8 +201,10 @@ namespace QuanLyKhachSan.ViewModel
                         if (price > priceB) continue;
                     RoomList.Add(newRoom);
                 }
-                catch { }
+                catch {
+                }
             }
+            //
         }
 
         int getVN(string p)
