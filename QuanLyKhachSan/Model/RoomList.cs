@@ -14,6 +14,7 @@ namespace QuanLyKhachSan.Model
         public string room_type { get; set; }
         public string room_status { get; set; }
         public string room_price { get; set; }
+        public string status { get; set; }
         public Brush color { get; set; }
     }
 }

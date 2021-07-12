@@ -12,5 +12,7 @@ namespace QuanLyKhachSan.Model
         public string RoomName { get; set; }
         public int RoomTypeId { get; set; }
         public int RoomStatusId { get; set; }
+        public string RoomTypeName { get; set; }
+        public string RoomStatusName { get; set; }
     }
 }

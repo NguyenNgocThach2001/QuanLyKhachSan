@@ -164,8 +164,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding RoomId}" Header="Mã Phòng"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding RoomName}" Header="Tên Phòng"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding RoomTypeId}" Header="Mã Loại Phòng"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding RoomStatusId}" Header="Mã Trạng Thái"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding RoomTypeName}" Header="Loại Phòng"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding RoomStatusName}" Header="Trạng Thái"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
