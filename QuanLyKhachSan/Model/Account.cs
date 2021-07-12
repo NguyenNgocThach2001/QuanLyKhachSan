@@ -16,10 +16,10 @@ namespace QuanLyKhachSan.Model
     {
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string FullName { get; set; }
-        public Nullable<int> Staff_ID { get; set; }
         public string StaffName { get; set; }
         public string Role { get; set; }
+        public string FullName { get; set; }
+        public Nullable<int> Staff_ID { get; set; }
     
         public virtual Staff Staff { get; set; }
     }

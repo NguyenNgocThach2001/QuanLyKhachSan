@@ -251,15 +251,16 @@ namespace QuanLyKhachSan.ViewModel
                 paymentservice.Service_ID = SService.serviceID;
                 paymentservice.Reservation_id = Reservation_id;
                 paymentservice.Useage = UseageTxtBox;
-                var db = DataProvider.Ins.db; 
+                var db = DataProvider.Ins.db;
                 db.PaymentServices.Add(paymentservice);
                 db.SaveChanges();
                 LoadData();
             }
             catch
             {
-                MessageBox.Show("Lỗi!Hãy kiểm tra lại thông tin!");
+                MessageBox.Show("Lỗi! Hãy điền đủ thông tin");
             }
+            
         }
         void DeleteData(Button p)
         {
@@ -298,8 +299,11 @@ namespace QuanLyKhachSan.ViewModel
                 var guestList = DataProvider.Ins.db.Guests;
                 Guest guest = guestList.FirstOrDefault(x => x.guest_id == reservation.guest_id);
                 Room room = DataProvider.Ins.db.Rooms.FirstOrDefault(x => x.room_id == reservation.room_id);
-                GuestName = guest.full_name;
-                CMND = guest.CMND;
+                if (guest != null)
+                {
+                    GuestName = guest.full_name;
+                    CMND = guest.CMND;
+                }
                 RoomName = room.room_name;
                 if (reservation.check_in_date != null)
                     CheckinDate = reservation.check_in_date.Value;

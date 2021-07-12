@@ -170,8 +170,7 @@ namespace QuanLyKhachSan.ViewModel
             foreach (var item in guestList)
             {
                 if (item.full_name == null || item.CMND == null) continue;
-                if (item.full_name.Replace(" {2, }", " ") == GuestName.Replace(" {2, }", " ")
-                    && item.CMND.Trim(' ') == CMND.Trim(' '))
+                if (item.CMND.Trim(' ') == CMND.Trim(' ') || item.CMND == "0")
                 {
                     reservation.guest_id = item.guest_id;
                     checkGuestExist = true;
@@ -181,11 +180,12 @@ namespace QuanLyKhachSan.ViewModel
 
             if (!checkGuestExist)
             {
+                var db = DataProvider.Ins.db;
                 newGuest.CMND = CMND;
                 newGuest.full_name = GuestName;
-                DataProvider.Ins.db.Guests.Add(newGuest);
-                DataProvider.Ins.db.SaveChanges();
-                guestList = DataProvider.Ins.db.Guests.ToList();
+                db.Guests.Add(newGuest);
+                db.SaveChanges();
+                guestList = db.Guests.ToList();
                 foreach (var item in guestList)
                 {
                     if (item.full_name == null || item.CMND == null) continue;
@@ -197,6 +197,8 @@ namespace QuanLyKhachSan.ViewModel
                     }
                 }
             }
+
+            
 
             foreach (var item in RoomNameList)
             {
@@ -218,9 +220,10 @@ namespace QuanLyKhachSan.ViewModel
             reservation.Room_Service = roomservice.Room_Service;
             reservation.paid = 0;
             reservation.reservation_date = DateTime.Today;
+            int idroomstatus = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_name == "Trống").room_status_id;
             DataProvider.Ins.db.RoomServices.Add(roomservice);
             DataProvider.Ins.db.Reservations.Add(reservation);
-            DataProvider.Ins.db.Rooms.First(x => x.room_status_id == 2 && x.room_id == reservation.room_id).room_status_id = 1;
+            DataProvider.Ins.db.Rooms.First(x => x.room_status_id == idroomstatus && x.room_id == reservation.room_id).room_status_id = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_name == "Đang Thuê").room_status_id;
             DataProvider.Ins.db.SaveChanges();
 
 
@@ -245,10 +248,11 @@ namespace QuanLyKhachSan.ViewModel
         {
             RoomNameList.Clear();
             var roomList = DataProvider.Ins.db.Rooms.ToList();
+            int roomstatus = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_name == "Trống").room_status_id;
             foreach (var item in roomList)
             {
                 AddHireModel newRoom = new AddHireModel();
-                if (item.room_status_id.ToString() == "2")
+                if (item.room_status_id == roomstatus)
                 {
                     newRoom.room = item;
                     RoomNameList.Add(newRoom);

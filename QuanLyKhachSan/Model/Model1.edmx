@@ -11,10 +11,10 @@
           </Key>
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" />
-          <Property Name="FullName" Type="nvarchar(max)" />
-          <Property Name="Staff_ID" Type="int" />
           <Property Name="StaffName" Type="nvarchar(max)" />
           <Property Name="Role" Type="nvarchar" MaxLength="20" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="Staff_ID" Type="int" />
         </EntityType>
         <EntityType Name="Coefficients">
           <Key>
@@ -58,7 +58,6 @@
             <PropertyRef Name="PaymentService_ID" />
           </Key>
           <Property Name="PaymentService_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="payment_id" Type="int" />
           <Property Name="Useage" Type="int" />
           <Property Name="Reservation_id" Type="int" />
           <Property Name="Service_ID" Type="int" />
@@ -89,9 +88,9 @@
           <Property Name="check_out_date" Type="date" />
           <Property Name="adult" Type="int" />
           <Property Name="children" Type="int" />
+          <Property Name="amount" Type="float" />
           <Property Name="Room_Service" Type="uniqueidentifier" />
           <Property Name="paid" Type="int" />
-          <Property Name="amount" Type="float" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -146,14 +145,14 @@
           <Property Name="Staff_Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="Staff_Position_ID" Type="nvarchar" MaxLength="10" />
           <Property Name="Staff_Payrange_ID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Staff_Coefficients_ID" Type="nvarchar" MaxLength="10" />
           <Property Name="Staff_Department_ID" Type="nvarchar" MaxLength="10" />
           <Property Name="Staff_Contract_Date" Type="datetime" />
           <Property Name="Expiry_Date" Type="datetime" />
           <Property Name="Birthday" Type="datetime" />
-          <Property Name="Staff_Coefficients_ID" Type="int" />
           <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK__Account__Staff_I__282DF8C2">
+        <Association Name="FK__Account__Staff_I__5FB337D6">
           <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -165,7 +164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contract__Staff___2645B050">
+        <Association Name="FK__Contract__Staff___534D60F1">
           <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
           <ReferentialConstraint>
@@ -177,7 +176,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Departmen__Depar__151B244E">
+        <Association Name="FK__Contract__Staff___5DCAEF64">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Staff_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Depar__5EBF139D">
           <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
           <ReferentialConstraint>
@@ -189,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PaymentSe__Reser__3A4CA8FD">
+        <Association Name="FK__PaymentSe__Reser__440B1D61">
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
           <End Role="PaymentService" Type="Self.PaymentService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -201,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PaymentSe__Servi__3B40CD36">
+        <Association Name="FK__PaymentSe__Servi__46E78A0C">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="PaymentService" Type="Self.PaymentService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -213,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__guest__3F466844">
+        <Association Name="FK__Reservati__guest__403A8C7D">
           <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -225,7 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__room___403A8C7D">
+        <Association Name="FK__Reservati__room___412EB0B6">
           <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -237,7 +248,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__Room___540C7B00">
+        <Association Name="FK__Reservati__Room___4AB81AF0">
           <End Role="RoomService" Type="Self.RoomService" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -261,7 +272,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Room__room_type___47DBAE45">
+        <Association Name="FK__Room__room_type___3B75D760">
           <End Role="RoomType" Type="Self.RoomType" Multiplicity="0..1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
           <ReferentialConstraint>
@@ -273,7 +284,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Staff__Staff_Dep__160F4887">
+        <Association Name="FK__Staff__Staff_Coe__5AEE82B9">
+          <End Role="Coefficients" Type="Self.Coefficients" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coefficients">
+              <PropertyRef Name="Coefficients_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Staff_Coefficients_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__Staff_Dep__59FA5E80">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,43 +308,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Staff__Staff_Dep__17F790F9">
-          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Dep__1DB06A4F">
-          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Dep__22751F6C">
-          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Pay__19DFD96B">
+        <Association Name="FK__Staff__Staff_Pay__5BE2A6F2">
           <End Role="Payrange" Type="Self.Payrange" Multiplicity="0..1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
@@ -333,19 +320,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Staff__Staff_Pay__245D67DE">
-          <End Role="Payrange" Type="Self.Payrange" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payrange">
-              <PropertyRef Name="Payrange_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Payrange_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Pos__25518C17">
+        <Association Name="FK__Staff__Staff_Pos__5CD6CB2B">
           <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,35 +348,39 @@
           <EntitySet Name="RoomType" EntityType="Self.RoomType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Account__Staff_I__282DF8C2" Association="Self.FK__Account__Staff_I__282DF8C2">
+          <AssociationSet Name="FK__Account__Staff_I__5FB337D6" Association="Self.FK__Account__Staff_I__5FB337D6">
             <End Role="Staff" EntitySet="Staff" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contract__Staff___2645B050" Association="Self.FK__Contract__Staff___2645B050">
+          <AssociationSet Name="FK__Contract__Staff___534D60F1" Association="Self.FK__Contract__Staff___534D60F1">
             <End Role="Staff" EntitySet="Staff" />
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
-          <AssociationSet Name="FK__Departmen__Depar__151B244E" Association="Self.FK__Departmen__Depar__151B244E">
+          <AssociationSet Name="FK__Contract__Staff___5DCAEF64" Association="Self.FK__Contract__Staff___5DCAEF64">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Depar__5EBF139D" Association="Self.FK__Departmen__Depar__5EBF139D">
             <End Role="Staff" EntitySet="Staff" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
-          <AssociationSet Name="FK__PaymentSe__Reser__3A4CA8FD" Association="Self.FK__PaymentSe__Reser__3A4CA8FD">
+          <AssociationSet Name="FK__PaymentSe__Reser__440B1D61" Association="Self.FK__PaymentSe__Reser__440B1D61">
             <End Role="Reservation" EntitySet="Reservation" />
             <End Role="PaymentService" EntitySet="PaymentService" />
           </AssociationSet>
-          <AssociationSet Name="FK__PaymentSe__Servi__3B40CD36" Association="Self.FK__PaymentSe__Servi__3B40CD36">
+          <AssociationSet Name="FK__PaymentSe__Servi__46E78A0C" Association="Self.FK__PaymentSe__Servi__46E78A0C">
             <End Role="Service" EntitySet="Service" />
             <End Role="PaymentService" EntitySet="PaymentService" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__guest__3F466844" Association="Self.FK__Reservati__guest__3F466844">
+          <AssociationSet Name="FK__Reservati__guest__403A8C7D" Association="Self.FK__Reservati__guest__403A8C7D">
             <End Role="Guest" EntitySet="Guest" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__room___403A8C7D" Association="Self.FK__Reservati__room___403A8C7D">
+          <AssociationSet Name="FK__Reservati__room___412EB0B6" Association="Self.FK__Reservati__room___412EB0B6">
             <End Role="Room" EntitySet="Room" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__Room___540C7B00" Association="Self.FK__Reservati__Room___540C7B00">
+          <AssociationSet Name="FK__Reservati__Room___4AB81AF0" Association="Self.FK__Reservati__Room___4AB81AF0">
             <End Role="RoomService" EntitySet="RoomService" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
@@ -409,35 +388,23 @@
             <End Role="RoomStatus" EntitySet="RoomStatus" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
-          <AssociationSet Name="FK__Room__room_type___47DBAE45" Association="Self.FK__Room__room_type___47DBAE45">
+          <AssociationSet Name="FK__Room__room_type___3B75D760" Association="Self.FK__Room__room_type___3B75D760">
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__160F4887" Association="Self.FK__Staff__Staff_Dep__160F4887">
+          <AssociationSet Name="FK__Staff__Staff_Coe__5AEE82B9" Association="Self.FK__Staff__Staff_Coe__5AEE82B9">
+            <End Role="Coefficients" EntitySet="Coefficients" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__Staff_Dep__59FA5E80" Association="Self.FK__Staff__Staff_Dep__59FA5E80">
             <End Role="Department" EntitySet="Department" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__17F790F9" Association="Self.FK__Staff__Staff_Dep__17F790F9">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__1DB06A4F" Association="Self.FK__Staff__Staff_Dep__1DB06A4F">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__22751F6C" Association="Self.FK__Staff__Staff_Dep__22751F6C">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Pay__19DFD96B" Association="Self.FK__Staff__Staff_Pay__19DFD96B">
+          <AssociationSet Name="FK__Staff__Staff_Pay__5BE2A6F2" Association="Self.FK__Staff__Staff_Pay__5BE2A6F2">
             <End Role="Payrange" EntitySet="Payrange" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Pay__245D67DE" Association="Self.FK__Staff__Staff_Pay__245D67DE">
-            <End Role="Payrange" EntitySet="Payrange" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Pos__25518C17" Association="Self.FK__Staff__Staff_Pos__25518C17">
+          <AssociationSet Name="FK__Staff__Staff_Pos__5CD6CB2B" Association="Self.FK__Staff__Staff_Pos__5CD6CB2B">
             <End Role="Position" EntitySet="Position" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
@@ -446,91 +413,71 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuanLyKhachSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account">
-          <Key>
-            <PropertyRef Name="UserName" />
-          </Key>
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_ID" Type="Int32" />
-          <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Account__Staff_I__282DF8C2" FromRole="Account" ToRole="Staff" />
-          <Property Name="StaffName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="QuanLyKhachSanEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Accounts" EntityType="QuanLyKhachSanModel.Account" />
           <EntitySet Name="Coefficients" EntityType="QuanLyKhachSanModel.Coefficient" />
           <EntitySet Name="Contracts" EntityType="QuanLyKhachSanModel.Contract" />
           <EntitySet Name="Departments" EntityType="QuanLyKhachSanModel.Department" />
-          <EntitySet Name="Payranges" EntityType="QuanLyKhachSanModel.Payrange" />
-          <EntitySet Name="Positions" EntityType="QuanLyKhachSanModel.Position" />
-          <EntitySet Name="Staffs" EntityType="QuanLyKhachSanModel.Staff" />
-          <AssociationSet Name="FK__Account__Staff_I__282DF8C2" Association="QuanLyKhachSanModel.FK__Account__Staff_I__282DF8C2">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Contract__Staff___2645B050" Association="QuanLyKhachSanModel.FK__Contract__Staff___2645B050">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Departmen__Depar__151B244E" Association="QuanLyKhachSanModel.FK__Departmen__Depar__151B244E">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Department" EntitySet="Departments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__160F4887" Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__160F4887">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__17F790F9" Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__17F790F9">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__1DB06A4F" Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__1DB06A4F">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Dep__22751F6C" Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__22751F6C">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Pay__19DFD96B" Association="QuanLyKhachSanModel.FK__Staff__Staff_Pay__19DFD96B">
-            <End Role="Payrange" EntitySet="Payranges" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Pay__245D67DE" Association="QuanLyKhachSanModel.FK__Staff__Staff_Pay__245D67DE">
-            <End Role="Payrange" EntitySet="Payranges" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__Staff_Pos__25518C17" Association="QuanLyKhachSanModel.FK__Staff__Staff_Pos__25518C17">
-            <End Role="Position" EntitySet="Positions" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
           <EntitySet Name="Guests" EntityType="QuanLyKhachSanModel.Guest" />
           <EntitySet Name="PaymentServices" EntityType="QuanLyKhachSanModel.PaymentService" />
+          <EntitySet Name="Payranges" EntityType="QuanLyKhachSanModel.Payrange" />
+          <EntitySet Name="Positions" EntityType="QuanLyKhachSanModel.Position" />
           <EntitySet Name="Reservations" EntityType="QuanLyKhachSanModel.Reservation" />
           <EntitySet Name="Rooms" EntityType="QuanLyKhachSanModel.Room" />
           <EntitySet Name="RoomServices" EntityType="QuanLyKhachSanModel.RoomService" />
           <EntitySet Name="RoomStatus" EntityType="QuanLyKhachSanModel.RoomStatu" />
           <EntitySet Name="RoomTypes" EntityType="QuanLyKhachSanModel.RoomType" />
           <EntitySet Name="Services" EntityType="QuanLyKhachSanModel.Service" />
-          <AssociationSet Name="FK__Reservati__guest__3F466844" Association="QuanLyKhachSanModel.FK__Reservati__guest__3F466844">
+          <EntitySet Name="Staffs" EntityType="QuanLyKhachSanModel.Staff" />
+          <AssociationSet Name="FK__Account__Staff_I__5FB337D6" Association="QuanLyKhachSanModel.FK__Account__Staff_I__5FB337D6">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__Staff_Coe__5AEE82B9" Association="QuanLyKhachSanModel.FK__Staff__Staff_Coe__5AEE82B9">
+            <End Role="Coefficient" EntitySet="Coefficients" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract__Staff___534D60F1" Association="QuanLyKhachSanModel.FK__Contract__Staff___534D60F1">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract__Staff___5DCAEF64" Association="QuanLyKhachSanModel.FK__Contract__Staff___5DCAEF64">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Depar__5EBF139D" Association="QuanLyKhachSanModel.FK__Departmen__Depar__5EBF139D">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__Staff_Dep__59FA5E80" Association="QuanLyKhachSanModel.FK__Staff__Staff_Dep__59FA5E80">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__guest__403A8C7D" Association="QuanLyKhachSanModel.FK__Reservati__guest__403A8C7D">
             <End Role="Guest" EntitySet="Guests" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__PaymentSe__Reser__3A4CA8FD" Association="QuanLyKhachSanModel.FK__PaymentSe__Reser__3A4CA8FD">
+          <AssociationSet Name="FK__PaymentSe__Reser__440B1D61" Association="QuanLyKhachSanModel.FK__PaymentSe__Reser__440B1D61">
             <End Role="Reservation" EntitySet="Reservations" />
             <End Role="PaymentService" EntitySet="PaymentServices" />
           </AssociationSet>
-          <AssociationSet Name="FK__PaymentSe__Servi__3B40CD36" Association="QuanLyKhachSanModel.FK__PaymentSe__Servi__3B40CD36">
+          <AssociationSet Name="FK__PaymentSe__Servi__46E78A0C" Association="QuanLyKhachSanModel.FK__PaymentSe__Servi__46E78A0C">
             <End Role="Service" EntitySet="Services" />
             <End Role="PaymentService" EntitySet="PaymentServices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__room___403A8C7D" Association="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D">
+          <AssociationSet Name="FK__Staff__Staff_Pay__5BE2A6F2" Association="QuanLyKhachSanModel.FK__Staff__Staff_Pay__5BE2A6F2">
+            <End Role="Payrange" EntitySet="Payranges" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__Staff_Pos__5CD6CB2B" Association="QuanLyKhachSanModel.FK__Staff__Staff_Pos__5CD6CB2B">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__room___412EB0B6" Association="QuanLyKhachSanModel.FK__Reservati__room___412EB0B6">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__Room___540C7B00" Association="QuanLyKhachSanModel.FK__Reservati__Room___540C7B00">
+          <AssociationSet Name="FK__Reservati__Room___4AB81AF0" Association="QuanLyKhachSanModel.FK__Reservati__Room___4AB81AF0">
             <End Role="RoomService" EntitySet="RoomServices" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
@@ -538,17 +485,30 @@
             <End Role="RoomStatu" EntitySet="RoomStatus" />
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Room__room_type___47DBAE45" Association="QuanLyKhachSanModel.FK__Room__room_type___47DBAE45">
+          <AssociationSet Name="FK__Room__room_type___3B75D760" Association="QuanLyKhachSanModel.FK__Room__room_type___3B75D760">
             <End Role="RoomType" EntitySet="RoomTypes" />
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_ID" Type="Int32" />
+          <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Account__Staff_I__5FB337D6" FromRole="Account" ToRole="Staff" />
+        </EntityType>
         <EntityType Name="Coefficient">
           <Key>
             <PropertyRef Name="Coefficients_ID" />
           </Key>
           <Property Name="Coefficients_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Coefficients_Num" Type="Double" />
+          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Coe__5AEE82B9" FromRole="Coefficient" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -557,7 +517,8 @@
           <Property Name="Contract_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Staff_ID" Type="Int32" />
           <Property Name="Context" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Contract__Staff___2645B050" FromRole="Contract" ToRole="Staff" />
+          <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Contract__Staff___534D60F1" FromRole="Contract" ToRole="Staff" />
+          <NavigationProperty Name="Staff1" Relationship="QuanLyKhachSanModel.FK__Contract__Staff___5DCAEF64" FromRole="Contract" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -567,176 +528,9 @@
           <Property Name="Department_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Department_Head_id" Type="Int32" />
           <Property Name="Deputy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Departmen__Depar__151B244E" FromRole="Department" ToRole="Staff" />
-          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__160F4887" FromRole="Department" ToRole="Staff" />
-          <NavigationProperty Name="Staffs1" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__17F790F9" FromRole="Department" ToRole="Staff" />
-          <NavigationProperty Name="Staffs2" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__1DB06A4F" FromRole="Department" ToRole="Staff" />
-          <NavigationProperty Name="Staffs3" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__22751F6C" FromRole="Department" ToRole="Staff" />
+          <NavigationProperty Name="Staff" Relationship="QuanLyKhachSanModel.FK__Departmen__Depar__5EBF139D" FromRole="Department" ToRole="Staff" />
+          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__59FA5E80" FromRole="Department" ToRole="Staff" />
         </EntityType>
-        <EntityType Name="Payrange">
-          <Key>
-            <PropertyRef Name="Payrange_ID" />
-          </Key>
-          <Property Name="Payrange_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Payrange_Num" Type="Double" />
-          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pay__19DFD96B" FromRole="Payrange" ToRole="Staff" />
-          <NavigationProperty Name="Staffs1" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pay__245D67DE" FromRole="Payrange" ToRole="Staff" />
-          </EntityType>
-        <EntityType Name="Position">
-          <Key>
-            <PropertyRef Name="Position_ID" />
-          </Key>
-          <Property Name="Position_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Position_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pos__25518C17" FromRole="Position" ToRole="Staff" />
-        </EntityType>
-        <EntityType Name="Staff">
-          <Key>
-            <PropertyRef Name="Staff_ID" />
-          </Key>
-          <Property Name="Staff_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Staff_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_Position_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_Payrange_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_Department_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Staff_Contract_Date" Type="DateTime" Precision="3" />
-          <Property Name="Expiry_Date" Type="DateTime" Precision="3" />
-          <Property Name="Birthday" Type="DateTime" Precision="3" />
-          <Property Name="Staff_Coefficients_ID" Type="Int32" />
-          <NavigationProperty Name="Accounts" Relationship="QuanLyKhachSanModel.FK__Account__Staff_I__282DF8C2" FromRole="Staff" ToRole="Account" />
-          <NavigationProperty Name="Contracts" Relationship="QuanLyKhachSanModel.FK__Contract__Staff___2645B050" FromRole="Staff" ToRole="Contract" />
-          <NavigationProperty Name="Departments" Relationship="QuanLyKhachSanModel.FK__Departmen__Depar__151B244E" FromRole="Staff" ToRole="Department" />
-          <NavigationProperty Name="Department" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__160F4887" FromRole="Staff" ToRole="Department" />
-          <NavigationProperty Name="Department1" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__17F790F9" FromRole="Staff" ToRole="Department" />
-          <NavigationProperty Name="Department2" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__1DB06A4F" FromRole="Staff" ToRole="Department" />
-          <NavigationProperty Name="Department3" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__22751F6C" FromRole="Staff" ToRole="Department" />
-          <NavigationProperty Name="Payrange" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pay__19DFD96B" FromRole="Staff" ToRole="Payrange" />
-          <NavigationProperty Name="Payrange1" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pay__245D67DE" FromRole="Staff" ToRole="Payrange" />
-          <NavigationProperty Name="Position" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pos__25518C17" FromRole="Staff" ToRole="Position" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK__Account__Staff_I__282DF8C2">
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Account" Role="Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="Staff_ID" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="Staff_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Contract__Staff___2645B050">
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="Staff_ID" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="Staff_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Departmen__Depar__151B244E">
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="Staff_ID" />
-            </Principal>
-            <Dependent Role="Department">
-              <PropertyRef Name="Department_Head_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Dep__160F4887">
-          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Dep__17F790F9">
-          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Dep__1DB06A4F">
-          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Dep__22751F6C">
-          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Department_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Pay__19DFD96B">
-          <End Type="QuanLyKhachSanModel.Payrange" Role="Payrange" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payrange">
-              <PropertyRef Name="Payrange_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Payrange_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Pay__245D67DE">
-          <End Type="QuanLyKhachSanModel.Payrange" Role="Payrange" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payrange">
-              <PropertyRef Name="Payrange_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Payrange_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Staff__Staff_Pos__25518C17">
-          <End Type="QuanLyKhachSanModel.Position" Role="Position" Multiplicity="0..1" />
-          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Position">
-              <PropertyRef Name="Position_ID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="Staff_Position_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Guest">
           <Key>
             <PropertyRef Name="guest_id" />
@@ -749,19 +543,34 @@
           <Property Name="country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CMND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__guest__3F466844" FromRole="Guest" ToRole="Reservation" />
+          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__guest__403A8C7D" FromRole="Guest" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="PaymentService">
           <Key>
             <PropertyRef Name="PaymentService_ID" />
           </Key>
           <Property Name="PaymentService_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="payment_id" Type="Int32" />
           <Property Name="Useage" Type="Int32" />
           <Property Name="Reservation_id" Type="Int32" />
           <Property Name="Service_ID" Type="Int32" />
-          <NavigationProperty Name="Reservation" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Reser__3A4CA8FD" FromRole="PaymentService" ToRole="Reservation" />
-          <NavigationProperty Name="Service" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Servi__3B40CD36" FromRole="PaymentService" ToRole="Service" />
+          <NavigationProperty Name="Reservation" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Reser__440B1D61" FromRole="PaymentService" ToRole="Reservation" />
+          <NavigationProperty Name="Service" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Servi__46E78A0C" FromRole="PaymentService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Payrange">
+          <Key>
+            <PropertyRef Name="Payrange_ID" />
+          </Key>
+          <Property Name="Payrange_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Payrange_Num" Type="Double" />
+          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pay__5BE2A6F2" FromRole="Payrange" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+          </Key>
+          <Property Name="Position_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staffs" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pos__5CD6CB2B" FromRole="Position" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -775,13 +584,13 @@
           <Property Name="check_out_date" Type="DateTime" Precision="0" />
           <Property Name="adult" Type="Int32" />
           <Property Name="children" Type="Int32" />
-          <Property Name="Room_Service" Type="Guid" />
-          <NavigationProperty Name="Guest" Relationship="QuanLyKhachSanModel.FK__Reservati__guest__3F466844" FromRole="Reservation" ToRole="Guest" />
-          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Reser__3A4CA8FD" FromRole="Reservation" ToRole="PaymentService" />
-          <NavigationProperty Name="Room" Relationship="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D" FromRole="Reservation" ToRole="Room" />
-          <NavigationProperty Name="RoomService" Relationship="QuanLyKhachSanModel.FK__Reservati__Room___540C7B00" FromRole="Reservation" ToRole="RoomService" />
-          <Property Name="paid" Type="Int32" />
           <Property Name="amount" Type="Double" />
+          <Property Name="Room_Service" Type="Guid" />
+          <Property Name="paid" Type="Int32" />
+          <NavigationProperty Name="Guest" Relationship="QuanLyKhachSanModel.FK__Reservati__guest__403A8C7D" FromRole="Reservation" ToRole="Guest" />
+          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Reser__440B1D61" FromRole="Reservation" ToRole="PaymentService" />
+          <NavigationProperty Name="Room" Relationship="QuanLyKhachSanModel.FK__Reservati__room___412EB0B6" FromRole="Reservation" ToRole="Room" />
+          <NavigationProperty Name="RoomService" Relationship="QuanLyKhachSanModel.FK__Reservati__Room___4AB81AF0" FromRole="Reservation" ToRole="RoomService" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -791,9 +600,9 @@
           <Property Name="room_type_id" Type="Int32" />
           <Property Name="room_status_id" Type="Int32" />
           <Property Name="room_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__room___403A8C7D" FromRole="Room" ToRole="Reservation" />
+          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__room___412EB0B6" FromRole="Room" ToRole="Reservation" />
           <NavigationProperty Name="RoomStatu" Relationship="QuanLyKhachSanModel.FK__Room__room_statu__3A81B327" FromRole="Room" ToRole="RoomStatu" />
-          <NavigationProperty Name="RoomType" Relationship="QuanLyKhachSanModel.FK__Room__room_type___47DBAE45" FromRole="Room" ToRole="RoomType" />
+          <NavigationProperty Name="RoomType" Relationship="QuanLyKhachSanModel.FK__Room__room_type___3B75D760" FromRole="Room" ToRole="RoomType" />
         </EntityType>
         <EntityType Name="RoomService">
           <Key>
@@ -804,7 +613,7 @@
           <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Unit_Price" Type="Int32" />
           <Property Name="Useage" Type="Int32" />
-          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__Room___540C7B00" FromRole="RoomService" ToRole="Reservation" />
+          <NavigationProperty Name="Reservations" Relationship="QuanLyKhachSanModel.FK__Reservati__Room___4AB81AF0" FromRole="RoomService" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="RoomStatu">
           <Key>
@@ -821,7 +630,7 @@
           <Property Name="room_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="room_type_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Int32" />
-          <NavigationProperty Name="Rooms" Relationship="QuanLyKhachSanModel.FK__Room__room_type___47DBAE45" FromRole="RoomType" ToRole="Room" />
+          <NavigationProperty Name="Rooms" Relationship="QuanLyKhachSanModel.FK__Room__room_type___3B75D760" FromRole="RoomType" ToRole="Room" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -831,9 +640,106 @@
           <Property Name="Service_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="unitPrice" Type="Int32" />
           <Property Name="unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Servi__3B40CD36" FromRole="Service" ToRole="PaymentService" />
+          <NavigationProperty Name="PaymentServices" Relationship="QuanLyKhachSanModel.FK__PaymentSe__Servi__46E78A0C" FromRole="Service" ToRole="PaymentService" />
         </EntityType>
-        <Association Name="FK__Reservati__guest__3F466844">
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Staff_ID" />
+          </Key>
+          <Property Name="Staff_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Staff_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Position_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Payrange_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Coefficients_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Department_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Staff_Contract_Date" Type="DateTime" Precision="3" />
+          <Property Name="Expiry_Date" Type="DateTime" Precision="3" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="QuanLyKhachSanModel.FK__Account__Staff_I__5FB337D6" FromRole="Staff" ToRole="Account" />
+          <NavigationProperty Name="Coefficient" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Coe__5AEE82B9" FromRole="Staff" ToRole="Coefficient" />
+          <NavigationProperty Name="Contracts" Relationship="QuanLyKhachSanModel.FK__Contract__Staff___534D60F1" FromRole="Staff" ToRole="Contract" />
+          <NavigationProperty Name="Contracts1" Relationship="QuanLyKhachSanModel.FK__Contract__Staff___5DCAEF64" FromRole="Staff" ToRole="Contract" />
+          <NavigationProperty Name="Departments" Relationship="QuanLyKhachSanModel.FK__Departmen__Depar__5EBF139D" FromRole="Staff" ToRole="Department" />
+          <NavigationProperty Name="Department" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Dep__59FA5E80" FromRole="Staff" ToRole="Department" />
+          <NavigationProperty Name="Payrange" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pay__5BE2A6F2" FromRole="Staff" ToRole="Payrange" />
+          <NavigationProperty Name="Position" Relationship="QuanLyKhachSanModel.FK__Staff__Staff_Pos__5CD6CB2B" FromRole="Staff" ToRole="Position" />
+        </EntityType>
+        <Association Name="FK__Account__Staff_I__5FB337D6">
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Staff_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__Staff_Coe__5AEE82B9">
+          <End Type="QuanLyKhachSanModel.Coefficient" Role="Coefficient" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coefficient">
+              <PropertyRef Name="Coefficients_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Staff_Coefficients_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract__Staff___534D60F1">
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Staff_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract__Staff___5DCAEF64">
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Staff_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Depar__5EBF139D">
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="Department_Head_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__Staff_Dep__59FA5E80">
+          <End Type="QuanLyKhachSanModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Department_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Staff_Department_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__guest__403A8C7D">
           <End Type="QuanLyKhachSanModel.Guest" Role="Guest" Multiplicity="0..1" />
           <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -845,7 +751,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PaymentSe__Reser__3A4CA8FD">
+        <Association Name="FK__PaymentSe__Reser__440B1D61">
           <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="0..1" />
           <End Type="QuanLyKhachSanModel.PaymentService" Role="PaymentService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -857,7 +763,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PaymentSe__Servi__3B40CD36">
+        <Association Name="FK__PaymentSe__Servi__46E78A0C">
           <End Type="QuanLyKhachSanModel.Service" Role="Service" Multiplicity="0..1" />
           <End Type="QuanLyKhachSanModel.PaymentService" Role="PaymentService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -869,7 +775,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__room___403A8C7D">
+        <Association Name="FK__Staff__Staff_Pay__5BE2A6F2">
+          <End Type="QuanLyKhachSanModel.Payrange" Role="Payrange" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payrange">
+              <PropertyRef Name="Payrange_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Staff_Payrange_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__Staff_Pos__5CD6CB2B">
+          <End Type="QuanLyKhachSanModel.Position" Role="Position" Multiplicity="0..1" />
+          <End Type="QuanLyKhachSanModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Position_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Staff_Position_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__room___412EB0B6">
           <End Type="QuanLyKhachSanModel.Room" Role="Room" Multiplicity="0..1" />
           <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -881,7 +811,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__Room___540C7B00">
+        <Association Name="FK__Reservati__Room___4AB81AF0">
           <End Type="QuanLyKhachSanModel.RoomService" Role="RoomService" Multiplicity="0..1" />
           <End Type="QuanLyKhachSanModel.Reservation" Role="Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -905,7 +835,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Room__room_type___47DBAE45">
+        <Association Name="FK__Room__room_type___3B75D760">
           <End Type="QuanLyKhachSanModel.RoomType" Role="RoomType" Multiplicity="0..1" />
           <End Type="QuanLyKhachSanModel.Room" Role="Room" Multiplicity="*" />
           <ReferentialConstraint>
@@ -926,12 +856,12 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
                 <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -962,40 +892,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Payranges">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Payrange">
-              <MappingFragment StoreEntitySet="Payrange">
-                <ScalarProperty Name="Payrange_Num" ColumnName="Payrange_Num" />
-                <ScalarProperty Name="Payrange_ID" ColumnName="Payrange_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Positions">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Position">
-              <MappingFragment StoreEntitySet="Position">
-                <ScalarProperty Name="Position_Name" ColumnName="Position_Name" />
-                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Staffs">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Staff">
-              <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="Staff_Coefficients_ID" ColumnName="Staff_Coefficients_ID" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Expiry_Date" ColumnName="Expiry_Date" />
-                <ScalarProperty Name="Staff_Contract_Date" ColumnName="Staff_Contract_Date" />
-                <ScalarProperty Name="Staff_Department_ID" ColumnName="Staff_Department_ID" />
-                <ScalarProperty Name="Staff_Payrange_ID" ColumnName="Staff_Payrange_ID" />
-                <ScalarProperty Name="Staff_Position_ID" ColumnName="Staff_Position_ID" />
-                <ScalarProperty Name="Staff_Phone" ColumnName="Staff_Phone" />
-                <ScalarProperty Name="Staff_Sex" ColumnName="Staff_Sex" />
-                <ScalarProperty Name="Staff_Name" ColumnName="Staff_Name" />
-                <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Guests">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Guest">
               <MappingFragment StoreEntitySet="Guest">
@@ -1016,17 +912,32 @@
                 <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
                 <ScalarProperty Name="Reservation_id" ColumnName="Reservation_id" />
                 <ScalarProperty Name="Useage" ColumnName="Useage" />
-                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
                 <ScalarProperty Name="PaymentService_ID" ColumnName="PaymentService_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payranges">
+            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Payrange">
+              <MappingFragment StoreEntitySet="Payrange">
+                <ScalarProperty Name="Payrange_Num" ColumnName="Payrange_Num" />
+                <ScalarProperty Name="Payrange_ID" ColumnName="Payrange_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="Position_Name" ColumnName="Position_Name" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reservations">
             <EntityTypeMapping TypeName="QuanLyKhachSanModel.Reservation">
               <MappingFragment StoreEntitySet="Reservation">
-                <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="paid" ColumnName="paid" />
                 <ScalarProperty Name="Room_Service" ColumnName="Room_Service" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="children" ColumnName="children" />
                 <ScalarProperty Name="adult" ColumnName="adult" />
                 <ScalarProperty Name="check_out_date" ColumnName="check_out_date" />
@@ -1083,6 +994,24 @@
                 <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
                 <ScalarProperty Name="Service_Name" ColumnName="Service_Name" />
                 <ScalarProperty Name="Service_ID" ColumnName="Service_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Expiry_Date" ColumnName="Expiry_Date" />
+                <ScalarProperty Name="Staff_Contract_Date" ColumnName="Staff_Contract_Date" />
+                <ScalarProperty Name="Staff_Department_ID" ColumnName="Staff_Department_ID" />
+                <ScalarProperty Name="Staff_Coefficients_ID" ColumnName="Staff_Coefficients_ID" />
+                <ScalarProperty Name="Staff_Payrange_ID" ColumnName="Staff_Payrange_ID" />
+                <ScalarProperty Name="Staff_Position_ID" ColumnName="Staff_Position_ID" />
+                <ScalarProperty Name="Staff_Phone" ColumnName="Staff_Phone" />
+                <ScalarProperty Name="Staff_Sex" ColumnName="Staff_Sex" />
+                <ScalarProperty Name="Staff_Name" ColumnName="Staff_Name" />
+                <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

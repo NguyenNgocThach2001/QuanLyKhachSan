@@ -15,7 +15,6 @@ namespace QuanLyKhachSan.Model
     public partial class PaymentService
     {
         public int PaymentService_ID { get; set; }
-        public Nullable<int> payment_id { get; set; }
         public Nullable<int> Useage { get; set; }
         public Nullable<int> Reservation_id { get; set; }
         public Nullable<int> Service_ID { get; set; }

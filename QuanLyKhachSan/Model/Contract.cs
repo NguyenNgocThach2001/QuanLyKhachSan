@@ -19,5 +19,6 @@ namespace QuanLyKhachSan.Model
         public string Context { get; set; }
     
         public virtual Staff Staff { get; set; }
+        public virtual Staff Staff1 { get; set; }
     }
 }

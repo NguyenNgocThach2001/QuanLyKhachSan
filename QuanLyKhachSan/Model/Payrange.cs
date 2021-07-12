@@ -18,7 +18,6 @@ namespace QuanLyKhachSan.Model
         public Payrange()
         {
             this.Staffs = new HashSet<Staff>();
-            this.Staffs1 = new HashSet<Staff>();
         }
     
         public string Payrange_ID { get; set; }
@@ -26,7 +25,5 @@ namespace QuanLyKhachSan.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Staff> Staffs1 { get; set; }
     }
 }
