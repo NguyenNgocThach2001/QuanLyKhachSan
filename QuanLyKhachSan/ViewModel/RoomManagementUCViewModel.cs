@@ -142,6 +142,8 @@ namespace QuanLyKhachSan.ViewModel
                     tmp.RoomName = room.room_name;
                     tmp.RoomStatusId = room.room_status_id.Value;
                     tmp.RoomTypeId = room.room_type_id.Value;
+                    tmp.RoomStatusName = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_id == tmp.RoomStatusId).room_status_name;
+                    tmp.RoomTypeName = DataProvider.Ins.db.RoomTypes.FirstOrDefault(x => x.room_type_id == tmp.RoomTypeId).room_type_name;
                     RoomList.Add(tmp);
                 }
                 catch { }

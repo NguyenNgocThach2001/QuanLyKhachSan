@@ -297,8 +297,11 @@
             -->
             <ScrollViewer>
                 <StackPanel HorizontalAlignment="Stretch">
-                    <ItemsControl HorizontalContentAlignment="Stretch" x:Name="ListViewRoom" ItemsSource="{Binding RoomList}">
-                        <ItemsControl.ItemTemplate>
+                    <ListBox HorizontalContentAlignment="Stretch" 
+                             x:Name="ListViewRoom" 
+                             ItemsSource="{Binding RoomList}"
+                             SelectedItem="{Binding SelectedItem}">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left">
                                     <Grid.ColumnDefinitions>
@@ -328,19 +331,35 @@
                                             </TextBlock>
                                         </materialDesign:Card>
                                         <materialDesign:Card Grid.Row="3">
-                                            <TextBlock Text="{Binding room_price}" Margin ="20 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                            </TextBlock>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding room_price}" 
+                                                           
+                                                           Margin ="20 0 0 0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                </TextBlock>
+                                                <Button Grid.Column="1" 
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        Width="105" Background ="{Binding color}">
+                                                    <TextBlock Text="{Binding status}">
+                                                        
+                                                    </TextBlock>
+                                                </Button>
+                                            </Grid>
                                         </materialDesign:Card>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                        </ListBox.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel></WrapPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                    </ListBox>
                 </StackPanel>
             </ScrollViewer>
         </materialDesign:Card>

@@ -181,10 +181,16 @@ namespace QuanLyKhachSan.ViewModel
                     newRoom.room_type = queryRoomType.room_type_name;
                     newRoom.room_status = DataProvider.Ins.db.RoomStatus.FirstOrDefault(x => x.room_status_id == item.room_status_id).room_status_name;
                     if (newRoom.room_status == "Trống")
+                    {
                         newRoom.color = new SolidColorBrush(Colors.Green);
+                        newRoom.status = "Thuê Phòng";
+                    }
                     else
                     {
                         newRoom.color = new SolidColorBrush(Colors.Red);
+                        newRoom.status = "Bận";
+                        if (newRoom.room_status == "Đang Thuê")
+                            newRoom.status = "Thanh Toán";
                     }
                     if (SName != "")
                         if (newRoom.room_name != SName) continue;
