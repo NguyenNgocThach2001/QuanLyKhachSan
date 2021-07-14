@@ -140,8 +140,10 @@ namespace QuanLyKhachSan.ViewModel
                 Department add = new Department();
                 add.Department_Name = DepartmentNameIP;
                 add.Department_ID = DepartmentIDIP;
-                add.Department_Head_id = HeadIP.ID;
-                add.Deputy = DeputyIP.ID.ToString();
+                if(HeadIP != null)
+                    add.Department_Head_id = HeadIP.ID;
+                if(DeputyIP != null)
+                    add.Deputy = DeputyIP.ID.ToString();
                 db.Departments.Add(add);
                 db.SaveChanges();
                 LoadData();

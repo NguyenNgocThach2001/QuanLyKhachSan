@@ -208,6 +208,7 @@ namespace QuanLyKhachSan.ViewModel
                     RoomList.Add(newRoom);
                 }
                 catch {
+                    MessageBox.Show("Lỗi");
                 }
             }
             //

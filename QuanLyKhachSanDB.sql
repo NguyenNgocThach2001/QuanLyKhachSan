@@ -1,4 +1,4 @@
-Create Database QuanLyKhachSan;
+Create Database QuanLyKhachSan
 use QuanLyKhachSan;
 
 Create Table RoomStatus(
@@ -13,7 +13,7 @@ Create Table RoomType(
 )
 
 Create Table Room(
-	room_id int primary key,
+	room_id int identity(1,1) primary key,
 	room_type_id int,
 	room_status_id int,
 	foreign key (room_status_id) references RoomStatus(room_status_id),
@@ -66,6 +66,18 @@ ADD foreign Key (Reservation_id) REFERENCES Reservation(Reservation_id);
 ALTER Table PaymentService
 ADD Service_ID int;
 
+Create Table Service(
+	Service_ID int identity(1,1) primary key,
+	Service_Name nvarchar(max),
+)
+
+ALTER TABLE Service
+ADD unitPrice int;
+
+ALTER TABLE Service
+ADD unit nvarchar(max);
+
+
 ALTER Table PaymentService
 ADD foreign Key (Service_ID) REFERENCES Service(Service_ID);
 
@@ -100,22 +112,7 @@ ADD Role nvarchar(20);
 ALTER TABLE Account
 ADD FullName nvarchar(max);
 
-Delete From Account
-Where Account.UserName = N'Thach';
 
-Insert into Account
-Values (N'Thach',N'e99d28b464722f0282f1c1d099b236f6');
-
-Create Table Service(
-	Service_ID int identity(1,1) primary key,
-	Service_Name nvarchar(max),
-)
-
-ALTER TABLE Service
-ADD unitPrice int;
-
-ALTER TABLE Service
-ADD unit nvarchar(max);
 
 Create Table Department(
 	Department_ID nvarchar(10) primary key,
@@ -179,8 +176,6 @@ ALTER TABLE Department
 ADD FOREIGN KEY (Department_Head_id) REFERENCES Staff(Staff_ID);
 ALTER TABLE Department
 ADD Deputy nvarchar(max);
-ALTER TABLE Reservation 
-ADD FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID);
 ALTER TABLE Account
 ADD Staff_ID int;
 ALTER TABLE Account 

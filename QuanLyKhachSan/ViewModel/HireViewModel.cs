@@ -119,7 +119,10 @@ namespace QuanLyKhachSan.ViewModel
                 {
                     if (item.paid == 1) continue;
                     HireModel newHire = new HireModel();
-                    newHire.guest_name = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).full_name;
+                    string guestName = "";
+                    if(guestList.FirstOrDefault(x => x.guest_id == item.guest_id) != null)
+                        guestName = guestList.FirstOrDefault(x => x.guest_id == item.guest_id).full_name;
+                    newHire.guest_name = guestName;
                     newHire.room_name = roomList.FirstOrDefault(x => x.room_id == item.room_id).room_name;
                     newHire.CheckinDate = (DateTime)item.check_in_date;
                     newHire.CheckoutDate = (DateTime)item.check_out_date;
@@ -129,7 +132,9 @@ namespace QuanLyKhachSan.ViewModel
                     //MessageBox.Show(newHire.CheckinDate.ToString());
                     HireList.Add(newHire);
                 }
-                catch { }
+                catch {
+                    MessageBox.Show("Lỗi!");
+                }
             }
         }
     }

@@ -18,9 +18,6 @@ namespace QuanLyKhachSan.Model
         public Department()
         {
             this.Staffs = new HashSet<Staff>();
-            this.Staffs1 = new HashSet<Staff>();
-            this.Staffs2 = new HashSet<Staff>();
-            this.Staffs3 = new HashSet<Staff>();
         }
     
         public string Department_ID { get; set; }
@@ -31,11 +28,5 @@ namespace QuanLyKhachSan.Model
         public virtual Staff Staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Staff> Staffs1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Staff> Staffs2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Staff> Staffs3 { get; set; }
     }
 }
